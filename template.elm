@@ -1,6 +1,6 @@
 module Time2.Zone exposing
     ( version
-    , get, getOrUtc
+    , get
     , zoneNames
     , ZONE_IDS
     )
@@ -16,7 +16,7 @@ Time Zone Database.
 
 ## Find a zone
 
-@docs get, getOrUtc
+@docs get
 
 
 ## Zone names
@@ -102,26 +102,6 @@ get name =
                         Dict.get name_ Etcetera.zones
            )
         |> Maybe.map (\f -> f ())
-
-
-{-|
-
-    import Time2
-
-    getOrUtc (Just "America/New_York")
-    --> america__new_york ()
-
-    getOrUtc Nothing
-    --> Time2.utc
-
-    getOrUtc (Just "XXX")
-    --> Time2.utc
-
--}
-getOrUtc : Maybe String -> Time2.Zone
-getOrUtc name =
-    Maybe.andThen get name
-        |> Maybe.withDefault Time2.utc
 
 
 {-| All zone names.
