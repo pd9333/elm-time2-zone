@@ -1,7 +1,6 @@
 module Time2.Zone exposing
     ( version
     , get, getOrUtc
-    , zones
     , ZONE_IDS
     )
 
@@ -18,7 +17,7 @@ Time Zone Database.
 
 ## Zones
 
-@docs zones
+@docs ZONE_IDS
 
 -}
 
@@ -98,14 +97,6 @@ getOrUtc name =
         |> Maybe.withDefault Time2.utc
 
 
-{-| You can look up an unevaluated zone by its zone name in the `zones` dictionary.
-
-    import Dict
-
-    Dict.get "America/New_York" zones
-    --> Just america__new_york
-
--}
 zones : Dict String (() -> Time2.Zone)
 zones =
     [ ZONE_NAME_ID_PAIRS
