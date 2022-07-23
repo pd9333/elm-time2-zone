@@ -2,13 +2,14 @@
 
 set -e
 
-# ensure tz repository
-
-if [ ! -d tz/.git ]; then
+fetch_latest_tz() {
+  if [ ! -d tz/.git ]; then
     git clone https://github.com/eggert/tz.git
-else
+  else
     git -C tz checkout main && git -C tz pull
-fi
+  fi
+}
+#fetch_latest_tz
 
 # tz: checkout latest version
 
@@ -17,11 +18,14 @@ git -C tz -c advice.detachedHead=false checkout $version
 
 # build file
 
-output="src/Time2/Zone.elm"
+zone_module="src/Time2/Zone.elm"
+echo "Creating file $zone_module for version $version"
+./build.py tz $version $zone_module
+elm-format --yes $zone_module
 
-echo "Creating file $output for version $version"
-./build.py tz $version $output
-elm-format --yes $output
+backward_module="src/Backward.elm"
+python3 ./build_backward_module.py tz $backward_module
+elm-format --yes $backward_module
 
 # tz: checkout main
 
