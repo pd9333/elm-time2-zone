@@ -1,6 +1,7 @@
 module Time2.Zone exposing
     ( version
     , get, getOrUtc
+    , zoneNames
     , ZONE_IDS
     )
 
@@ -10,9 +11,17 @@ Time Zone Database.
 @docs version
 
 
+# Usage
+
+
 ## Find a zone
 
 @docs get, getOrUtc
+
+
+## Zone names
+
+@docs zoneNames
 
 
 ## Zones
@@ -95,6 +104,13 @@ getOrUtc : Maybe String -> Time2.Zone
 getOrUtc name =
     Maybe.andThen get name
         |> Maybe.withDefault Time2.utc
+
+
+{-| All zone names.
+-}
+zoneNames : List String
+zoneNames =
+    Dict.keys zones
 
 
 zones : Dict String (() -> Time2.Zone)
