@@ -22,6 +22,7 @@ Time Zone Database.
 
 -}
 
+import Backward
 import Dict exposing (Dict)
 import Maybe exposing (Maybe)
 import Time exposing (Month(..), Weekday(..))
@@ -55,7 +56,12 @@ fromSpecification name zone =
     Time2.customZone name descending bottom
 
 
-{-|
+{-| Get [`Time2.Zone`][zone] of the given name, with deprecated names changed to new names.
+
+[zone]: /packages/pd9333/elm-time2/latest/Time2#Zone
+
+    get "Africa/Asmera"
+    --> Just (africa__nairobi ())
 
     get "America/New_York"
     --> Just (america__new_york ())
@@ -63,7 +69,12 @@ fromSpecification name zone =
 -}
 get : String -> Maybe Time2.Zone
 get name =
-    Dict.get name zones
+    let
+        name_ =
+            Dict.get name Backward.deprecatedNames
+                |> Maybe.withDefault name
+    in
+    Dict.get name_ zones
         |> Maybe.map (\f -> f ())
 
 
