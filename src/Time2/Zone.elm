@@ -1,6 +1,6 @@
-module TimeZone exposing
+module Time2.Zone exposing
     ( version
-    , getZone, Error(..)
+    , get, getOrUtc
     , zones
     , africa__abidjan, africa__accra, africa__addis_ababa, africa__algiers, africa__asmara, africa__bamako, africa__bangui, africa__banjul, africa__bissau, africa__blantyre, africa__brazzaville, africa__bujumbura, africa__cairo, africa__casablanca, africa__ceuta, africa__conakry, africa__dakar, africa__dar_es_salaam, africa__djibouti, africa__douala, africa__el_aaiun, africa__freetown, africa__gaborone, africa__harare, africa__johannesburg, africa__juba, africa__kampala, africa__khartoum, africa__kigali, africa__kinshasa, africa__lagos, africa__libreville, africa__lome, africa__luanda, africa__lubumbashi, africa__lusaka, africa__malabo, africa__maputo, africa__maseru, africa__mbabane, africa__mogadishu, africa__monrovia, africa__nairobi, africa__ndjamena, africa__niamey, africa__nouakchott, africa__ouagadougou, africa__porto_novo, africa__sao_tome, africa__tripoli, africa__tunis, africa__windhoek, america__adak, america__anchorage, america__anguilla, america__antigua, america__araguaina, america__argentina__buenos_aires, america__argentina__catamarca, america__argentina__cordoba, america__argentina__jujuy, america__argentina__la_rioja, america__argentina__mendoza, america__argentina__rio_gallegos, america__argentina__salta, america__argentina__san_juan, america__argentina__san_luis, america__argentina__tucuman, america__argentina__ushuaia, america__aruba, america__asuncion, america__atikokan, america__bahia, america__bahia_banderas, america__barbados, america__belem, america__belize, america__blanc_sablon, america__boa_vista, america__bogota, america__boise, america__cambridge_bay, america__campo_grande, america__cancun, america__caracas, america__cayenne, america__cayman, america__chicago, america__chihuahua, america__costa_rica, america__creston, america__cuiaba, america__curacao, america__danmarkshavn, america__dawson, america__dawson_creek, america__denver, america__detroit, america__dominica, america__edmonton, america__eirunepe, america__el_salvador, america__fort_nelson, america__fortaleza, america__glace_bay, america__goose_bay, america__grand_turk, america__grenada, america__guadeloupe, america__guatemala, america__guayaquil, america__guyana, america__halifax, america__havana, america__hermosillo, america__indiana__indianapolis, america__indiana__knox, america__indiana__marengo, america__indiana__petersburg, america__indiana__tell_city, america__indiana__vevay, america__indiana__vincennes, america__indiana__winamac, america__inuvik, america__iqaluit, america__jamaica, america__juneau, america__kentucky__louisville, america__kentucky__monticello, america__kralendijk, america__la_paz, america__lima, america__los_angeles, america__lower_princes, america__maceio, america__managua, america__manaus, america__marigot, america__martinique, america__matamoros, america__mazatlan, america__menominee, america__merida, america__metlakatla, america__mexico_city, america__miquelon, america__moncton, america__monterrey, america__montevideo, america__montserrat, america__nassau, america__new_york, america__nipigon, america__nome, america__noronha, america__north_dakota__beulah, america__north_dakota__center, america__north_dakota__new_salem, america__nuuk, america__ojinaga, america__panama, america__pangnirtung, america__paramaribo, america__phoenix, america__port_au_prince, america__port_of_spain, america__porto_velho, america__puerto_rico, america__punta_arenas, america__rainy_river, america__rankin_inlet, america__recife, america__regina, america__resolute, america__rio_branco, america__santarem, america__santiago, america__santo_domingo, america__sao_paulo, america__scoresbysund, america__sitka, america__st_barthelemy, america__st_johns, america__st_kitts, america__st_lucia, america__st_thomas, america__st_vincent, america__swift_current, america__tegucigalpa, america__thule, america__thunder_bay, america__tijuana, america__toronto, america__tortola, america__vancouver, america__whitehorse, america__winnipeg, america__yakutat, america__yellowknife, antarctica__casey, antarctica__davis, antarctica__dumontdurville, antarctica__macquarie, antarctica__mawson, antarctica__mcmurdo, antarctica__palmer, antarctica__rothera, antarctica__syowa, antarctica__troll, antarctica__vostok, arctic__longyearbyen, asia__aden, asia__almaty, asia__amman, asia__anadyr, asia__aqtau, asia__aqtobe, asia__ashgabat, asia__atyrau, asia__baghdad, asia__bahrain, asia__baku, asia__bangkok, asia__barnaul, asia__beirut, asia__bishkek, asia__brunei, asia__chita, asia__choibalsan, asia__colombo, asia__damascus, asia__dhaka, asia__dili, asia__dubai, asia__dushanbe, asia__famagusta, asia__gaza, asia__hebron, asia__ho_chi_minh, asia__hong_kong, asia__hovd, asia__irkutsk, asia__istanbul, asia__jakarta, asia__jayapura, asia__jerusalem, asia__kabul, asia__kamchatka, asia__karachi, asia__kathmandu, asia__khandyga, asia__kolkata, asia__krasnoyarsk, asia__kuala_lumpur, asia__kuching, asia__kuwait, asia__macau, asia__magadan, asia__makassar, asia__manila, asia__muscat, asia__nicosia, asia__novokuznetsk, asia__novosibirsk, asia__omsk, asia__oral, asia__phnom_penh, asia__pontianak, asia__pyongyang, asia__qatar, asia__qostanay, asia__qyzylorda, asia__riyadh, asia__sakhalin, asia__samarkand, asia__seoul, asia__shanghai, asia__singapore, asia__srednekolymsk, asia__taipei, asia__tashkent, asia__tbilisi, asia__tehran, asia__thimphu, asia__tokyo, asia__tomsk, asia__ulaanbaatar, asia__urumqi, asia__ust_nera, asia__vientiane, asia__vladivostok, asia__yakutsk, asia__yangon, asia__yekaterinburg, asia__yerevan, atlantic__azores, atlantic__bermuda, atlantic__canary, atlantic__cape_verde, atlantic__faroe, atlantic__madeira, atlantic__reykjavik, atlantic__south_georgia, atlantic__st_helena, atlantic__stanley, australia__adelaide, australia__brisbane, australia__broken_hill, australia__darwin, australia__eucla, australia__hobart, australia__lindeman, australia__lord_howe, australia__melbourne, australia__perth, australia__sydney, europe__amsterdam, europe__andorra, europe__astrakhan, europe__athens, europe__belgrade, europe__berlin, europe__bratislava, europe__brussels, europe__bucharest, europe__budapest, europe__busingen, europe__chisinau, europe__copenhagen, europe__dublin, europe__gibraltar, europe__guernsey, europe__helsinki, europe__isle_of_man, europe__istanbul, europe__jersey, europe__kaliningrad, europe__kiev, europe__kirov, europe__lisbon, europe__ljubljana, europe__london, europe__luxembourg, europe__madrid, europe__malta, europe__mariehamn, europe__minsk, europe__monaco, europe__moscow, europe__nicosia, europe__oslo, europe__paris, europe__podgorica, europe__prague, europe__riga, europe__rome, europe__samara, europe__san_marino, europe__sarajevo, europe__saratov, europe__simferopol, europe__skopje, europe__sofia, europe__stockholm, europe__tallinn, europe__tirane, europe__ulyanovsk, europe__uzhgorod, europe__vaduz, europe__vatican, europe__vienna, europe__vilnius, europe__volgograd, europe__warsaw, europe__zagreb, europe__zaporozhye, europe__zurich, indian__antananarivo, indian__chagos, indian__christmas, indian__cocos, indian__comoro, indian__kerguelen, indian__mahe, indian__maldives, indian__mauritius, indian__mayotte, indian__reunion, pacific__apia, pacific__auckland, pacific__bougainville, pacific__chatham, pacific__chuuk, pacific__easter, pacific__efate, pacific__fakaofo, pacific__fiji, pacific__funafuti, pacific__galapagos, pacific__gambier, pacific__guadalcanal, pacific__guam, pacific__honolulu, pacific__kanton, pacific__kiritimati, pacific__kosrae, pacific__kwajalein, pacific__majuro, pacific__marquesas, pacific__midway, pacific__nauru, pacific__niue, pacific__norfolk, pacific__noumea, pacific__pago_pago, pacific__palau, pacific__pitcairn, pacific__pohnpei, pacific__port_moresby, pacific__rarotonga, pacific__saipan, pacific__tahiti, pacific__tarawa, pacific__tongatapu, pacific__wake, pacific__wallis
     )
@@ -11,30 +11,22 @@ Time Zone Database.
 @docs version
 
 
-## Local zone
+## Find a zone
 
-@docs getZone, Error
+@docs get, getOrUtc
 
 
 ## Zones
 
 @docs zones
 
----
-
-Each unevaluated zone is named after its zone name (e.g.
-`America/New_York`), where slashes are replaced by `__`, dashes are replaced
-by `_`, and the name is lowercased. For example, `America/Port-au-Prince`
-becomes `america__port_au_prince`.
-
-@docs africa__abidjan, africa__accra, africa__addis_ababa, africa__algiers, africa__asmara, africa__bamako, africa__bangui, africa__banjul, africa__bissau, africa__blantyre, africa__brazzaville, africa__bujumbura, africa__cairo, africa__casablanca, africa__ceuta, africa__conakry, africa__dakar, africa__dar_es_salaam, africa__djibouti, africa__douala, africa__el_aaiun, africa__freetown, africa__gaborone, africa__harare, africa__johannesburg, africa__juba, africa__kampala, africa__khartoum, africa__kigali, africa__kinshasa, africa__lagos, africa__libreville, africa__lome, africa__luanda, africa__lubumbashi, africa__lusaka, africa__malabo, africa__maputo, africa__maseru, africa__mbabane, africa__mogadishu, africa__monrovia, africa__nairobi, africa__ndjamena, africa__niamey, africa__nouakchott, africa__ouagadougou, africa__porto_novo, africa__sao_tome, africa__tripoli, africa__tunis, africa__windhoek, america__adak, america__anchorage, america__anguilla, america__antigua, america__araguaina, america__argentina__buenos_aires, america__argentina__catamarca, america__argentina__cordoba, america__argentina__jujuy, america__argentina__la_rioja, america__argentina__mendoza, america__argentina__rio_gallegos, america__argentina__salta, america__argentina__san_juan, america__argentina__san_luis, america__argentina__tucuman, america__argentina__ushuaia, america__aruba, america__asuncion, america__atikokan, america__bahia, america__bahia_banderas, america__barbados, america__belem, america__belize, america__blanc_sablon, america__boa_vista, america__bogota, america__boise, america__cambridge_bay, america__campo_grande, america__cancun, america__caracas, america__cayenne, america__cayman, america__chicago, america__chihuahua, america__costa_rica, america__creston, america__cuiaba, america__curacao, america__danmarkshavn, america__dawson, america__dawson_creek, america__denver, america__detroit, america__dominica, america__edmonton, america__eirunepe, america__el_salvador, america__fort_nelson, america__fortaleza, america__glace_bay, america__goose_bay, america__grand_turk, america__grenada, america__guadeloupe, america__guatemala, america__guayaquil, america__guyana, america__halifax, america__havana, america__hermosillo, america__indiana__indianapolis, america__indiana__knox, america__indiana__marengo, america__indiana__petersburg, america__indiana__tell_city, america__indiana__vevay, america__indiana__vincennes, america__indiana__winamac, america__inuvik, america__iqaluit, america__jamaica, america__juneau, america__kentucky__louisville, america__kentucky__monticello, america__kralendijk, america__la_paz, america__lima, america__los_angeles, america__lower_princes, america__maceio, america__managua, america__manaus, america__marigot, america__martinique, america__matamoros, america__mazatlan, america__menominee, america__merida, america__metlakatla, america__mexico_city, america__miquelon, america__moncton, america__monterrey, america__montevideo, america__montserrat, america__nassau, america__new_york, america__nipigon, america__nome, america__noronha, america__north_dakota__beulah, america__north_dakota__center, america__north_dakota__new_salem, america__nuuk, america__ojinaga, america__panama, america__pangnirtung, america__paramaribo, america__phoenix, america__port_au_prince, america__port_of_spain, america__porto_velho, america__puerto_rico, america__punta_arenas, america__rainy_river, america__rankin_inlet, america__recife, america__regina, america__resolute, america__rio_branco, america__santarem, america__santiago, america__santo_domingo, america__sao_paulo, america__scoresbysund, america__sitka, america__st_barthelemy, america__st_johns, america__st_kitts, america__st_lucia, america__st_thomas, america__st_vincent, america__swift_current, america__tegucigalpa, america__thule, america__thunder_bay, america__tijuana, america__toronto, america__tortola, america__vancouver, america__whitehorse, america__winnipeg, america__yakutat, america__yellowknife, antarctica__casey, antarctica__davis, antarctica__dumontdurville, antarctica__macquarie, antarctica__mawson, antarctica__mcmurdo, antarctica__palmer, antarctica__rothera, antarctica__syowa, antarctica__troll, antarctica__vostok, arctic__longyearbyen, asia__aden, asia__almaty, asia__amman, asia__anadyr, asia__aqtau, asia__aqtobe, asia__ashgabat, asia__atyrau, asia__baghdad, asia__bahrain, asia__baku, asia__bangkok, asia__barnaul, asia__beirut, asia__bishkek, asia__brunei, asia__chita, asia__choibalsan, asia__colombo, asia__damascus, asia__dhaka, asia__dili, asia__dubai, asia__dushanbe, asia__famagusta, asia__gaza, asia__hebron, asia__ho_chi_minh, asia__hong_kong, asia__hovd, asia__irkutsk, asia__istanbul, asia__jakarta, asia__jayapura, asia__jerusalem, asia__kabul, asia__kamchatka, asia__karachi, asia__kathmandu, asia__khandyga, asia__kolkata, asia__krasnoyarsk, asia__kuala_lumpur, asia__kuching, asia__kuwait, asia__macau, asia__magadan, asia__makassar, asia__manila, asia__muscat, asia__nicosia, asia__novokuznetsk, asia__novosibirsk, asia__omsk, asia__oral, asia__phnom_penh, asia__pontianak, asia__pyongyang, asia__qatar, asia__qostanay, asia__qyzylorda, asia__riyadh, asia__sakhalin, asia__samarkand, asia__seoul, asia__shanghai, asia__singapore, asia__srednekolymsk, asia__taipei, asia__tashkent, asia__tbilisi, asia__tehran, asia__thimphu, asia__tokyo, asia__tomsk, asia__ulaanbaatar, asia__urumqi, asia__ust_nera, asia__vientiane, asia__vladivostok, asia__yakutsk, asia__yangon, asia__yekaterinburg, asia__yerevan, atlantic__azores, atlantic__bermuda, atlantic__canary, atlantic__cape_verde, atlantic__faroe, atlantic__madeira, atlantic__reykjavik, atlantic__south_georgia, atlantic__st_helena, atlantic__stanley, australia__adelaide, australia__brisbane, australia__broken_hill, australia__darwin, australia__eucla, australia__hobart, australia__lindeman, australia__lord_howe, australia__melbourne, australia__perth, australia__sydney, europe__amsterdam, europe__andorra, europe__astrakhan, europe__athens, europe__belgrade, europe__berlin, europe__bratislava, europe__brussels, europe__bucharest, europe__budapest, europe__busingen, europe__chisinau, europe__copenhagen, europe__dublin, europe__gibraltar, europe__guernsey, europe__helsinki, europe__isle_of_man, europe__istanbul, europe__jersey, europe__kaliningrad, europe__kiev, europe__kirov, europe__lisbon, europe__ljubljana, europe__london, europe__luxembourg, europe__madrid, europe__malta, europe__mariehamn, europe__minsk, europe__monaco, europe__moscow, europe__nicosia, europe__oslo, europe__paris, europe__podgorica, europe__prague, europe__riga, europe__rome, europe__samara, europe__san_marino, europe__sarajevo, europe__saratov, europe__simferopol, europe__skopje, europe__sofia, europe__stockholm, europe__tallinn, europe__tirane, europe__ulyanovsk, europe__uzhgorod, europe__vaduz, europe__vatican, europe__vienna, europe__vilnius, europe__volgograd, europe__warsaw, europe__zagreb, europe__zaporozhye, europe__zurich, indian__antananarivo, indian__chagos, indian__christmas, indian__cocos, indian__comoro, indian__kerguelen, indian__mahe, indian__maldives, indian__mauritius, indian__mayotte, indian__reunion, pacific__apia, pacific__auckland, pacific__bougainville, pacific__chatham, pacific__chuuk, pacific__easter, pacific__efate, pacific__fakaofo, pacific__fiji, pacific__funafuti, pacific__galapagos, pacific__gambier, pacific__guadalcanal, pacific__guam, pacific__honolulu, pacific__kanton, pacific__kiritimati, pacific__kosrae, pacific__kwajalein, pacific__majuro, pacific__marquesas, pacific__midway, pacific__nauru, pacific__niue, pacific__norfolk, pacific__noumea, pacific__pago_pago, pacific__palau, pacific__pitcairn, pacific__pohnpei, pacific__port_moresby, pacific__rarotonga, pacific__saipan, pacific__tahiti, pacific__tarawa, pacific__tongatapu, pacific__wake, pacific__wallis
-
 -}
 
 import Dict exposing (Dict)
-import Task exposing (Task)
+import Maybe exposing (Maybe)
 import Time exposing (Month(..), Weekday(..))
-import TimeZone.Specification exposing (Clock(..), DateTime, DayOfMonth(..), Rule, Zone, ZoneRules(..), ZoneState)
+import Time2
+import Time2.Zone.Specification exposing (Clock(..), DateTime, DayOfMonth(..), Rule, Zone, ZoneRules(..), ZoneState)
 
 
 {-| What release of the IANA Time Zone Database is this data from?
@@ -54,56 +46,56 @@ maxYear =
     2037
 
 
-fromSpecification : Zone -> Time.Zone
-fromSpecification zone =
+fromSpecification : String -> Zone -> Time2.Zone
+fromSpecification name zone =
     let
         ( descending, bottom ) =
-            zone |> TimeZone.Specification.toOffsets minYear maxYear
+            zone |> Time2.Zone.Specification.toOffsets minYear maxYear
     in
-    Time.customZone bottom descending
+    Time2.customZone name descending bottom
 
 
-{-| Represents an error that may occur when trying to get the local zone.
+{-|
+
+    get "America/New_York"
+    --> Just (america__new_york ())
+
 -}
-type Error
-    = NoZoneName
-    | NoDataForZoneName String
+get : String -> Maybe Time2.Zone
+get name =
+    Dict.get name zones
+        |> Maybe.map (\f -> f ())
 
 
-{-| Try to get the local time zone. If the task succeeds, then you get the zone
-name along with the `Time.Zone`.
+{-|
+
+    import Time2
+
+    getOrUtc (Just "America/New_York")
+    --> america__new_york ()
+
+    getOrUtc Nothing
+    --> Time2.utc
+
+    getOrUtc (Just "XXX")
+    --> Time2.utc
+
 -}
-getZone : Task Error ( String, Time.Zone )
-getZone =
-    Time.getZoneName
-        |> Task.andThen
-            (\nameOrOffset ->
-                case nameOrOffset of
-                    Time.Name zoneName ->
-                        case Dict.get zoneName zones of
-                            Just zone ->
-                                Task.succeed ( zoneName, zone () )
-
-                            Nothing ->
-                                Task.fail (NoDataForZoneName zoneName)
-
-                    Time.Offset _ ->
-                        Task.fail NoZoneName
-            )
+getOrUtc : Maybe String -> Time2.Zone
+getOrUtc name =
+    Maybe.andThen get name
+        |> Maybe.withDefault Time2.utc
 
 
 {-| You can look up an unevaluated zone by its zone name in the `zones` dictionary.
 
     import Dict
-    import TimeZone exposing (zones, america__new_york)
-
 
     Dict.get "America/New_York" zones
-
-    -- Just america__new_york
+    --> Just america__new_york
 
 -}
-zones : Dict String (() -> Time.Zone)
+zones : Dict String (() -> Time2.Zone)
 zones =
     [ ( "Africa/Abidjan", africa__abidjan )
     , ( "Africa/Accra", africa__accra )
@@ -2093,9 +2085,9 @@ rules_Zion =
 
 {-| `Africa/Abidjan`
 -}
-africa__abidjan : () -> Time.Zone
+africa__abidjan : () -> Time2.Zone
 africa__abidjan _ =
-    fromSpecification <|
+    fromSpecification "Africa/Abidjan" <|
         Zone
             []
             (ZoneState 0 (Save 0))
@@ -2103,9 +2095,9 @@ africa__abidjan _ =
 
 {-| `Africa/Algiers`
 -}
-africa__algiers : () -> Time.Zone
+africa__algiers : () -> Time2.Zone
 africa__algiers _ =
-    fromSpecification <|
+    fromSpecification "Africa/Algiers" <|
         Zone
             [ ( ZoneState 0 (Rules rules_Algeria), DateTime 1977 Oct 21 0 WallClock )
             , ( ZoneState 60 (Rules rules_Algeria), DateTime 1979 Oct 26 0 WallClock )
@@ -2116,9 +2108,9 @@ africa__algiers _ =
 
 {-| `Africa/Bissau`
 -}
-africa__bissau : () -> Time.Zone
+africa__bissau : () -> Time2.Zone
 africa__bissau _ =
-    fromSpecification <|
+    fromSpecification "Africa/Bissau" <|
         Zone
             [ ( ZoneState -60 (Save 0), DateTime 1975 Jan 1 0 WallClock )
             ]
@@ -2127,9 +2119,9 @@ africa__bissau _ =
 
 {-| `Africa/Cairo`
 -}
-africa__cairo : () -> Time.Zone
+africa__cairo : () -> Time2.Zone
 africa__cairo _ =
-    fromSpecification <|
+    fromSpecification "Africa/Cairo" <|
         Zone
             []
             (ZoneState 120 (Rules rules_Egypt))
@@ -2137,9 +2129,9 @@ africa__cairo _ =
 
 {-| `Africa/Casablanca`
 -}
-africa__casablanca : () -> Time.Zone
+africa__casablanca : () -> Time2.Zone
 africa__casablanca _ =
-    fromSpecification <|
+    fromSpecification "Africa/Casablanca" <|
         Zone
             [ ( ZoneState 0 (Rules rules_Morocco), DateTime 1984 Mar 16 0 WallClock )
             , ( ZoneState 60 (Save 0), DateTime 1986 Jan 1 0 WallClock )
@@ -2150,9 +2142,9 @@ africa__casablanca _ =
 
 {-| `Africa/Ceuta`
 -}
-africa__ceuta : () -> Time.Zone
+africa__ceuta : () -> Time2.Zone
 africa__ceuta _ =
-    fromSpecification <|
+    fromSpecification "Africa/Ceuta" <|
         Zone
             [ ( ZoneState 0 (Rules rules_SpainAfrica), DateTime 1984 Mar 16 0 WallClock )
             , ( ZoneState 60 (Save 0), DateTime 1986 Jan 1 0 WallClock )
@@ -2162,9 +2154,9 @@ africa__ceuta _ =
 
 {-| `Africa/El_Aaiun`
 -}
-africa__el_aaiun : () -> Time.Zone
+africa__el_aaiun : () -> Time2.Zone
 africa__el_aaiun _ =
-    fromSpecification <|
+    fromSpecification "Africa/El_Aaiun" <|
         Zone
             [ ( ZoneState -60 (Save 0), DateTime 1976 Apr 14 0 WallClock )
             , ( ZoneState 0 (Rules rules_Morocco), DateTime 2018 Oct 28 180 WallClock )
@@ -2174,9 +2166,9 @@ africa__el_aaiun _ =
 
 {-| `Africa/Johannesburg`
 -}
-africa__johannesburg : () -> Time.Zone
+africa__johannesburg : () -> Time2.Zone
 africa__johannesburg _ =
-    fromSpecification <|
+    fromSpecification "Africa/Johannesburg" <|
         Zone
             []
             (ZoneState 120 (Save 0))
@@ -2184,9 +2176,9 @@ africa__johannesburg _ =
 
 {-| `Africa/Juba`
 -}
-africa__juba : () -> Time.Zone
+africa__juba : () -> Time2.Zone
 africa__juba _ =
-    fromSpecification <|
+    fromSpecification "Africa/Juba" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Sudan), DateTime 2000 Jan 15 720 WallClock )
             , ( ZoneState 180 (Save 0), DateTime 2021 Feb 1 0 WallClock )
@@ -2196,9 +2188,9 @@ africa__juba _ =
 
 {-| `Africa/Khartoum`
 -}
-africa__khartoum : () -> Time.Zone
+africa__khartoum : () -> Time2.Zone
 africa__khartoum _ =
-    fromSpecification <|
+    fromSpecification "Africa/Khartoum" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Sudan), DateTime 2000 Jan 15 720 WallClock )
             , ( ZoneState 180 (Save 0), DateTime 2017 Nov 1 0 WallClock )
@@ -2208,9 +2200,9 @@ africa__khartoum _ =
 
 {-| `Africa/Lagos`
 -}
-africa__lagos : () -> Time.Zone
+africa__lagos : () -> Time2.Zone
 africa__lagos _ =
-    fromSpecification <|
+    fromSpecification "Africa/Lagos" <|
         Zone
             []
             (ZoneState 60 (Save 0))
@@ -2218,9 +2210,9 @@ africa__lagos _ =
 
 {-| `Africa/Maputo`
 -}
-africa__maputo : () -> Time.Zone
+africa__maputo : () -> Time2.Zone
 africa__maputo _ =
-    fromSpecification <|
+    fromSpecification "Africa/Maputo" <|
         Zone
             []
             (ZoneState 120 (Save 0))
@@ -2228,9 +2220,9 @@ africa__maputo _ =
 
 {-| `Africa/Monrovia`
 -}
-africa__monrovia : () -> Time.Zone
+africa__monrovia : () -> Time2.Zone
 africa__monrovia _ =
-    fromSpecification <|
+    fromSpecification "Africa/Monrovia" <|
         Zone
             [ ( ZoneState -45 (Save 0), DateTime 1972 Jan 7 0 WallClock )
             ]
@@ -2239,9 +2231,9 @@ africa__monrovia _ =
 
 {-| `Africa/Nairobi`
 -}
-africa__nairobi : () -> Time.Zone
+africa__nairobi : () -> Time2.Zone
 africa__nairobi _ =
-    fromSpecification <|
+    fromSpecification "Africa/Nairobi" <|
         Zone
             []
             (ZoneState 180 (Save 0))
@@ -2249,9 +2241,9 @@ africa__nairobi _ =
 
 {-| `Africa/Ndjamena`
 -}
-africa__ndjamena : () -> Time.Zone
+africa__ndjamena : () -> Time2.Zone
 africa__ndjamena _ =
-    fromSpecification <|
+    fromSpecification "Africa/Ndjamena" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1979 Oct 14 0 WallClock )
             , ( ZoneState 60 (Save 60), DateTime 1980 Mar 8 0 WallClock )
@@ -2261,9 +2253,9 @@ africa__ndjamena _ =
 
 {-| `Africa/Sao_Tome`
 -}
-africa__sao_tome : () -> Time.Zone
+africa__sao_tome : () -> Time2.Zone
 africa__sao_tome _ =
-    fromSpecification <|
+    fromSpecification "Africa/Sao_Tome" <|
         Zone
             [ ( ZoneState 0 (Save 0), DateTime 2018 Jan 1 60 WallClock )
             , ( ZoneState 60 (Save 0), DateTime 2019 Jan 1 120 WallClock )
@@ -2273,9 +2265,9 @@ africa__sao_tome _ =
 
 {-| `Africa/Tripoli`
 -}
-africa__tripoli : () -> Time.Zone
+africa__tripoli : () -> Time2.Zone
 africa__tripoli _ =
-    fromSpecification <|
+    fromSpecification "Africa/Tripoli" <|
         Zone
             [ ( ZoneState 120 (Save 0), DateTime 1982 Jan 1 0 WallClock )
             , ( ZoneState 60 (Rules rules_Libya), DateTime 1990 May 4 0 WallClock )
@@ -2289,9 +2281,9 @@ africa__tripoli _ =
 
 {-| `Africa/Tunis`
 -}
-africa__tunis : () -> Time.Zone
+africa__tunis : () -> Time2.Zone
 africa__tunis _ =
-    fromSpecification <|
+    fromSpecification "Africa/Tunis" <|
         Zone
             []
             (ZoneState 60 (Rules rules_Tunisia))
@@ -2299,9 +2291,9 @@ africa__tunis _ =
 
 {-| `Africa/Windhoek`
 -}
-africa__windhoek : () -> Time.Zone
+africa__windhoek : () -> Time2.Zone
 africa__windhoek _ =
-    fromSpecification <|
+    fromSpecification "Africa/Windhoek" <|
         Zone
             [ ( ZoneState 120 (Save 0), DateTime 1990 Mar 21 0 WallClock )
             ]
@@ -2310,9 +2302,9 @@ africa__windhoek _ =
 
 {-| `America/Adak`
 -}
-america__adak : () -> Time.Zone
+america__adak : () -> Time2.Zone
 america__adak _ =
-    fromSpecification <|
+    fromSpecification "America/Adak" <|
         Zone
             [ ( ZoneState -660 (Rules rules_US), DateTime 1983 Oct 30 120 WallClock )
             , ( ZoneState -600 (Rules rules_US), DateTime 1983 Nov 30 0 WallClock )
@@ -2322,9 +2314,9 @@ america__adak _ =
 
 {-| `America/Anchorage`
 -}
-america__anchorage : () -> Time.Zone
+america__anchorage : () -> Time2.Zone
 america__anchorage _ =
-    fromSpecification <|
+    fromSpecification "America/Anchorage" <|
         Zone
             [ ( ZoneState -600 (Rules rules_US), DateTime 1983 Oct 30 120 WallClock )
             , ( ZoneState -540 (Rules rules_US), DateTime 1983 Nov 30 0 WallClock )
@@ -2334,9 +2326,9 @@ america__anchorage _ =
 
 {-| `America/Araguaina`
 -}
-america__araguaina : () -> Time.Zone
+america__araguaina : () -> Time2.Zone
 america__araguaina _ =
-    fromSpecification <|
+    fromSpecification "America/Araguaina" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Brazil), DateTime 1990 Sep 17 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 1995 Sep 14 0 WallClock )
@@ -2349,9 +2341,9 @@ america__araguaina _ =
 
 {-| `America/Argentina/Buenos_Aires`
 -}
-america__argentina__buenos_aires : () -> Time.Zone
+america__argentina__buenos_aires : () -> Time2.Zone
 america__argentina__buenos_aires _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Buenos_Aires" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1999 Oct 3 0 WallClock )
             , ( ZoneState -240 (Rules rules_Arg), DateTime 2000 Mar 3 0 WallClock )
@@ -2361,9 +2353,9 @@ america__argentina__buenos_aires _ =
 
 {-| `America/Argentina/Catamarca`
 -}
-america__argentina__catamarca : () -> Time.Zone
+america__argentina__catamarca : () -> Time2.Zone
 america__argentina__catamarca _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Catamarca" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1991 Mar 3 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1991 Oct 20 0 WallClock )
@@ -2378,9 +2370,9 @@ america__argentina__catamarca _ =
 
 {-| `America/Argentina/Cordoba`
 -}
-america__argentina__cordoba : () -> Time.Zone
+america__argentina__cordoba : () -> Time2.Zone
 america__argentina__cordoba _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Cordoba" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1991 Mar 3 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1991 Oct 20 0 WallClock )
@@ -2392,9 +2384,9 @@ america__argentina__cordoba _ =
 
 {-| `America/Argentina/Jujuy`
 -}
-america__argentina__jujuy : () -> Time.Zone
+america__argentina__jujuy : () -> Time2.Zone
 america__argentina__jujuy _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Jujuy" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1990 Mar 4 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1990 Oct 28 0 WallClock )
@@ -2410,9 +2402,9 @@ america__argentina__jujuy _ =
 
 {-| `America/Argentina/La_Rioja`
 -}
-america__argentina__la_rioja : () -> Time.Zone
+america__argentina__la_rioja : () -> Time2.Zone
 america__argentina__la_rioja _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/La_Rioja" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1991 Mar 1 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1991 May 7 0 WallClock )
@@ -2427,9 +2419,9 @@ america__argentina__la_rioja _ =
 
 {-| `America/Argentina/Mendoza`
 -}
-america__argentina__mendoza : () -> Time.Zone
+america__argentina__mendoza : () -> Time2.Zone
 america__argentina__mendoza _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Mendoza" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1990 Mar 4 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1990 Oct 15 0 WallClock )
@@ -2448,9 +2440,9 @@ america__argentina__mendoza _ =
 
 {-| `America/Argentina/Rio_Gallegos`
 -}
-america__argentina__rio_gallegos : () -> Time.Zone
+america__argentina__rio_gallegos : () -> Time2.Zone
 america__argentina__rio_gallegos _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Rio_Gallegos" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1999 Oct 3 0 WallClock )
             , ( ZoneState -240 (Rules rules_Arg), DateTime 2000 Mar 3 0 WallClock )
@@ -2463,9 +2455,9 @@ america__argentina__rio_gallegos _ =
 
 {-| `America/Argentina/Salta`
 -}
-america__argentina__salta : () -> Time.Zone
+america__argentina__salta : () -> Time2.Zone
 america__argentina__salta _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Salta" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1991 Mar 3 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1991 Oct 20 0 WallClock )
@@ -2478,9 +2470,9 @@ america__argentina__salta _ =
 
 {-| `America/Argentina/San_Juan`
 -}
-america__argentina__san_juan : () -> Time.Zone
+america__argentina__san_juan : () -> Time2.Zone
 america__argentina__san_juan _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/San_Juan" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1991 Mar 1 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1991 May 7 0 WallClock )
@@ -2495,9 +2487,9 @@ america__argentina__san_juan _ =
 
 {-| `America/Argentina/San_Luis`
 -}
-america__argentina__san_luis : () -> Time.Zone
+america__argentina__san_luis : () -> Time2.Zone
 america__argentina__san_luis _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/San_Luis" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1990 Jan 1 0 WallClock )
             , ( ZoneState -180 (Save 60), DateTime 1990 Mar 14 0 WallClock )
@@ -2516,9 +2508,9 @@ america__argentina__san_luis _ =
 
 {-| `America/Argentina/Tucuman`
 -}
-america__argentina__tucuman : () -> Time.Zone
+america__argentina__tucuman : () -> Time2.Zone
 america__argentina__tucuman _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Tucuman" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1991 Mar 3 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1991 Oct 20 0 WallClock )
@@ -2532,9 +2524,9 @@ america__argentina__tucuman _ =
 
 {-| `America/Argentina/Ushuaia`
 -}
-america__argentina__ushuaia : () -> Time.Zone
+america__argentina__ushuaia : () -> Time2.Zone
 america__argentina__ushuaia _ =
-    fromSpecification <|
+    fromSpecification "America/Argentina/Ushuaia" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1999 Oct 3 0 WallClock )
             , ( ZoneState -240 (Rules rules_Arg), DateTime 2000 Mar 3 0 WallClock )
@@ -2547,9 +2539,9 @@ america__argentina__ushuaia _ =
 
 {-| `America/Asuncion`
 -}
-america__asuncion : () -> Time.Zone
+america__asuncion : () -> Time2.Zone
 america__asuncion _ =
-    fromSpecification <|
+    fromSpecification "America/Asuncion" <|
         Zone
             [ ( ZoneState -240 (Save 0), DateTime 1972 Oct 1 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 1974 Apr 1 0 WallClock )
@@ -2559,9 +2551,9 @@ america__asuncion _ =
 
 {-| `America/Bahia`
 -}
-america__bahia : () -> Time.Zone
+america__bahia : () -> Time2.Zone
 america__bahia _ =
-    fromSpecification <|
+    fromSpecification "America/Bahia" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Brazil), DateTime 2003 Sep 24 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 2011 Oct 16 0 WallClock )
@@ -2572,9 +2564,9 @@ america__bahia _ =
 
 {-| `America/Bahia_Banderas`
 -}
-america__bahia_banderas : () -> Time.Zone
+america__bahia_banderas : () -> Time2.Zone
 america__bahia_banderas _ =
-    fromSpecification <|
+    fromSpecification "America/Bahia_Banderas" <|
         Zone
             [ ( ZoneState -480 (Save 0), DateTime 1970 Jan 1 0 WallClock )
             , ( ZoneState -420 (Rules rules_Mexico), DateTime 2010 Apr 4 120 WallClock )
@@ -2584,9 +2576,9 @@ america__bahia_banderas _ =
 
 {-| `America/Barbados`
 -}
-america__barbados : () -> Time.Zone
+america__barbados : () -> Time2.Zone
 america__barbados _ =
-    fromSpecification <|
+    fromSpecification "America/Barbados" <|
         Zone
             []
             (ZoneState -240 (Rules rules_Barb))
@@ -2594,9 +2586,9 @@ america__barbados _ =
 
 {-| `America/Belem`
 -}
-america__belem : () -> Time.Zone
+america__belem : () -> Time2.Zone
 america__belem _ =
-    fromSpecification <|
+    fromSpecification "America/Belem" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Brazil), DateTime 1988 Sep 12 0 WallClock )
             ]
@@ -2605,9 +2597,9 @@ america__belem _ =
 
 {-| `America/Belize`
 -}
-america__belize : () -> Time.Zone
+america__belize : () -> Time2.Zone
 america__belize _ =
-    fromSpecification <|
+    fromSpecification "America/Belize" <|
         Zone
             []
             (ZoneState -360 (Rules rules_Belize))
@@ -2615,9 +2607,9 @@ america__belize _ =
 
 {-| `America/Boa_Vista`
 -}
-america__boa_vista : () -> Time.Zone
+america__boa_vista : () -> Time2.Zone
 america__boa_vista _ =
-    fromSpecification <|
+    fromSpecification "America/Boa_Vista" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Brazil), DateTime 1988 Sep 12 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1999 Sep 30 0 WallClock )
@@ -2628,9 +2620,9 @@ america__boa_vista _ =
 
 {-| `America/Bogota`
 -}
-america__bogota : () -> Time.Zone
+america__bogota : () -> Time2.Zone
 america__bogota _ =
-    fromSpecification <|
+    fromSpecification "America/Bogota" <|
         Zone
             []
             (ZoneState -300 (Rules rules_CO))
@@ -2638,9 +2630,9 @@ america__bogota _ =
 
 {-| `America/Boise`
 -}
-america__boise : () -> Time.Zone
+america__boise : () -> Time2.Zone
 america__boise _ =
-    fromSpecification <|
+    fromSpecification "America/Boise" <|
         Zone
             [ ( ZoneState -420 (Rules rules_US), DateTime 1974 Jan 1 0 WallClock )
             , ( ZoneState -420 (Save 0), DateTime 1974 Feb 3 120 WallClock )
@@ -2650,9 +2642,9 @@ america__boise _ =
 
 {-| `America/Cambridge_Bay`
 -}
-america__cambridge_bay : () -> Time.Zone
+america__cambridge_bay : () -> Time2.Zone
 america__cambridge_bay _ =
-    fromSpecification <|
+    fromSpecification "America/Cambridge_Bay" <|
         Zone
             [ ( ZoneState -420 (Rules rules_NT_YK), DateTime 1999 Oct 31 120 WallClock )
             , ( ZoneState -360 (Rules rules_Canada), DateTime 2000 Oct 29 120 WallClock )
@@ -2664,9 +2656,9 @@ america__cambridge_bay _ =
 
 {-| `America/Campo_Grande`
 -}
-america__campo_grande : () -> Time.Zone
+america__campo_grande : () -> Time2.Zone
 america__campo_grande _ =
-    fromSpecification <|
+    fromSpecification "America/Campo_Grande" <|
         Zone
             []
             (ZoneState -240 (Rules rules_Brazil))
@@ -2674,9 +2666,9 @@ america__campo_grande _ =
 
 {-| `America/Cancun`
 -}
-america__cancun : () -> Time.Zone
+america__cancun : () -> Time2.Zone
 america__cancun _ =
-    fromSpecification <|
+    fromSpecification "America/Cancun" <|
         Zone
             [ ( ZoneState -360 (Save 0), DateTime 1981 Dec 23 0 WallClock )
             , ( ZoneState -300 (Rules rules_Mexico), DateTime 1998 Aug 2 120 WallClock )
@@ -2687,9 +2679,9 @@ america__cancun _ =
 
 {-| `America/Caracas`
 -}
-america__caracas : () -> Time.Zone
+america__caracas : () -> Time2.Zone
 america__caracas _ =
-    fromSpecification <|
+    fromSpecification "America/Caracas" <|
         Zone
             [ ( ZoneState -240 (Save 0), DateTime 2007 Dec 9 180 WallClock )
             , ( ZoneState -270 (Save 0), DateTime 2016 May 1 150 WallClock )
@@ -2699,9 +2691,9 @@ america__caracas _ =
 
 {-| `America/Cayenne`
 -}
-america__cayenne : () -> Time.Zone
+america__cayenne : () -> Time2.Zone
 america__cayenne _ =
-    fromSpecification <|
+    fromSpecification "America/Cayenne" <|
         Zone
             []
             (ZoneState -180 (Save 0))
@@ -2709,9 +2701,9 @@ america__cayenne _ =
 
 {-| `America/Chicago`
 -}
-america__chicago : () -> Time.Zone
+america__chicago : () -> Time2.Zone
 america__chicago _ =
-    fromSpecification <|
+    fromSpecification "America/Chicago" <|
         Zone
             []
             (ZoneState -360 (Rules rules_US))
@@ -2719,9 +2711,9 @@ america__chicago _ =
 
 {-| `America/Chihuahua`
 -}
-america__chihuahua : () -> Time.Zone
+america__chihuahua : () -> Time2.Zone
 america__chihuahua _ =
-    fromSpecification <|
+    fromSpecification "America/Chihuahua" <|
         Zone
             [ ( ZoneState -360 (Save 0), DateTime 1996 Jan 1 0 WallClock )
             , ( ZoneState -360 (Rules rules_Mexico), DateTime 1998 Jan 1 0 WallClock )
@@ -2732,9 +2724,9 @@ america__chihuahua _ =
 
 {-| `America/Costa_Rica`
 -}
-america__costa_rica : () -> Time.Zone
+america__costa_rica : () -> Time2.Zone
 america__costa_rica _ =
-    fromSpecification <|
+    fromSpecification "America/Costa_Rica" <|
         Zone
             []
             (ZoneState -360 (Rules rules_CR))
@@ -2742,9 +2734,9 @@ america__costa_rica _ =
 
 {-| `America/Cuiaba`
 -}
-america__cuiaba : () -> Time.Zone
+america__cuiaba : () -> Time2.Zone
 america__cuiaba _ =
-    fromSpecification <|
+    fromSpecification "America/Cuiaba" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Brazil), DateTime 2003 Sep 24 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 2004 Oct 1 0 WallClock )
@@ -2754,9 +2746,9 @@ america__cuiaba _ =
 
 {-| `America/Danmarkshavn`
 -}
-america__danmarkshavn : () -> Time.Zone
+america__danmarkshavn : () -> Time2.Zone
 america__danmarkshavn _ =
-    fromSpecification <|
+    fromSpecification "America/Danmarkshavn" <|
         Zone
             [ ( ZoneState -180 (Save 0), DateTime 1980 Apr 6 120 WallClock )
             , ( ZoneState -180 (Rules rules_EU), DateTime 1996 Jan 1 0 WallClock )
@@ -2766,9 +2758,9 @@ america__danmarkshavn _ =
 
 {-| `America/Dawson`
 -}
-america__dawson : () -> Time.Zone
+america__dawson : () -> Time2.Zone
 america__dawson _ =
-    fromSpecification <|
+    fromSpecification "America/Dawson" <|
         Zone
             [ ( ZoneState -540 (Rules rules_NT_YK), DateTime 1973 Oct 28 0 WallClock )
             , ( ZoneState -480 (Rules rules_NT_YK), DateTime 1980 Jan 1 0 WallClock )
@@ -2779,9 +2771,9 @@ america__dawson _ =
 
 {-| `America/Dawson_Creek`
 -}
-america__dawson_creek : () -> Time.Zone
+america__dawson_creek : () -> Time2.Zone
 america__dawson_creek _ =
-    fromSpecification <|
+    fromSpecification "America/Dawson_Creek" <|
         Zone
             [ ( ZoneState -480 (Rules rules_Vanc), DateTime 1972 Aug 30 120 WallClock )
             ]
@@ -2790,9 +2782,9 @@ america__dawson_creek _ =
 
 {-| `America/Denver`
 -}
-america__denver : () -> Time.Zone
+america__denver : () -> Time2.Zone
 america__denver _ =
-    fromSpecification <|
+    fromSpecification "America/Denver" <|
         Zone
             []
             (ZoneState -420 (Rules rules_US))
@@ -2800,9 +2792,9 @@ america__denver _ =
 
 {-| `America/Detroit`
 -}
-america__detroit : () -> Time.Zone
+america__detroit : () -> Time2.Zone
 america__detroit _ =
-    fromSpecification <|
+    fromSpecification "America/Detroit" <|
         Zone
             [ ( ZoneState -300 (Save 0), DateTime 1973 Jan 1 0 WallClock )
             , ( ZoneState -300 (Rules rules_US), DateTime 1975 Jan 1 0 WallClock )
@@ -2813,9 +2805,9 @@ america__detroit _ =
 
 {-| `America/Edmonton`
 -}
-america__edmonton : () -> Time.Zone
+america__edmonton : () -> Time2.Zone
 america__edmonton _ =
-    fromSpecification <|
+    fromSpecification "America/Edmonton" <|
         Zone
             [ ( ZoneState -420 (Rules rules_Edm), DateTime 1987 Jan 1 0 WallClock )
             ]
@@ -2824,9 +2816,9 @@ america__edmonton _ =
 
 {-| `America/Eirunepe`
 -}
-america__eirunepe : () -> Time.Zone
+america__eirunepe : () -> Time2.Zone
 america__eirunepe _ =
-    fromSpecification <|
+    fromSpecification "America/Eirunepe" <|
         Zone
             [ ( ZoneState -300 (Rules rules_Brazil), DateTime 1988 Sep 12 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 1993 Sep 28 0 WallClock )
@@ -2839,9 +2831,9 @@ america__eirunepe _ =
 
 {-| `America/El_Salvador`
 -}
-america__el_salvador : () -> Time.Zone
+america__el_salvador : () -> Time2.Zone
 america__el_salvador _ =
-    fromSpecification <|
+    fromSpecification "America/El_Salvador" <|
         Zone
             []
             (ZoneState -360 (Rules rules_Salv))
@@ -2849,9 +2841,9 @@ america__el_salvador _ =
 
 {-| `America/Fort_Nelson`
 -}
-america__fort_nelson : () -> Time.Zone
+america__fort_nelson : () -> Time2.Zone
 america__fort_nelson _ =
-    fromSpecification <|
+    fromSpecification "America/Fort_Nelson" <|
         Zone
             [ ( ZoneState -480 (Rules rules_Vanc), DateTime 1987 Jan 1 0 WallClock )
             , ( ZoneState -480 (Rules rules_Canada), DateTime 2015 Mar 8 120 WallClock )
@@ -2861,9 +2853,9 @@ america__fort_nelson _ =
 
 {-| `America/Fortaleza`
 -}
-america__fortaleza : () -> Time.Zone
+america__fortaleza : () -> Time2.Zone
 america__fortaleza _ =
-    fromSpecification <|
+    fromSpecification "America/Fortaleza" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Brazil), DateTime 1990 Sep 17 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 1999 Sep 30 0 WallClock )
@@ -2876,9 +2868,9 @@ america__fortaleza _ =
 
 {-| `America/Glace_Bay`
 -}
-america__glace_bay : () -> Time.Zone
+america__glace_bay : () -> Time2.Zone
 america__glace_bay _ =
-    fromSpecification <|
+    fromSpecification "America/Glace_Bay" <|
         Zone
             [ ( ZoneState -240 (Save 0), DateTime 1972 Jan 1 0 WallClock )
             , ( ZoneState -240 (Rules rules_Halifax), DateTime 1974 Jan 1 0 WallClock )
@@ -2888,9 +2880,9 @@ america__glace_bay _ =
 
 {-| `America/Goose_Bay`
 -}
-america__goose_bay : () -> Time.Zone
+america__goose_bay : () -> Time2.Zone
 america__goose_bay _ =
-    fromSpecification <|
+    fromSpecification "America/Goose_Bay" <|
         Zone
             [ ( ZoneState -240 (Rules rules_StJohns), DateTime 2011 Nov 1 0 WallClock )
             ]
@@ -2899,9 +2891,9 @@ america__goose_bay _ =
 
 {-| `America/Grand_Turk`
 -}
-america__grand_turk : () -> Time.Zone
+america__grand_turk : () -> Time2.Zone
 america__grand_turk _ =
-    fromSpecification <|
+    fromSpecification "America/Grand_Turk" <|
         Zone
             [ ( ZoneState -300 (Save 0), DateTime 1979 Jan 1 0 WallClock )
             , ( ZoneState -300 (Rules rules_US), DateTime 2015 Mar 8 120 WallClock )
@@ -2912,9 +2904,9 @@ america__grand_turk _ =
 
 {-| `America/Guatemala`
 -}
-america__guatemala : () -> Time.Zone
+america__guatemala : () -> Time2.Zone
 america__guatemala _ =
-    fromSpecification <|
+    fromSpecification "America/Guatemala" <|
         Zone
             []
             (ZoneState -360 (Rules rules_Guat))
@@ -2922,9 +2914,9 @@ america__guatemala _ =
 
 {-| `America/Guayaquil`
 -}
-america__guayaquil : () -> Time.Zone
+america__guayaquil : () -> Time2.Zone
 america__guayaquil _ =
-    fromSpecification <|
+    fromSpecification "America/Guayaquil" <|
         Zone
             []
             (ZoneState -300 (Rules rules_Ecuador))
@@ -2932,9 +2924,9 @@ america__guayaquil _ =
 
 {-| `America/Guyana`
 -}
-america__guyana : () -> Time.Zone
+america__guyana : () -> Time2.Zone
 america__guyana _ =
-    fromSpecification <|
+    fromSpecification "America/Guyana" <|
         Zone
             [ ( ZoneState -225 (Save 0), DateTime 1975 Aug 1 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 1992 Mar 29 60 WallClock )
@@ -2944,9 +2936,9 @@ america__guyana _ =
 
 {-| `America/Halifax`
 -}
-america__halifax : () -> Time.Zone
+america__halifax : () -> Time2.Zone
 america__halifax _ =
-    fromSpecification <|
+    fromSpecification "America/Halifax" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Halifax), DateTime 1974 Jan 1 0 WallClock )
             ]
@@ -2955,9 +2947,9 @@ america__halifax _ =
 
 {-| `America/Havana`
 -}
-america__havana : () -> Time.Zone
+america__havana : () -> Time2.Zone
 america__havana _ =
-    fromSpecification <|
+    fromSpecification "America/Havana" <|
         Zone
             []
             (ZoneState -300 (Rules rules_Cuba))
@@ -2965,9 +2957,9 @@ america__havana _ =
 
 {-| `America/Hermosillo`
 -}
-america__hermosillo : () -> Time.Zone
+america__hermosillo : () -> Time2.Zone
 america__hermosillo _ =
-    fromSpecification <|
+    fromSpecification "America/Hermosillo" <|
         Zone
             [ ( ZoneState -480 (Save 0), DateTime 1970 Jan 1 0 WallClock )
             , ( ZoneState -420 (Rules rules_Mexico), DateTime 1999 Jan 1 0 WallClock )
@@ -2977,9 +2969,9 @@ america__hermosillo _ =
 
 {-| `America/Indiana/Indianapolis`
 -}
-america__indiana__indianapolis : () -> Time.Zone
+america__indiana__indianapolis : () -> Time2.Zone
 america__indiana__indianapolis _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Indianapolis" <|
         Zone
             [ ( ZoneState -300 (Rules rules_US), DateTime 1971 Jan 1 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2006 Jan 1 0 WallClock )
@@ -2989,9 +2981,9 @@ america__indiana__indianapolis _ =
 
 {-| `America/Indiana/Knox`
 -}
-america__indiana__knox : () -> Time.Zone
+america__indiana__knox : () -> Time2.Zone
 america__indiana__knox _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Knox" <|
         Zone
             [ ( ZoneState -360 (Rules rules_US), DateTime 1991 Oct 27 120 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2006 Apr 2 120 WallClock )
@@ -3001,9 +2993,9 @@ america__indiana__knox _ =
 
 {-| `America/Indiana/Marengo`
 -}
-america__indiana__marengo : () -> Time.Zone
+america__indiana__marengo : () -> Time2.Zone
 america__indiana__marengo _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Marengo" <|
         Zone
             [ ( ZoneState -300 (Rules rules_US), DateTime 1974 Jan 6 120 WallClock )
             , ( ZoneState -360 (Save 60), DateTime 1974 Oct 27 120 WallClock )
@@ -3015,9 +3007,9 @@ america__indiana__marengo _ =
 
 {-| `America/Indiana/Petersburg`
 -}
-america__indiana__petersburg : () -> Time.Zone
+america__indiana__petersburg : () -> Time2.Zone
 america__indiana__petersburg _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Petersburg" <|
         Zone
             [ ( ZoneState -360 (Rules rules_US), DateTime 1977 Oct 30 120 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2006 Apr 2 120 WallClock )
@@ -3028,9 +3020,9 @@ america__indiana__petersburg _ =
 
 {-| `America/Indiana/Tell_City`
 -}
-america__indiana__tell_city : () -> Time.Zone
+america__indiana__tell_city : () -> Time2.Zone
 america__indiana__tell_city _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Tell_City" <|
         Zone
             [ ( ZoneState -300 (Rules rules_US), DateTime 1971 Jan 1 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2006 Apr 2 120 WallClock )
@@ -3040,9 +3032,9 @@ america__indiana__tell_city _ =
 
 {-| `America/Indiana/Vevay`
 -}
-america__indiana__vevay : () -> Time.Zone
+america__indiana__vevay : () -> Time2.Zone
 america__indiana__vevay _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Vevay" <|
         Zone
             [ ( ZoneState -300 (Rules rules_US), DateTime 1973 Jan 1 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2006 Jan 1 0 WallClock )
@@ -3052,9 +3044,9 @@ america__indiana__vevay _ =
 
 {-| `America/Indiana/Vincennes`
 -}
-america__indiana__vincennes : () -> Time.Zone
+america__indiana__vincennes : () -> Time2.Zone
 america__indiana__vincennes _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Vincennes" <|
         Zone
             [ ( ZoneState -300 (Rules rules_US), DateTime 1971 Jan 1 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2006 Apr 2 120 WallClock )
@@ -3065,9 +3057,9 @@ america__indiana__vincennes _ =
 
 {-| `America/Indiana/Winamac`
 -}
-america__indiana__winamac : () -> Time.Zone
+america__indiana__winamac : () -> Time2.Zone
 america__indiana__winamac _ =
-    fromSpecification <|
+    fromSpecification "America/Indiana/Winamac" <|
         Zone
             [ ( ZoneState -300 (Rules rules_US), DateTime 1971 Jan 1 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2006 Apr 2 120 WallClock )
@@ -3078,9 +3070,9 @@ america__indiana__winamac _ =
 
 {-| `America/Inuvik`
 -}
-america__inuvik : () -> Time.Zone
+america__inuvik : () -> Time2.Zone
 america__inuvik _ =
-    fromSpecification <|
+    fromSpecification "America/Inuvik" <|
         Zone
             [ ( ZoneState -480 (Rules rules_NT_YK), DateTime 1979 Apr 29 120 WallClock )
             , ( ZoneState -420 (Rules rules_NT_YK), DateTime 1980 Jan 1 0 WallClock )
@@ -3090,9 +3082,9 @@ america__inuvik _ =
 
 {-| `America/Iqaluit`
 -}
-america__iqaluit : () -> Time.Zone
+america__iqaluit : () -> Time2.Zone
 america__iqaluit _ =
-    fromSpecification <|
+    fromSpecification "America/Iqaluit" <|
         Zone
             [ ( ZoneState -300 (Rules rules_NT_YK), DateTime 1999 Oct 31 120 WallClock )
             , ( ZoneState -360 (Rules rules_Canada), DateTime 2000 Oct 29 120 WallClock )
@@ -3102,9 +3094,9 @@ america__iqaluit _ =
 
 {-| `America/Jamaica`
 -}
-america__jamaica : () -> Time.Zone
+america__jamaica : () -> Time2.Zone
 america__jamaica _ =
-    fromSpecification <|
+    fromSpecification "America/Jamaica" <|
         Zone
             [ ( ZoneState -300 (Save 0), DateTime 1974 Jan 1 0 WallClock )
             , ( ZoneState -300 (Rules rules_US), DateTime 1984 Jan 1 0 WallClock )
@@ -3114,9 +3106,9 @@ america__jamaica _ =
 
 {-| `America/Juneau`
 -}
-america__juneau : () -> Time.Zone
+america__juneau : () -> Time2.Zone
 america__juneau _ =
-    fromSpecification <|
+    fromSpecification "America/Juneau" <|
         Zone
             [ ( ZoneState -480 (Rules rules_US), DateTime 1980 Apr 27 120 WallClock )
             , ( ZoneState -540 (Rules rules_US), DateTime 1980 Oct 26 120 WallClock )
@@ -3128,9 +3120,9 @@ america__juneau _ =
 
 {-| `America/Kentucky/Louisville`
 -}
-america__kentucky__louisville : () -> Time.Zone
+america__kentucky__louisville : () -> Time2.Zone
 america__kentucky__louisville _ =
-    fromSpecification <|
+    fromSpecification "America/Kentucky/Louisville" <|
         Zone
             [ ( ZoneState -300 (Rules rules_US), DateTime 1974 Jan 6 120 WallClock )
             , ( ZoneState -360 (Save 60), DateTime 1974 Oct 27 120 WallClock )
@@ -3140,9 +3132,9 @@ america__kentucky__louisville _ =
 
 {-| `America/Kentucky/Monticello`
 -}
-america__kentucky__monticello : () -> Time.Zone
+america__kentucky__monticello : () -> Time2.Zone
 america__kentucky__monticello _ =
-    fromSpecification <|
+    fromSpecification "America/Kentucky/Monticello" <|
         Zone
             [ ( ZoneState -360 (Rules rules_US), DateTime 2000 Oct 29 120 WallClock )
             ]
@@ -3151,9 +3143,9 @@ america__kentucky__monticello _ =
 
 {-| `America/La_Paz`
 -}
-america__la_paz : () -> Time.Zone
+america__la_paz : () -> Time2.Zone
 america__la_paz _ =
-    fromSpecification <|
+    fromSpecification "America/La_Paz" <|
         Zone
             []
             (ZoneState -240 (Save 0))
@@ -3161,9 +3153,9 @@ america__la_paz _ =
 
 {-| `America/Lima`
 -}
-america__lima : () -> Time.Zone
+america__lima : () -> Time2.Zone
 america__lima _ =
-    fromSpecification <|
+    fromSpecification "America/Lima" <|
         Zone
             []
             (ZoneState -300 (Rules rules_Peru))
@@ -3171,9 +3163,9 @@ america__lima _ =
 
 {-| `America/Los_Angeles`
 -}
-america__los_angeles : () -> Time.Zone
+america__los_angeles : () -> Time2.Zone
 america__los_angeles _ =
-    fromSpecification <|
+    fromSpecification "America/Los_Angeles" <|
         Zone
             []
             (ZoneState -480 (Rules rules_US))
@@ -3181,9 +3173,9 @@ america__los_angeles _ =
 
 {-| `America/Maceio`
 -}
-america__maceio : () -> Time.Zone
+america__maceio : () -> Time2.Zone
 america__maceio _ =
-    fromSpecification <|
+    fromSpecification "America/Maceio" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Brazil), DateTime 1990 Sep 17 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 1995 Oct 13 0 WallClock )
@@ -3198,9 +3190,9 @@ america__maceio _ =
 
 {-| `America/Managua`
 -}
-america__managua : () -> Time.Zone
+america__managua : () -> Time2.Zone
 america__managua _ =
-    fromSpecification <|
+    fromSpecification "America/Managua" <|
         Zone
             [ ( ZoneState -360 (Save 0), DateTime 1973 May 1 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 1975 Feb 16 0 WallClock )
@@ -3214,9 +3206,9 @@ america__managua _ =
 
 {-| `America/Manaus`
 -}
-america__manaus : () -> Time.Zone
+america__manaus : () -> Time2.Zone
 america__manaus _ =
-    fromSpecification <|
+    fromSpecification "America/Manaus" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Brazil), DateTime 1988 Sep 12 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 1993 Sep 28 0 WallClock )
@@ -3227,9 +3219,9 @@ america__manaus _ =
 
 {-| `America/Martinique`
 -}
-america__martinique : () -> Time.Zone
+america__martinique : () -> Time2.Zone
 america__martinique _ =
-    fromSpecification <|
+    fromSpecification "America/Martinique" <|
         Zone
             [ ( ZoneState -240 (Save 0), DateTime 1980 Apr 6 0 WallClock )
             , ( ZoneState -240 (Save 60), DateTime 1980 Sep 28 0 WallClock )
@@ -3239,9 +3231,9 @@ america__martinique _ =
 
 {-| `America/Matamoros`
 -}
-america__matamoros : () -> Time.Zone
+america__matamoros : () -> Time2.Zone
 america__matamoros _ =
-    fromSpecification <|
+    fromSpecification "America/Matamoros" <|
         Zone
             [ ( ZoneState -360 (Save 0), DateTime 1988 Jan 1 0 WallClock )
             , ( ZoneState -360 (Rules rules_US), DateTime 1989 Jan 1 0 WallClock )
@@ -3252,9 +3244,9 @@ america__matamoros _ =
 
 {-| `America/Mazatlan`
 -}
-america__mazatlan : () -> Time.Zone
+america__mazatlan : () -> Time2.Zone
 america__mazatlan _ =
-    fromSpecification <|
+    fromSpecification "America/Mazatlan" <|
         Zone
             [ ( ZoneState -480 (Save 0), DateTime 1970 Jan 1 0 WallClock )
             ]
@@ -3263,9 +3255,9 @@ america__mazatlan _ =
 
 {-| `America/Menominee`
 -}
-america__menominee : () -> Time.Zone
+america__menominee : () -> Time2.Zone
 america__menominee _ =
-    fromSpecification <|
+    fromSpecification "America/Menominee" <|
         Zone
             [ ( ZoneState -300 (Save 0), DateTime 1973 Apr 29 120 WallClock )
             ]
@@ -3274,9 +3266,9 @@ america__menominee _ =
 
 {-| `America/Merida`
 -}
-america__merida : () -> Time.Zone
+america__merida : () -> Time2.Zone
 america__merida _ =
-    fromSpecification <|
+    fromSpecification "America/Merida" <|
         Zone
             [ ( ZoneState -360 (Save 0), DateTime 1981 Dec 23 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 1982 Dec 2 0 WallClock )
@@ -3286,9 +3278,9 @@ america__merida _ =
 
 {-| `America/Metlakatla`
 -}
-america__metlakatla : () -> Time.Zone
+america__metlakatla : () -> Time2.Zone
 america__metlakatla _ =
-    fromSpecification <|
+    fromSpecification "America/Metlakatla" <|
         Zone
             [ ( ZoneState -480 (Rules rules_US), DateTime 1983 Oct 30 120 WallClock )
             , ( ZoneState -480 (Save 0), DateTime 2015 Nov 1 120 WallClock )
@@ -3300,9 +3292,9 @@ america__metlakatla _ =
 
 {-| `America/Mexico_City`
 -}
-america__mexico_city : () -> Time.Zone
+america__mexico_city : () -> Time2.Zone
 america__mexico_city _ =
-    fromSpecification <|
+    fromSpecification "America/Mexico_City" <|
         Zone
             [ ( ZoneState -360 (Rules rules_Mexico), DateTime 2001 Sep 30 120 WallClock )
             , ( ZoneState -360 (Save 0), DateTime 2002 Feb 20 0 WallClock )
@@ -3312,9 +3304,9 @@ america__mexico_city _ =
 
 {-| `America/Miquelon`
 -}
-america__miquelon : () -> Time.Zone
+america__miquelon : () -> Time2.Zone
 america__miquelon _ =
-    fromSpecification <|
+    fromSpecification "America/Miquelon" <|
         Zone
             [ ( ZoneState -240 (Save 0), DateTime 1980 May 1 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 1987 Jan 1 0 WallClock )
@@ -3324,9 +3316,9 @@ america__miquelon _ =
 
 {-| `America/Moncton`
 -}
-america__moncton : () -> Time.Zone
+america__moncton : () -> Time2.Zone
 america__moncton _ =
-    fromSpecification <|
+    fromSpecification "America/Moncton" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Moncton), DateTime 1973 Jan 1 0 WallClock )
             , ( ZoneState -240 (Rules rules_Canada), DateTime 1993 Jan 1 0 WallClock )
@@ -3337,9 +3329,9 @@ america__moncton _ =
 
 {-| `America/Monterrey`
 -}
-america__monterrey : () -> Time.Zone
+america__monterrey : () -> Time2.Zone
 america__monterrey _ =
-    fromSpecification <|
+    fromSpecification "America/Monterrey" <|
         Zone
             [ ( ZoneState -360 (Save 0), DateTime 1988 Jan 1 0 WallClock )
             , ( ZoneState -360 (Rules rules_US), DateTime 1989 Jan 1 0 WallClock )
@@ -3349,9 +3341,9 @@ america__monterrey _ =
 
 {-| `America/Montevideo`
 -}
-america__montevideo : () -> Time.Zone
+america__montevideo : () -> Time2.Zone
 america__montevideo _ =
-    fromSpecification <|
+    fromSpecification "America/Montevideo" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Uruguay), DateTime 1970 Jan 1 0 WallClock )
             , ( ZoneState -180 (Rules rules_Uruguay), DateTime 1974 Jan 1 0 WallClock )
@@ -3363,9 +3355,9 @@ america__montevideo _ =
 
 {-| `America/New_York`
 -}
-america__new_york : () -> Time.Zone
+america__new_york : () -> Time2.Zone
 america__new_york _ =
-    fromSpecification <|
+    fromSpecification "America/New_York" <|
         Zone
             []
             (ZoneState -300 (Rules rules_US))
@@ -3373,9 +3365,9 @@ america__new_york _ =
 
 {-| `America/Nipigon`
 -}
-america__nipigon : () -> Time.Zone
+america__nipigon : () -> Time2.Zone
 america__nipigon _ =
-    fromSpecification <|
+    fromSpecification "America/Nipigon" <|
         Zone
             []
             (ZoneState -300 (Rules rules_Canada))
@@ -3383,9 +3375,9 @@ america__nipigon _ =
 
 {-| `America/Nome`
 -}
-america__nome : () -> Time.Zone
+america__nome : () -> Time2.Zone
 america__nome _ =
-    fromSpecification <|
+    fromSpecification "America/Nome" <|
         Zone
             [ ( ZoneState -660 (Rules rules_US), DateTime 1983 Oct 30 120 WallClock )
             , ( ZoneState -540 (Rules rules_US), DateTime 1983 Nov 30 0 WallClock )
@@ -3395,9 +3387,9 @@ america__nome _ =
 
 {-| `America/Noronha`
 -}
-america__noronha : () -> Time.Zone
+america__noronha : () -> Time2.Zone
 america__noronha _ =
-    fromSpecification <|
+    fromSpecification "America/Noronha" <|
         Zone
             [ ( ZoneState -120 (Rules rules_Brazil), DateTime 1990 Sep 17 0 WallClock )
             , ( ZoneState -120 (Save 0), DateTime 1999 Sep 30 0 WallClock )
@@ -3410,9 +3402,9 @@ america__noronha _ =
 
 {-| `America/North_Dakota/Beulah`
 -}
-america__north_dakota__beulah : () -> Time.Zone
+america__north_dakota__beulah : () -> Time2.Zone
 america__north_dakota__beulah _ =
-    fromSpecification <|
+    fromSpecification "America/North_Dakota/Beulah" <|
         Zone
             [ ( ZoneState -420 (Rules rules_US), DateTime 2010 Nov 7 120 WallClock )
             ]
@@ -3421,9 +3413,9 @@ america__north_dakota__beulah _ =
 
 {-| `America/North_Dakota/Center`
 -}
-america__north_dakota__center : () -> Time.Zone
+america__north_dakota__center : () -> Time2.Zone
 america__north_dakota__center _ =
-    fromSpecification <|
+    fromSpecification "America/North_Dakota/Center" <|
         Zone
             [ ( ZoneState -420 (Rules rules_US), DateTime 1992 Oct 25 120 WallClock )
             ]
@@ -3432,9 +3424,9 @@ america__north_dakota__center _ =
 
 {-| `America/North_Dakota/New_Salem`
 -}
-america__north_dakota__new_salem : () -> Time.Zone
+america__north_dakota__new_salem : () -> Time2.Zone
 america__north_dakota__new_salem _ =
-    fromSpecification <|
+    fromSpecification "America/North_Dakota/New_Salem" <|
         Zone
             [ ( ZoneState -420 (Rules rules_US), DateTime 2003 Oct 26 120 WallClock )
             ]
@@ -3443,9 +3435,9 @@ america__north_dakota__new_salem _ =
 
 {-| `America/Nuuk`
 -}
-america__nuuk : () -> Time.Zone
+america__nuuk : () -> Time2.Zone
 america__nuuk _ =
-    fromSpecification <|
+    fromSpecification "America/Nuuk" <|
         Zone
             [ ( ZoneState -180 (Save 0), DateTime 1980 Apr 6 120 WallClock )
             ]
@@ -3454,9 +3446,9 @@ america__nuuk _ =
 
 {-| `America/Ojinaga`
 -}
-america__ojinaga : () -> Time.Zone
+america__ojinaga : () -> Time2.Zone
 america__ojinaga _ =
-    fromSpecification <|
+    fromSpecification "America/Ojinaga" <|
         Zone
             [ ( ZoneState -360 (Save 0), DateTime 1996 Jan 1 0 WallClock )
             , ( ZoneState -360 (Rules rules_Mexico), DateTime 1998 Jan 1 0 WallClock )
@@ -3468,9 +3460,9 @@ america__ojinaga _ =
 
 {-| `America/Panama`
 -}
-america__panama : () -> Time.Zone
+america__panama : () -> Time2.Zone
 america__panama _ =
-    fromSpecification <|
+    fromSpecification "America/Panama" <|
         Zone
             []
             (ZoneState -300 (Save 0))
@@ -3478,9 +3470,9 @@ america__panama _ =
 
 {-| `America/Pangnirtung`
 -}
-america__pangnirtung : () -> Time.Zone
+america__pangnirtung : () -> Time2.Zone
 america__pangnirtung _ =
-    fromSpecification <|
+    fromSpecification "America/Pangnirtung" <|
         Zone
             [ ( ZoneState -240 (Rules rules_NT_YK), DateTime 1995 Apr 2 120 WallClock )
             , ( ZoneState -300 (Rules rules_Canada), DateTime 1999 Oct 31 120 WallClock )
@@ -3491,9 +3483,9 @@ america__pangnirtung _ =
 
 {-| `America/Paramaribo`
 -}
-america__paramaribo : () -> Time.Zone
+america__paramaribo : () -> Time2.Zone
 america__paramaribo _ =
-    fromSpecification <|
+    fromSpecification "America/Paramaribo" <|
         Zone
             [ ( ZoneState -210 (Save 0), DateTime 1984 Oct 1 0 WallClock )
             ]
@@ -3502,9 +3494,9 @@ america__paramaribo _ =
 
 {-| `America/Phoenix`
 -}
-america__phoenix : () -> Time.Zone
+america__phoenix : () -> Time2.Zone
 america__phoenix _ =
-    fromSpecification <|
+    fromSpecification "America/Phoenix" <|
         Zone
             []
             (ZoneState -420 (Save 0))
@@ -3512,9 +3504,9 @@ america__phoenix _ =
 
 {-| `America/Port-au-Prince`
 -}
-america__port_au_prince : () -> Time.Zone
+america__port_au_prince : () -> Time2.Zone
 america__port_au_prince _ =
-    fromSpecification <|
+    fromSpecification "America/Port-au-Prince" <|
         Zone
             []
             (ZoneState -300 (Rules rules_Haiti))
@@ -3522,9 +3514,9 @@ america__port_au_prince _ =
 
 {-| `America/Porto_Velho`
 -}
-america__porto_velho : () -> Time.Zone
+america__porto_velho : () -> Time2.Zone
 america__porto_velho _ =
-    fromSpecification <|
+    fromSpecification "America/Porto_Velho" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Brazil), DateTime 1988 Sep 12 0 WallClock )
             ]
@@ -3533,9 +3525,9 @@ america__porto_velho _ =
 
 {-| `America/Puerto_Rico`
 -}
-america__puerto_rico : () -> Time.Zone
+america__puerto_rico : () -> Time2.Zone
 america__puerto_rico _ =
-    fromSpecification <|
+    fromSpecification "America/Puerto_Rico" <|
         Zone
             []
             (ZoneState -240 (Save 0))
@@ -3543,9 +3535,9 @@ america__puerto_rico _ =
 
 {-| `America/Punta_Arenas`
 -}
-america__punta_arenas : () -> Time.Zone
+america__punta_arenas : () -> Time2.Zone
 america__punta_arenas _ =
-    fromSpecification <|
+    fromSpecification "America/Punta_Arenas" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Chile), DateTime 2016 Dec 4 0 WallClock )
             ]
@@ -3554,9 +3546,9 @@ america__punta_arenas _ =
 
 {-| `America/Rainy_River`
 -}
-america__rainy_river : () -> Time.Zone
+america__rainy_river : () -> Time2.Zone
 america__rainy_river _ =
-    fromSpecification <|
+    fromSpecification "America/Rainy_River" <|
         Zone
             []
             (ZoneState -360 (Rules rules_Canada))
@@ -3564,9 +3556,9 @@ america__rainy_river _ =
 
 {-| `America/Rankin_Inlet`
 -}
-america__rankin_inlet : () -> Time.Zone
+america__rankin_inlet : () -> Time2.Zone
 america__rankin_inlet _ =
-    fromSpecification <|
+    fromSpecification "America/Rankin_Inlet" <|
         Zone
             [ ( ZoneState -360 (Rules rules_NT_YK), DateTime 2000 Oct 29 120 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2001 Apr 1 180 WallClock )
@@ -3576,9 +3568,9 @@ america__rankin_inlet _ =
 
 {-| `America/Recife`
 -}
-america__recife : () -> Time.Zone
+america__recife : () -> Time2.Zone
 america__recife _ =
-    fromSpecification <|
+    fromSpecification "America/Recife" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Brazil), DateTime 1990 Sep 17 0 WallClock )
             , ( ZoneState -180 (Save 0), DateTime 1999 Sep 30 0 WallClock )
@@ -3591,9 +3583,9 @@ america__recife _ =
 
 {-| `America/Regina`
 -}
-america__regina : () -> Time.Zone
+america__regina : () -> Time2.Zone
 america__regina _ =
-    fromSpecification <|
+    fromSpecification "America/Regina" <|
         Zone
             []
             (ZoneState -360 (Save 0))
@@ -3601,9 +3593,9 @@ america__regina _ =
 
 {-| `America/Resolute`
 -}
-america__resolute : () -> Time.Zone
+america__resolute : () -> Time2.Zone
 america__resolute _ =
-    fromSpecification <|
+    fromSpecification "America/Resolute" <|
         Zone
             [ ( ZoneState -360 (Rules rules_NT_YK), DateTime 2000 Oct 29 120 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2001 Apr 1 180 WallClock )
@@ -3615,9 +3607,9 @@ america__resolute _ =
 
 {-| `America/Rio_Branco`
 -}
-america__rio_branco : () -> Time.Zone
+america__rio_branco : () -> Time2.Zone
 america__rio_branco _ =
-    fromSpecification <|
+    fromSpecification "America/Rio_Branco" <|
         Zone
             [ ( ZoneState -300 (Rules rules_Brazil), DateTime 1988 Sep 12 0 WallClock )
             , ( ZoneState -300 (Save 0), DateTime 2008 Jun 24 0 WallClock )
@@ -3628,9 +3620,9 @@ america__rio_branco _ =
 
 {-| `America/Santarem`
 -}
-america__santarem : () -> Time.Zone
+america__santarem : () -> Time2.Zone
 america__santarem _ =
-    fromSpecification <|
+    fromSpecification "America/Santarem" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Brazil), DateTime 1988 Sep 12 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 2008 Jun 24 0 WallClock )
@@ -3640,9 +3632,9 @@ america__santarem _ =
 
 {-| `America/Santiago`
 -}
-america__santiago : () -> Time.Zone
+america__santiago : () -> Time2.Zone
 america__santiago _ =
-    fromSpecification <|
+    fromSpecification "America/Santiago" <|
         Zone
             []
             (ZoneState -240 (Rules rules_Chile))
@@ -3650,9 +3642,9 @@ america__santiago _ =
 
 {-| `America/Santo_Domingo`
 -}
-america__santo_domingo : () -> Time.Zone
+america__santo_domingo : () -> Time2.Zone
 america__santo_domingo _ =
-    fromSpecification <|
+    fromSpecification "America/Santo_Domingo" <|
         Zone
             [ ( ZoneState -300 (Rules rules_DR), DateTime 1974 Oct 27 0 WallClock )
             , ( ZoneState -240 (Save 0), DateTime 2000 Oct 29 120 WallClock )
@@ -3663,9 +3655,9 @@ america__santo_domingo _ =
 
 {-| `America/Sao_Paulo`
 -}
-america__sao_paulo : () -> Time.Zone
+america__sao_paulo : () -> Time2.Zone
 america__sao_paulo _ =
-    fromSpecification <|
+    fromSpecification "America/Sao_Paulo" <|
         Zone
             []
             (ZoneState -180 (Rules rules_Brazil))
@@ -3673,9 +3665,9 @@ america__sao_paulo _ =
 
 {-| `America/Scoresbysund`
 -}
-america__scoresbysund : () -> Time.Zone
+america__scoresbysund : () -> Time2.Zone
 america__scoresbysund _ =
-    fromSpecification <|
+    fromSpecification "America/Scoresbysund" <|
         Zone
             [ ( ZoneState -120 (Save 0), DateTime 1980 Apr 6 120 WallClock )
             , ( ZoneState -120 (Rules rules_C_Eur), DateTime 1981 Mar 29 0 WallClock )
@@ -3685,9 +3677,9 @@ america__scoresbysund _ =
 
 {-| `America/Sitka`
 -}
-america__sitka : () -> Time.Zone
+america__sitka : () -> Time2.Zone
 america__sitka _ =
-    fromSpecification <|
+    fromSpecification "America/Sitka" <|
         Zone
             [ ( ZoneState -480 (Rules rules_US), DateTime 1983 Oct 30 120 WallClock )
             , ( ZoneState -540 (Rules rules_US), DateTime 1983 Nov 30 0 WallClock )
@@ -3697,9 +3689,9 @@ america__sitka _ =
 
 {-| `America/St_Johns`
 -}
-america__st_johns : () -> Time.Zone
+america__st_johns : () -> Time2.Zone
 america__st_johns _ =
-    fromSpecification <|
+    fromSpecification "America/St_Johns" <|
         Zone
             [ ( ZoneState -210 (Rules rules_StJohns), DateTime 2011 Nov 1 0 WallClock )
             ]
@@ -3708,9 +3700,9 @@ america__st_johns _ =
 
 {-| `America/Swift_Current`
 -}
-america__swift_current : () -> Time.Zone
+america__swift_current : () -> Time2.Zone
 america__swift_current _ =
-    fromSpecification <|
+    fromSpecification "America/Swift_Current" <|
         Zone
             [ ( ZoneState -420 (Save 0), DateTime 1972 Apr 30 120 WallClock )
             ]
@@ -3719,9 +3711,9 @@ america__swift_current _ =
 
 {-| `America/Tegucigalpa`
 -}
-america__tegucigalpa : () -> Time.Zone
+america__tegucigalpa : () -> Time2.Zone
 america__tegucigalpa _ =
-    fromSpecification <|
+    fromSpecification "America/Tegucigalpa" <|
         Zone
             []
             (ZoneState -360 (Rules rules_Hond))
@@ -3729,9 +3721,9 @@ america__tegucigalpa _ =
 
 {-| `America/Thule`
 -}
-america__thule : () -> Time.Zone
+america__thule : () -> Time2.Zone
 america__thule _ =
-    fromSpecification <|
+    fromSpecification "America/Thule" <|
         Zone
             []
             (ZoneState -240 (Rules rules_Thule))
@@ -3739,9 +3731,9 @@ america__thule _ =
 
 {-| `America/Thunder_Bay`
 -}
-america__thunder_bay : () -> Time.Zone
+america__thunder_bay : () -> Time2.Zone
 america__thunder_bay _ =
-    fromSpecification <|
+    fromSpecification "America/Thunder_Bay" <|
         Zone
             [ ( ZoneState -300 (Rules rules_Canada), DateTime 1970 Jan 1 0 WallClock )
             , ( ZoneState -300 (Rules rules_Toronto), DateTime 1973 Jan 1 0 WallClock )
@@ -3752,9 +3744,9 @@ america__thunder_bay _ =
 
 {-| `America/Tijuana`
 -}
-america__tijuana : () -> Time.Zone
+america__tijuana : () -> Time2.Zone
 america__tijuana _ =
-    fromSpecification <|
+    fromSpecification "America/Tijuana" <|
         Zone
             [ ( ZoneState -480 (Save 0), DateTime 1976 Jan 1 0 WallClock )
             , ( ZoneState -480 (Rules rules_US), DateTime 1996 Jan 1 0 WallClock )
@@ -3767,9 +3759,9 @@ america__tijuana _ =
 
 {-| `America/Toronto`
 -}
-america__toronto : () -> Time.Zone
+america__toronto : () -> Time2.Zone
 america__toronto _ =
-    fromSpecification <|
+    fromSpecification "America/Toronto" <|
         Zone
             [ ( ZoneState -300 (Rules rules_Toronto), DateTime 1974 Jan 1 0 WallClock )
             ]
@@ -3778,9 +3770,9 @@ america__toronto _ =
 
 {-| `America/Vancouver`
 -}
-america__vancouver : () -> Time.Zone
+america__vancouver : () -> Time2.Zone
 america__vancouver _ =
-    fromSpecification <|
+    fromSpecification "America/Vancouver" <|
         Zone
             [ ( ZoneState -480 (Rules rules_Vanc), DateTime 1987 Jan 1 0 WallClock )
             ]
@@ -3789,9 +3781,9 @@ america__vancouver _ =
 
 {-| `America/Whitehorse`
 -}
-america__whitehorse : () -> Time.Zone
+america__whitehorse : () -> Time2.Zone
 america__whitehorse _ =
-    fromSpecification <|
+    fromSpecification "America/Whitehorse" <|
         Zone
             [ ( ZoneState -480 (Rules rules_NT_YK), DateTime 1980 Jan 1 0 WallClock )
             , ( ZoneState -480 (Rules rules_Canada), DateTime 2020 Nov 1 0 WallClock )
@@ -3801,9 +3793,9 @@ america__whitehorse _ =
 
 {-| `America/Winnipeg`
 -}
-america__winnipeg : () -> Time.Zone
+america__winnipeg : () -> Time2.Zone
 america__winnipeg _ =
-    fromSpecification <|
+    fromSpecification "America/Winnipeg" <|
         Zone
             [ ( ZoneState -360 (Rules rules_Winn), DateTime 2006 Jan 1 0 WallClock )
             ]
@@ -3812,9 +3804,9 @@ america__winnipeg _ =
 
 {-| `America/Yakutat`
 -}
-america__yakutat : () -> Time.Zone
+america__yakutat : () -> Time2.Zone
 america__yakutat _ =
-    fromSpecification <|
+    fromSpecification "America/Yakutat" <|
         Zone
             [ ( ZoneState -540 (Rules rules_US), DateTime 1983 Nov 30 0 WallClock )
             ]
@@ -3823,9 +3815,9 @@ america__yakutat _ =
 
 {-| `America/Yellowknife`
 -}
-america__yellowknife : () -> Time.Zone
+america__yellowknife : () -> Time2.Zone
 america__yellowknife _ =
-    fromSpecification <|
+    fromSpecification "America/Yellowknife" <|
         Zone
             [ ( ZoneState -420 (Rules rules_NT_YK), DateTime 1980 Jan 1 0 WallClock )
             ]
@@ -3834,9 +3826,9 @@ america__yellowknife _ =
 
 {-| `Antarctica/Casey`
 -}
-antarctica__casey : () -> Time.Zone
+antarctica__casey : () -> Time2.Zone
 antarctica__casey _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Casey" <|
         Zone
             [ ( ZoneState 480 (Save 0), DateTime 2009 Oct 18 120 WallClock )
             , ( ZoneState 660 (Save 0), DateTime 2010 Mar 5 120 WallClock )
@@ -3855,9 +3847,9 @@ antarctica__casey _ =
 
 {-| `Antarctica/Davis`
 -}
-antarctica__davis : () -> Time.Zone
+antarctica__davis : () -> Time2.Zone
 antarctica__davis _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Davis" <|
         Zone
             [ ( ZoneState 420 (Save 0), DateTime 2009 Oct 18 120 WallClock )
             , ( ZoneState 300 (Save 0), DateTime 2010 Mar 10 1200 Universal )
@@ -3869,9 +3861,9 @@ antarctica__davis _ =
 
 {-| `Antarctica/Macquarie`
 -}
-antarctica__macquarie : () -> Time.Zone
+antarctica__macquarie : () -> Time2.Zone
 antarctica__macquarie _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Macquarie" <|
         Zone
             [ ( ZoneState 600 (Rules rules_AT), DateTime 2010 Jan 1 0 WallClock )
             , ( ZoneState 600 (Save 60), DateTime 2011 Jan 1 0 WallClock )
@@ -3881,9 +3873,9 @@ antarctica__macquarie _ =
 
 {-| `Antarctica/Mawson`
 -}
-antarctica__mawson : () -> Time.Zone
+antarctica__mawson : () -> Time2.Zone
 antarctica__mawson _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Mawson" <|
         Zone
             [ ( ZoneState 360 (Save 0), DateTime 2009 Oct 18 120 WallClock )
             ]
@@ -3892,9 +3884,9 @@ antarctica__mawson _ =
 
 {-| `Antarctica/Palmer`
 -}
-antarctica__palmer : () -> Time.Zone
+antarctica__palmer : () -> Time2.Zone
 antarctica__palmer _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Palmer" <|
         Zone
             [ ( ZoneState -180 (Rules rules_Arg), DateTime 1982 May 1 0 WallClock )
             , ( ZoneState -240 (Rules rules_Chile), DateTime 2016 Dec 4 0 WallClock )
@@ -3904,9 +3896,9 @@ antarctica__palmer _ =
 
 {-| `Antarctica/Rothera`
 -}
-antarctica__rothera : () -> Time.Zone
+antarctica__rothera : () -> Time2.Zone
 antarctica__rothera _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Rothera" <|
         Zone
             [ ( ZoneState 0 (Save 0), DateTime 1976 Dec 1 0 WallClock )
             ]
@@ -3915,9 +3907,9 @@ antarctica__rothera _ =
 
 {-| `Antarctica/Troll`
 -}
-antarctica__troll : () -> Time.Zone
+antarctica__troll : () -> Time2.Zone
 antarctica__troll _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Troll" <|
         Zone
             [ ( ZoneState 0 (Save 0), DateTime 2005 Feb 12 0 WallClock )
             ]
@@ -3926,9 +3918,9 @@ antarctica__troll _ =
 
 {-| `Antarctica/Vostok`
 -}
-antarctica__vostok : () -> Time.Zone
+antarctica__vostok : () -> Time2.Zone
 antarctica__vostok _ =
-    fromSpecification <|
+    fromSpecification "Antarctica/Vostok" <|
         Zone
             []
             (ZoneState 360 (Save 0))
@@ -3936,9 +3928,9 @@ antarctica__vostok _ =
 
 {-| `Asia/Almaty`
 -}
-asia__almaty : () -> Time.Zone
+asia__almaty : () -> Time2.Zone
 asia__almaty _ =
-    fromSpecification <|
+    fromSpecification "Asia/Almaty" <|
         Zone
             [ ( ZoneState 360 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 300 (Rules rules_RussiaAsia), DateTime 1992 Jan 19 120 Standard )
@@ -3949,9 +3941,9 @@ asia__almaty _ =
 
 {-| `Asia/Amman`
 -}
-asia__amman : () -> Time.Zone
+asia__amman : () -> Time2.Zone
 asia__amman _ =
-    fromSpecification <|
+    fromSpecification "Asia/Amman" <|
         Zone
             []
             (ZoneState 120 (Rules rules_Jordan))
@@ -3959,9 +3951,9 @@ asia__amman _ =
 
 {-| `Asia/Anadyr`
 -}
-asia__anadyr : () -> Time.Zone
+asia__anadyr : () -> Time2.Zone
 asia__anadyr _ =
-    fromSpecification <|
+    fromSpecification "Asia/Anadyr" <|
         Zone
             [ ( ZoneState 780 (Rules rules_Russia), DateTime 1982 Apr 1 0 Standard )
             , ( ZoneState 720 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -3974,9 +3966,9 @@ asia__anadyr _ =
 
 {-| `Asia/Aqtau`
 -}
-asia__aqtau : () -> Time.Zone
+asia__aqtau : () -> Time2.Zone
 asia__aqtau _ =
-    fromSpecification <|
+    fromSpecification "Asia/Aqtau" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1981 Oct 1 0 WallClock )
             , ( ZoneState 360 (Save 0), DateTime 1982 Apr 1 0 WallClock )
@@ -3990,9 +3982,9 @@ asia__aqtau _ =
 
 {-| `Asia/Aqtobe`
 -}
-asia__aqtobe : () -> Time.Zone
+asia__aqtobe : () -> Time2.Zone
 asia__aqtobe _ =
-    fromSpecification <|
+    fromSpecification "Asia/Aqtobe" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1981 Apr 1 0 WallClock )
             , ( ZoneState 300 (Save 60), DateTime 1981 Oct 1 0 WallClock )
@@ -4006,9 +3998,9 @@ asia__aqtobe _ =
 
 {-| `Asia/Ashgabat`
 -}
-asia__ashgabat : () -> Time.Zone
+asia__ashgabat : () -> Time2.Zone
 asia__ashgabat _ =
-    fromSpecification <|
+    fromSpecification "Asia/Ashgabat" <|
         Zone
             [ ( ZoneState 300 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 WallClock )
             , ( ZoneState 240 (Rules rules_RussiaAsia), DateTime 1992 Jan 19 120 WallClock )
@@ -4018,9 +4010,9 @@ asia__ashgabat _ =
 
 {-| `Asia/Atyrau`
 -}
-asia__atyrau : () -> Time.Zone
+asia__atyrau : () -> Time2.Zone
 asia__atyrau _ =
-    fromSpecification <|
+    fromSpecification "Asia/Atyrau" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1981 Oct 1 0 WallClock )
             , ( ZoneState 360 (Save 0), DateTime 1982 Apr 1 0 WallClock )
@@ -4034,9 +4026,9 @@ asia__atyrau _ =
 
 {-| `Asia/Baghdad`
 -}
-asia__baghdad : () -> Time.Zone
+asia__baghdad : () -> Time2.Zone
 asia__baghdad _ =
-    fromSpecification <|
+    fromSpecification "Asia/Baghdad" <|
         Zone
             [ ( ZoneState 180 (Save 0), DateTime 1982 May 1 0 WallClock )
             ]
@@ -4045,9 +4037,9 @@ asia__baghdad _ =
 
 {-| `Asia/Baku`
 -}
-asia__baku : () -> Time.Zone
+asia__baku : () -> Time2.Zone
 asia__baku _ =
-    fromSpecification <|
+    fromSpecification "Asia/Baku" <|
         Zone
             [ ( ZoneState 240 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 180 (Rules rules_RussiaAsia), DateTime 1992 Sep 27 120 Standard )
@@ -4059,9 +4051,9 @@ asia__baku _ =
 
 {-| `Asia/Bangkok`
 -}
-asia__bangkok : () -> Time.Zone
+asia__bangkok : () -> Time2.Zone
 asia__bangkok _ =
-    fromSpecification <|
+    fromSpecification "Asia/Bangkok" <|
         Zone
             []
             (ZoneState 420 (Save 0))
@@ -4069,9 +4061,9 @@ asia__bangkok _ =
 
 {-| `Asia/Barnaul`
 -}
-asia__barnaul : () -> Time.Zone
+asia__barnaul : () -> Time2.Zone
 asia__barnaul _ =
-    fromSpecification <|
+    fromSpecification "Asia/Barnaul" <|
         Zone
             [ ( ZoneState 420 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 360 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4085,9 +4077,9 @@ asia__barnaul _ =
 
 {-| `Asia/Beirut`
 -}
-asia__beirut : () -> Time.Zone
+asia__beirut : () -> Time2.Zone
 asia__beirut _ =
-    fromSpecification <|
+    fromSpecification "Asia/Beirut" <|
         Zone
             []
             (ZoneState 120 (Rules rules_Lebanon))
@@ -4095,9 +4087,9 @@ asia__beirut _ =
 
 {-| `Asia/Bishkek`
 -}
-asia__bishkek : () -> Time.Zone
+asia__bishkek : () -> Time2.Zone
 asia__bishkek _ =
-    fromSpecification <|
+    fromSpecification "Asia/Bishkek" <|
         Zone
             [ ( ZoneState 360 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 300 (Rules rules_RussiaAsia), DateTime 1991 Aug 31 120 WallClock )
@@ -4108,9 +4100,9 @@ asia__bishkek _ =
 
 {-| `Asia/Brunei`
 -}
-asia__brunei : () -> Time.Zone
+asia__brunei : () -> Time2.Zone
 asia__brunei _ =
-    fromSpecification <|
+    fromSpecification "Asia/Brunei" <|
         Zone
             []
             (ZoneState 480 (Save 0))
@@ -4118,9 +4110,9 @@ asia__brunei _ =
 
 {-| `Asia/Chita`
 -}
-asia__chita : () -> Time.Zone
+asia__chita : () -> Time2.Zone
 asia__chita _ =
-    fromSpecification <|
+    fromSpecification "Asia/Chita" <|
         Zone
             [ ( ZoneState 540 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 480 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4133,9 +4125,9 @@ asia__chita _ =
 
 {-| `Asia/Choibalsan`
 -}
-asia__choibalsan : () -> Time.Zone
+asia__choibalsan : () -> Time2.Zone
 asia__choibalsan _ =
-    fromSpecification <|
+    fromSpecification "Asia/Choibalsan" <|
         Zone
             [ ( ZoneState 420 (Save 0), DateTime 1978 Jan 1 0 WallClock )
             , ( ZoneState 480 (Save 0), DateTime 1983 Apr 1 0 WallClock )
@@ -4146,9 +4138,9 @@ asia__choibalsan _ =
 
 {-| `Asia/Colombo`
 -}
-asia__colombo : () -> Time.Zone
+asia__colombo : () -> Time2.Zone
 asia__colombo _ =
-    fromSpecification <|
+    fromSpecification "Asia/Colombo" <|
         Zone
             [ ( ZoneState 330 (Save 0), DateTime 1996 May 25 0 WallClock )
             , ( ZoneState 390 (Save 0), DateTime 1996 Oct 26 30 WallClock )
@@ -4159,9 +4151,9 @@ asia__colombo _ =
 
 {-| `Asia/Damascus`
 -}
-asia__damascus : () -> Time.Zone
+asia__damascus : () -> Time2.Zone
 asia__damascus _ =
-    fromSpecification <|
+    fromSpecification "Asia/Damascus" <|
         Zone
             []
             (ZoneState 120 (Rules rules_Syria))
@@ -4169,9 +4161,9 @@ asia__damascus _ =
 
 {-| `Asia/Dhaka`
 -}
-asia__dhaka : () -> Time.Zone
+asia__dhaka : () -> Time2.Zone
 asia__dhaka _ =
-    fromSpecification <|
+    fromSpecification "Asia/Dhaka" <|
         Zone
             [ ( ZoneState 360 (Save 0), DateTime 2009 Jan 1 0 WallClock )
             ]
@@ -4180,9 +4172,9 @@ asia__dhaka _ =
 
 {-| `Asia/Dili`
 -}
-asia__dili : () -> Time.Zone
+asia__dili : () -> Time2.Zone
 asia__dili _ =
-    fromSpecification <|
+    fromSpecification "Asia/Dili" <|
         Zone
             [ ( ZoneState 540 (Save 0), DateTime 1976 May 3 0 WallClock )
             , ( ZoneState 480 (Save 0), DateTime 2000 Sep 17 0 WallClock )
@@ -4192,9 +4184,9 @@ asia__dili _ =
 
 {-| `Asia/Dubai`
 -}
-asia__dubai : () -> Time.Zone
+asia__dubai : () -> Time2.Zone
 asia__dubai _ =
-    fromSpecification <|
+    fromSpecification "Asia/Dubai" <|
         Zone
             []
             (ZoneState 240 (Save 0))
@@ -4202,9 +4194,9 @@ asia__dubai _ =
 
 {-| `Asia/Dushanbe`
 -}
-asia__dushanbe : () -> Time.Zone
+asia__dushanbe : () -> Time2.Zone
 asia__dushanbe _ =
-    fromSpecification <|
+    fromSpecification "Asia/Dushanbe" <|
         Zone
             [ ( ZoneState 360 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 300 (Save 60), DateTime 1991 Sep 9 120 Standard )
@@ -4214,9 +4206,9 @@ asia__dushanbe _ =
 
 {-| `Asia/Famagusta`
 -}
-asia__famagusta : () -> Time.Zone
+asia__famagusta : () -> Time2.Zone
 asia__famagusta _ =
-    fromSpecification <|
+    fromSpecification "Asia/Famagusta" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Cyprus), DateTime 1998 Sep 1 0 WallClock )
             , ( ZoneState 120 (Rules rules_EUAsia), DateTime 2016 Sep 8 0 WallClock )
@@ -4227,9 +4219,9 @@ asia__famagusta _ =
 
 {-| `Asia/Gaza`
 -}
-asia__gaza : () -> Time.Zone
+asia__gaza : () -> Time2.Zone
 asia__gaza _ =
-    fromSpecification <|
+    fromSpecification "Asia/Gaza" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Zion), DateTime 1996 Jan 1 0 WallClock )
             , ( ZoneState 120 (Rules rules_Jordan), DateTime 1999 Jan 1 0 WallClock )
@@ -4245,9 +4237,9 @@ asia__gaza _ =
 
 {-| `Asia/Hebron`
 -}
-asia__hebron : () -> Time.Zone
+asia__hebron : () -> Time2.Zone
 asia__hebron _ =
-    fromSpecification <|
+    fromSpecification "Asia/Hebron" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Zion), DateTime 1996 Jan 1 0 WallClock )
             , ( ZoneState 120 (Rules rules_Jordan), DateTime 1999 Jan 1 0 WallClock )
@@ -4257,9 +4249,9 @@ asia__hebron _ =
 
 {-| `Asia/Ho_Chi_Minh`
 -}
-asia__ho_chi_minh : () -> Time.Zone
+asia__ho_chi_minh : () -> Time2.Zone
 asia__ho_chi_minh _ =
-    fromSpecification <|
+    fromSpecification "Asia/Ho_Chi_Minh" <|
         Zone
             [ ( ZoneState 480 (Save 0), DateTime 1975 Jun 13 0 WallClock )
             ]
@@ -4268,9 +4260,9 @@ asia__ho_chi_minh _ =
 
 {-| `Asia/Hong_Kong`
 -}
-asia__hong_kong : () -> Time.Zone
+asia__hong_kong : () -> Time2.Zone
 asia__hong_kong _ =
-    fromSpecification <|
+    fromSpecification "Asia/Hong_Kong" <|
         Zone
             []
             (ZoneState 480 (Rules rules_HK))
@@ -4278,9 +4270,9 @@ asia__hong_kong _ =
 
 {-| `Asia/Hovd`
 -}
-asia__hovd : () -> Time.Zone
+asia__hovd : () -> Time2.Zone
 asia__hovd _ =
-    fromSpecification <|
+    fromSpecification "Asia/Hovd" <|
         Zone
             [ ( ZoneState 360 (Save 0), DateTime 1978 Jan 1 0 WallClock )
             ]
@@ -4289,9 +4281,9 @@ asia__hovd _ =
 
 {-| `Asia/Irkutsk`
 -}
-asia__irkutsk : () -> Time.Zone
+asia__irkutsk : () -> Time2.Zone
 asia__irkutsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Irkutsk" <|
         Zone
             [ ( ZoneState 480 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 420 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4303,9 +4295,9 @@ asia__irkutsk _ =
 
 {-| `Asia/Jakarta`
 -}
-asia__jakarta : () -> Time.Zone
+asia__jakarta : () -> Time2.Zone
 asia__jakarta _ =
-    fromSpecification <|
+    fromSpecification "Asia/Jakarta" <|
         Zone
             []
             (ZoneState 420 (Save 0))
@@ -4313,9 +4305,9 @@ asia__jakarta _ =
 
 {-| `Asia/Jayapura`
 -}
-asia__jayapura : () -> Time.Zone
+asia__jayapura : () -> Time2.Zone
 asia__jayapura _ =
-    fromSpecification <|
+    fromSpecification "Asia/Jayapura" <|
         Zone
             []
             (ZoneState 540 (Save 0))
@@ -4323,9 +4315,9 @@ asia__jayapura _ =
 
 {-| `Asia/Jerusalem`
 -}
-asia__jerusalem : () -> Time.Zone
+asia__jerusalem : () -> Time2.Zone
 asia__jerusalem _ =
-    fromSpecification <|
+    fromSpecification "Asia/Jerusalem" <|
         Zone
             []
             (ZoneState 120 (Rules rules_Zion))
@@ -4333,9 +4325,9 @@ asia__jerusalem _ =
 
 {-| `Asia/Kabul`
 -}
-asia__kabul : () -> Time.Zone
+asia__kabul : () -> Time2.Zone
 asia__kabul _ =
-    fromSpecification <|
+    fromSpecification "Asia/Kabul" <|
         Zone
             []
             (ZoneState 270 (Save 0))
@@ -4343,9 +4335,9 @@ asia__kabul _ =
 
 {-| `Asia/Kamchatka`
 -}
-asia__kamchatka : () -> Time.Zone
+asia__kamchatka : () -> Time2.Zone
 asia__kamchatka _ =
-    fromSpecification <|
+    fromSpecification "Asia/Kamchatka" <|
         Zone
             [ ( ZoneState 720 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 660 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4357,9 +4349,9 @@ asia__kamchatka _ =
 
 {-| `Asia/Karachi`
 -}
-asia__karachi : () -> Time.Zone
+asia__karachi : () -> Time2.Zone
 asia__karachi _ =
-    fromSpecification <|
+    fromSpecification "Asia/Karachi" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1971 Mar 26 0 WallClock )
             ]
@@ -4368,9 +4360,9 @@ asia__karachi _ =
 
 {-| `Asia/Kathmandu`
 -}
-asia__kathmandu : () -> Time.Zone
+asia__kathmandu : () -> Time2.Zone
 asia__kathmandu _ =
-    fromSpecification <|
+    fromSpecification "Asia/Kathmandu" <|
         Zone
             [ ( ZoneState 330 (Save 0), DateTime 1986 Jan 1 0 WallClock )
             ]
@@ -4379,9 +4371,9 @@ asia__kathmandu _ =
 
 {-| `Asia/Khandyga`
 -}
-asia__khandyga : () -> Time.Zone
+asia__khandyga : () -> Time2.Zone
 asia__khandyga _ =
-    fromSpecification <|
+    fromSpecification "Asia/Khandyga" <|
         Zone
             [ ( ZoneState 540 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 480 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4395,9 +4387,9 @@ asia__khandyga _ =
 
 {-| `Asia/Kolkata`
 -}
-asia__kolkata : () -> Time.Zone
+asia__kolkata : () -> Time2.Zone
 asia__kolkata _ =
-    fromSpecification <|
+    fromSpecification "Asia/Kolkata" <|
         Zone
             []
             (ZoneState 330 (Save 0))
@@ -4405,9 +4397,9 @@ asia__kolkata _ =
 
 {-| `Asia/Krasnoyarsk`
 -}
-asia__krasnoyarsk : () -> Time.Zone
+asia__krasnoyarsk : () -> Time2.Zone
 asia__krasnoyarsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Krasnoyarsk" <|
         Zone
             [ ( ZoneState 420 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 360 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4419,9 +4411,9 @@ asia__krasnoyarsk _ =
 
 {-| `Asia/Kuala_Lumpur`
 -}
-asia__kuala_lumpur : () -> Time.Zone
+asia__kuala_lumpur : () -> Time2.Zone
 asia__kuala_lumpur _ =
-    fromSpecification <|
+    fromSpecification "Asia/Kuala_Lumpur" <|
         Zone
             [ ( ZoneState 450 (Save 0), DateTime 1982 Jan 1 0 WallClock )
             ]
@@ -4430,9 +4422,9 @@ asia__kuala_lumpur _ =
 
 {-| `Asia/Kuching`
 -}
-asia__kuching : () -> Time.Zone
+asia__kuching : () -> Time2.Zone
 asia__kuching _ =
-    fromSpecification <|
+    fromSpecification "Asia/Kuching" <|
         Zone
             []
             (ZoneState 480 (Save 0))
@@ -4440,9 +4432,9 @@ asia__kuching _ =
 
 {-| `Asia/Macau`
 -}
-asia__macau : () -> Time.Zone
+asia__macau : () -> Time2.Zone
 asia__macau _ =
-    fromSpecification <|
+    fromSpecification "Asia/Macau" <|
         Zone
             []
             (ZoneState 480 (Rules rules_Macau))
@@ -4450,9 +4442,9 @@ asia__macau _ =
 
 {-| `Asia/Magadan`
 -}
-asia__magadan : () -> Time.Zone
+asia__magadan : () -> Time2.Zone
 asia__magadan _ =
-    fromSpecification <|
+    fromSpecification "Asia/Magadan" <|
         Zone
             [ ( ZoneState 660 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 600 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4465,9 +4457,9 @@ asia__magadan _ =
 
 {-| `Asia/Makassar`
 -}
-asia__makassar : () -> Time.Zone
+asia__makassar : () -> Time2.Zone
 asia__makassar _ =
-    fromSpecification <|
+    fromSpecification "Asia/Makassar" <|
         Zone
             []
             (ZoneState 480 (Save 0))
@@ -4475,9 +4467,9 @@ asia__makassar _ =
 
 {-| `Asia/Manila`
 -}
-asia__manila : () -> Time.Zone
+asia__manila : () -> Time2.Zone
 asia__manila _ =
-    fromSpecification <|
+    fromSpecification "Asia/Manila" <|
         Zone
             []
             (ZoneState 480 (Rules rules_Phil))
@@ -4485,9 +4477,9 @@ asia__manila _ =
 
 {-| `Asia/Nicosia`
 -}
-asia__nicosia : () -> Time.Zone
+asia__nicosia : () -> Time2.Zone
 asia__nicosia _ =
-    fromSpecification <|
+    fromSpecification "Asia/Nicosia" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Cyprus), DateTime 1998 Sep 1 0 WallClock )
             ]
@@ -4496,9 +4488,9 @@ asia__nicosia _ =
 
 {-| `Asia/Novokuznetsk`
 -}
-asia__novokuznetsk : () -> Time.Zone
+asia__novokuznetsk : () -> Time2.Zone
 asia__novokuznetsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Novokuznetsk" <|
         Zone
             [ ( ZoneState 420 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 360 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4510,9 +4502,9 @@ asia__novokuznetsk _ =
 
 {-| `Asia/Novosibirsk`
 -}
-asia__novosibirsk : () -> Time.Zone
+asia__novosibirsk : () -> Time2.Zone
 asia__novosibirsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Novosibirsk" <|
         Zone
             [ ( ZoneState 420 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 360 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4526,9 +4518,9 @@ asia__novosibirsk _ =
 
 {-| `Asia/Omsk`
 -}
-asia__omsk : () -> Time.Zone
+asia__omsk : () -> Time2.Zone
 asia__omsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Omsk" <|
         Zone
             [ ( ZoneState 360 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 300 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4540,9 +4532,9 @@ asia__omsk _ =
 
 {-| `Asia/Oral`
 -}
-asia__oral : () -> Time.Zone
+asia__oral : () -> Time2.Zone
 asia__oral _ =
-    fromSpecification <|
+    fromSpecification "Asia/Oral" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1981 Apr 1 0 WallClock )
             , ( ZoneState 300 (Save 60), DateTime 1981 Oct 1 0 WallClock )
@@ -4557,9 +4549,9 @@ asia__oral _ =
 
 {-| `Asia/Pontianak`
 -}
-asia__pontianak : () -> Time.Zone
+asia__pontianak : () -> Time2.Zone
 asia__pontianak _ =
-    fromSpecification <|
+    fromSpecification "Asia/Pontianak" <|
         Zone
             [ ( ZoneState 480 (Save 0), DateTime 1988 Jan 1 0 WallClock )
             ]
@@ -4568,9 +4560,9 @@ asia__pontianak _ =
 
 {-| `Asia/Pyongyang`
 -}
-asia__pyongyang : () -> Time.Zone
+asia__pyongyang : () -> Time2.Zone
 asia__pyongyang _ =
-    fromSpecification <|
+    fromSpecification "Asia/Pyongyang" <|
         Zone
             [ ( ZoneState 540 (Save 0), DateTime 2015 Aug 15 0 WallClock )
             , ( ZoneState 510 (Save 0), DateTime 2018 May 4 1410 WallClock )
@@ -4580,9 +4572,9 @@ asia__pyongyang _ =
 
 {-| `Asia/Qatar`
 -}
-asia__qatar : () -> Time.Zone
+asia__qatar : () -> Time2.Zone
 asia__qatar _ =
-    fromSpecification <|
+    fromSpecification "Asia/Qatar" <|
         Zone
             [ ( ZoneState 240 (Save 0), DateTime 1972 Jun 1 0 WallClock )
             ]
@@ -4591,9 +4583,9 @@ asia__qatar _ =
 
 {-| `Asia/Qostanay`
 -}
-asia__qostanay : () -> Time.Zone
+asia__qostanay : () -> Time2.Zone
 asia__qostanay _ =
-    fromSpecification <|
+    fromSpecification "Asia/Qostanay" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1981 Apr 1 0 WallClock )
             , ( ZoneState 300 (Save 60), DateTime 1981 Oct 1 0 WallClock )
@@ -4607,9 +4599,9 @@ asia__qostanay _ =
 
 {-| `Asia/Qyzylorda`
 -}
-asia__qyzylorda : () -> Time.Zone
+asia__qyzylorda : () -> Time2.Zone
 asia__qyzylorda _ =
-    fromSpecification <|
+    fromSpecification "Asia/Qyzylorda" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1981 Apr 1 0 WallClock )
             , ( ZoneState 300 (Save 60), DateTime 1981 Oct 1 0 WallClock )
@@ -4626,9 +4618,9 @@ asia__qyzylorda _ =
 
 {-| `Asia/Riyadh`
 -}
-asia__riyadh : () -> Time.Zone
+asia__riyadh : () -> Time2.Zone
 asia__riyadh _ =
-    fromSpecification <|
+    fromSpecification "Asia/Riyadh" <|
         Zone
             []
             (ZoneState 180 (Save 0))
@@ -4636,9 +4628,9 @@ asia__riyadh _ =
 
 {-| `Asia/Sakhalin`
 -}
-asia__sakhalin : () -> Time.Zone
+asia__sakhalin : () -> Time2.Zone
 asia__sakhalin _ =
-    fromSpecification <|
+    fromSpecification "Asia/Sakhalin" <|
         Zone
             [ ( ZoneState 660 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 600 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4652,9 +4644,9 @@ asia__sakhalin _ =
 
 {-| `Asia/Samarkand`
 -}
-asia__samarkand : () -> Time.Zone
+asia__samarkand : () -> Time2.Zone
 asia__samarkand _ =
-    fromSpecification <|
+    fromSpecification "Asia/Samarkand" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1981 Apr 1 0 WallClock )
             , ( ZoneState 300 (Save 60), DateTime 1981 Oct 1 0 WallClock )
@@ -4666,9 +4658,9 @@ asia__samarkand _ =
 
 {-| `Asia/Seoul`
 -}
-asia__seoul : () -> Time.Zone
+asia__seoul : () -> Time2.Zone
 asia__seoul _ =
-    fromSpecification <|
+    fromSpecification "Asia/Seoul" <|
         Zone
             []
             (ZoneState 540 (Rules rules_ROK))
@@ -4676,9 +4668,9 @@ asia__seoul _ =
 
 {-| `Asia/Shanghai`
 -}
-asia__shanghai : () -> Time.Zone
+asia__shanghai : () -> Time2.Zone
 asia__shanghai _ =
-    fromSpecification <|
+    fromSpecification "Asia/Shanghai" <|
         Zone
             []
             (ZoneState 480 (Rules rules_PRC))
@@ -4686,9 +4678,9 @@ asia__shanghai _ =
 
 {-| `Asia/Singapore`
 -}
-asia__singapore : () -> Time.Zone
+asia__singapore : () -> Time2.Zone
 asia__singapore _ =
-    fromSpecification <|
+    fromSpecification "Asia/Singapore" <|
         Zone
             [ ( ZoneState 450 (Save 0), DateTime 1982 Jan 1 0 WallClock )
             ]
@@ -4697,9 +4689,9 @@ asia__singapore _ =
 
 {-| `Asia/Srednekolymsk`
 -}
-asia__srednekolymsk : () -> Time.Zone
+asia__srednekolymsk : () -> Time2.Zone
 asia__srednekolymsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Srednekolymsk" <|
         Zone
             [ ( ZoneState 660 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 600 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4711,9 +4703,9 @@ asia__srednekolymsk _ =
 
 {-| `Asia/Taipei`
 -}
-asia__taipei : () -> Time.Zone
+asia__taipei : () -> Time2.Zone
 asia__taipei _ =
-    fromSpecification <|
+    fromSpecification "Asia/Taipei" <|
         Zone
             []
             (ZoneState 480 (Rules rules_Taiwan))
@@ -4721,9 +4713,9 @@ asia__taipei _ =
 
 {-| `Asia/Tashkent`
 -}
-asia__tashkent : () -> Time.Zone
+asia__tashkent : () -> Time2.Zone
 asia__tashkent _ =
-    fromSpecification <|
+    fromSpecification "Asia/Tashkent" <|
         Zone
             [ ( ZoneState 360 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 WallClock )
             , ( ZoneState 300 (Rules rules_RussiaAsia), DateTime 1992 Jan 1 0 WallClock )
@@ -4733,9 +4725,9 @@ asia__tashkent _ =
 
 {-| `Asia/Tbilisi`
 -}
-asia__tbilisi : () -> Time.Zone
+asia__tbilisi : () -> Time2.Zone
 asia__tbilisi _ =
-    fromSpecification <|
+    fromSpecification "Asia/Tbilisi" <|
         Zone
             [ ( ZoneState 240 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 180 (Rules rules_RussiaAsia), DateTime 1992 Jan 1 0 WallClock )
@@ -4750,9 +4742,9 @@ asia__tbilisi _ =
 
 {-| `Asia/Tehran`
 -}
-asia__tehran : () -> Time.Zone
+asia__tehran : () -> Time2.Zone
 asia__tehran _ =
-    fromSpecification <|
+    fromSpecification "Asia/Tehran" <|
         Zone
             [ ( ZoneState 210 (Save 0), DateTime 1977 Nov 1 0 WallClock )
             , ( ZoneState 240 (Rules rules_Iran), DateTime 1979 Jan 1 0 WallClock )
@@ -4762,9 +4754,9 @@ asia__tehran _ =
 
 {-| `Asia/Thimphu`
 -}
-asia__thimphu : () -> Time.Zone
+asia__thimphu : () -> Time2.Zone
 asia__thimphu _ =
-    fromSpecification <|
+    fromSpecification "Asia/Thimphu" <|
         Zone
             [ ( ZoneState 330 (Save 0), DateTime 1987 Oct 1 0 WallClock )
             ]
@@ -4773,9 +4765,9 @@ asia__thimphu _ =
 
 {-| `Asia/Tokyo`
 -}
-asia__tokyo : () -> Time.Zone
+asia__tokyo : () -> Time2.Zone
 asia__tokyo _ =
-    fromSpecification <|
+    fromSpecification "Asia/Tokyo" <|
         Zone
             []
             (ZoneState 540 (Save 0))
@@ -4783,9 +4775,9 @@ asia__tokyo _ =
 
 {-| `Asia/Tomsk`
 -}
-asia__tomsk : () -> Time.Zone
+asia__tomsk : () -> Time2.Zone
 asia__tomsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Tomsk" <|
         Zone
             [ ( ZoneState 420 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 360 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4799,9 +4791,9 @@ asia__tomsk _ =
 
 {-| `Asia/Ulaanbaatar`
 -}
-asia__ulaanbaatar : () -> Time.Zone
+asia__ulaanbaatar : () -> Time2.Zone
 asia__ulaanbaatar _ =
-    fromSpecification <|
+    fromSpecification "Asia/Ulaanbaatar" <|
         Zone
             [ ( ZoneState 420 (Save 0), DateTime 1978 Jan 1 0 WallClock )
             ]
@@ -4810,9 +4802,9 @@ asia__ulaanbaatar _ =
 
 {-| `Asia/Urumqi`
 -}
-asia__urumqi : () -> Time.Zone
+asia__urumqi : () -> Time2.Zone
 asia__urumqi _ =
-    fromSpecification <|
+    fromSpecification "Asia/Urumqi" <|
         Zone
             []
             (ZoneState 360 (Save 0))
@@ -4820,9 +4812,9 @@ asia__urumqi _ =
 
 {-| `Asia/Ust-Nera`
 -}
-asia__ust_nera : () -> Time.Zone
+asia__ust_nera : () -> Time2.Zone
 asia__ust_nera _ =
-    fromSpecification <|
+    fromSpecification "Asia/Ust-Nera" <|
         Zone
             [ ( ZoneState 540 (Rules rules_Russia), DateTime 1981 Apr 1 0 WallClock )
             , ( ZoneState 660 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -4836,9 +4828,9 @@ asia__ust_nera _ =
 
 {-| `Asia/Vladivostok`
 -}
-asia__vladivostok : () -> Time.Zone
+asia__vladivostok : () -> Time2.Zone
 asia__vladivostok _ =
-    fromSpecification <|
+    fromSpecification "Asia/Vladivostok" <|
         Zone
             [ ( ZoneState 600 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 540 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4850,9 +4842,9 @@ asia__vladivostok _ =
 
 {-| `Asia/Yakutsk`
 -}
-asia__yakutsk : () -> Time.Zone
+asia__yakutsk : () -> Time2.Zone
 asia__yakutsk _ =
-    fromSpecification <|
+    fromSpecification "Asia/Yakutsk" <|
         Zone
             [ ( ZoneState 540 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 480 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4864,9 +4856,9 @@ asia__yakutsk _ =
 
 {-| `Asia/Yangon`
 -}
-asia__yangon : () -> Time.Zone
+asia__yangon : () -> Time2.Zone
 asia__yangon _ =
-    fromSpecification <|
+    fromSpecification "Asia/Yangon" <|
         Zone
             []
             (ZoneState 390 (Save 0))
@@ -4874,9 +4866,9 @@ asia__yangon _ =
 
 {-| `Asia/Yekaterinburg`
 -}
-asia__yekaterinburg : () -> Time.Zone
+asia__yekaterinburg : () -> Time2.Zone
 asia__yekaterinburg _ =
-    fromSpecification <|
+    fromSpecification "Asia/Yekaterinburg" <|
         Zone
             [ ( ZoneState 300 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 240 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -4888,9 +4880,9 @@ asia__yekaterinburg _ =
 
 {-| `Asia/Yerevan`
 -}
-asia__yerevan : () -> Time.Zone
+asia__yerevan : () -> Time2.Zone
 asia__yerevan _ =
-    fromSpecification <|
+    fromSpecification "Asia/Yerevan" <|
         Zone
             [ ( ZoneState 240 (Rules rules_RussiaAsia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 180 (Rules rules_RussiaAsia), DateTime 1995 Sep 24 120 Standard )
@@ -4902,9 +4894,9 @@ asia__yerevan _ =
 
 {-| `Atlantic/Azores`
 -}
-atlantic__azores : () -> Time.Zone
+atlantic__azores : () -> Time2.Zone
 atlantic__azores _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Azores" <|
         Zone
             [ ( ZoneState -60 (Rules rules_Port), DateTime 1983 Sep 25 60 Standard )
             , ( ZoneState -60 (Rules rules_W_Eur), DateTime 1992 Sep 27 60 Standard )
@@ -4915,9 +4907,9 @@ atlantic__azores _ =
 
 {-| `Atlantic/Bermuda`
 -}
-atlantic__bermuda : () -> Time.Zone
+atlantic__bermuda : () -> Time2.Zone
 atlantic__bermuda _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Bermuda" <|
         Zone
             [ ( ZoneState -240 (Save 0), DateTime 1974 Apr 28 120 WallClock )
             , ( ZoneState -240 (Rules rules_Canada), DateTime 1976 Jan 1 0 WallClock )
@@ -4927,9 +4919,9 @@ atlantic__bermuda _ =
 
 {-| `Atlantic/Canary`
 -}
-atlantic__canary : () -> Time.Zone
+atlantic__canary : () -> Time2.Zone
 atlantic__canary _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Canary" <|
         Zone
             [ ( ZoneState 0 (Save 0), DateTime 1980 Apr 6 0 Standard )
             , ( ZoneState 0 (Save 60), DateTime 1980 Sep 28 60 Universal )
@@ -4939,9 +4931,9 @@ atlantic__canary _ =
 
 {-| `Atlantic/Cape_Verde`
 -}
-atlantic__cape_verde : () -> Time.Zone
+atlantic__cape_verde : () -> Time2.Zone
 atlantic__cape_verde _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Cape_Verde" <|
         Zone
             [ ( ZoneState -120 (Save 0), DateTime 1975 Nov 25 120 WallClock )
             ]
@@ -4950,9 +4942,9 @@ atlantic__cape_verde _ =
 
 {-| `Atlantic/Faroe`
 -}
-atlantic__faroe : () -> Time.Zone
+atlantic__faroe : () -> Time2.Zone
 atlantic__faroe _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Faroe" <|
         Zone
             [ ( ZoneState 0 (Save 0), DateTime 1981 Jan 1 0 WallClock )
             ]
@@ -4961,9 +4953,9 @@ atlantic__faroe _ =
 
 {-| `Atlantic/Madeira`
 -}
-atlantic__madeira : () -> Time.Zone
+atlantic__madeira : () -> Time2.Zone
 atlantic__madeira _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Madeira" <|
         Zone
             [ ( ZoneState 0 (Rules rules_Port), DateTime 1983 Sep 25 60 Standard )
             ]
@@ -4972,9 +4964,9 @@ atlantic__madeira _ =
 
 {-| `Atlantic/Reykjavik`
 -}
-atlantic__reykjavik : () -> Time.Zone
+atlantic__reykjavik : () -> Time2.Zone
 atlantic__reykjavik _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Reykjavik" <|
         Zone
             []
             (ZoneState 0 (Save 0))
@@ -4982,9 +4974,9 @@ atlantic__reykjavik _ =
 
 {-| `Atlantic/South_Georgia`
 -}
-atlantic__south_georgia : () -> Time.Zone
+atlantic__south_georgia : () -> Time2.Zone
 atlantic__south_georgia _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/South_Georgia" <|
         Zone
             []
             (ZoneState -120 (Save 0))
@@ -4992,9 +4984,9 @@ atlantic__south_georgia _ =
 
 {-| `Atlantic/Stanley`
 -}
-atlantic__stanley : () -> Time.Zone
+atlantic__stanley : () -> Time2.Zone
 atlantic__stanley _ =
-    fromSpecification <|
+    fromSpecification "Atlantic/Stanley" <|
         Zone
             [ ( ZoneState -240 (Rules rules_Falk), DateTime 1983 May 1 0 WallClock )
             , ( ZoneState -180 (Rules rules_Falk), DateTime 1985 Sep 15 0 WallClock )
@@ -5005,9 +4997,9 @@ atlantic__stanley _ =
 
 {-| `Australia/Adelaide`
 -}
-australia__adelaide : () -> Time.Zone
+australia__adelaide : () -> Time2.Zone
 australia__adelaide _ =
-    fromSpecification <|
+    fromSpecification "Australia/Adelaide" <|
         Zone
             [ ( ZoneState 570 (Save 0), DateTime 1971 Jan 1 0 WallClock )
             ]
@@ -5016,9 +5008,9 @@ australia__adelaide _ =
 
 {-| `Australia/Brisbane`
 -}
-australia__brisbane : () -> Time.Zone
+australia__brisbane : () -> Time2.Zone
 australia__brisbane _ =
-    fromSpecification <|
+    fromSpecification "Australia/Brisbane" <|
         Zone
             [ ( ZoneState 600 (Save 0), DateTime 1971 Jan 1 0 WallClock )
             ]
@@ -5027,9 +5019,9 @@ australia__brisbane _ =
 
 {-| `Australia/Broken_Hill`
 -}
-australia__broken_hill : () -> Time.Zone
+australia__broken_hill : () -> Time2.Zone
 australia__broken_hill _ =
-    fromSpecification <|
+    fromSpecification "Australia/Broken_Hill" <|
         Zone
             [ ( ZoneState 570 (Save 0), DateTime 1971 Jan 1 0 WallClock )
             , ( ZoneState 570 (Rules rules_AN), DateTime 2000 Jan 1 0 WallClock )
@@ -5039,9 +5031,9 @@ australia__broken_hill _ =
 
 {-| `Australia/Darwin`
 -}
-australia__darwin : () -> Time.Zone
+australia__darwin : () -> Time2.Zone
 australia__darwin _ =
-    fromSpecification <|
+    fromSpecification "Australia/Darwin" <|
         Zone
             []
             (ZoneState 570 (Save 0))
@@ -5049,9 +5041,9 @@ australia__darwin _ =
 
 {-| `Australia/Eucla`
 -}
-australia__eucla : () -> Time.Zone
+australia__eucla : () -> Time2.Zone
 australia__eucla _ =
-    fromSpecification <|
+    fromSpecification "Australia/Eucla" <|
         Zone
             []
             (ZoneState 525 (Rules rules_AW))
@@ -5059,9 +5051,9 @@ australia__eucla _ =
 
 {-| `Australia/Hobart`
 -}
-australia__hobart : () -> Time.Zone
+australia__hobart : () -> Time2.Zone
 australia__hobart _ =
-    fromSpecification <|
+    fromSpecification "Australia/Hobart" <|
         Zone
             []
             (ZoneState 600 (Rules rules_AT))
@@ -5069,9 +5061,9 @@ australia__hobart _ =
 
 {-| `Australia/Lindeman`
 -}
-australia__lindeman : () -> Time.Zone
+australia__lindeman : () -> Time2.Zone
 australia__lindeman _ =
-    fromSpecification <|
+    fromSpecification "Australia/Lindeman" <|
         Zone
             [ ( ZoneState 600 (Save 0), DateTime 1971 Jan 1 0 WallClock )
             , ( ZoneState 600 (Rules rules_AQ), DateTime 1992 Jul 1 0 WallClock )
@@ -5081,9 +5073,9 @@ australia__lindeman _ =
 
 {-| `Australia/Lord_Howe`
 -}
-australia__lord_howe : () -> Time.Zone
+australia__lord_howe : () -> Time2.Zone
 australia__lord_howe _ =
-    fromSpecification <|
+    fromSpecification "Australia/Lord_Howe" <|
         Zone
             [ ( ZoneState 600 (Save 0), DateTime 1981 Mar 1 0 WallClock )
             , ( ZoneState 630 (Rules rules_LH), DateTime 1985 Jul 1 0 WallClock )
@@ -5093,9 +5085,9 @@ australia__lord_howe _ =
 
 {-| `Australia/Melbourne`
 -}
-australia__melbourne : () -> Time.Zone
+australia__melbourne : () -> Time2.Zone
 australia__melbourne _ =
-    fromSpecification <|
+    fromSpecification "Australia/Melbourne" <|
         Zone
             [ ( ZoneState 600 (Save 0), DateTime 1971 Jan 1 0 WallClock )
             ]
@@ -5104,9 +5096,9 @@ australia__melbourne _ =
 
 {-| `Australia/Perth`
 -}
-australia__perth : () -> Time.Zone
+australia__perth : () -> Time2.Zone
 australia__perth _ =
-    fromSpecification <|
+    fromSpecification "Australia/Perth" <|
         Zone
             []
             (ZoneState 480 (Rules rules_AW))
@@ -5114,9 +5106,9 @@ australia__perth _ =
 
 {-| `Australia/Sydney`
 -}
-australia__sydney : () -> Time.Zone
+australia__sydney : () -> Time2.Zone
 australia__sydney _ =
-    fromSpecification <|
+    fromSpecification "Australia/Sydney" <|
         Zone
             [ ( ZoneState 600 (Save 0), DateTime 1971 Jan 1 0 WallClock )
             ]
@@ -5125,9 +5117,9 @@ australia__sydney _ =
 
 {-| `Europe/Amsterdam`
 -}
-europe__amsterdam : () -> Time.Zone
+europe__amsterdam : () -> Time2.Zone
 europe__amsterdam _ =
-    fromSpecification <|
+    fromSpecification "Europe/Amsterdam" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1977 Jan 1 0 WallClock )
             ]
@@ -5136,9 +5128,9 @@ europe__amsterdam _ =
 
 {-| `Europe/Andorra`
 -}
-europe__andorra : () -> Time.Zone
+europe__andorra : () -> Time2.Zone
 europe__andorra _ =
-    fromSpecification <|
+    fromSpecification "Europe/Andorra" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1985 Mar 31 120 WallClock )
             ]
@@ -5147,9 +5139,9 @@ europe__andorra _ =
 
 {-| `Europe/Astrakhan`
 -}
-europe__astrakhan : () -> Time.Zone
+europe__astrakhan : () -> Time2.Zone
 europe__astrakhan _ =
-    fromSpecification <|
+    fromSpecification "Europe/Astrakhan" <|
         Zone
             [ ( ZoneState 240 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -5163,9 +5155,9 @@ europe__astrakhan _ =
 
 {-| `Europe/Athens`
 -}
-europe__athens : () -> Time.Zone
+europe__athens : () -> Time2.Zone
 europe__athens _ =
-    fromSpecification <|
+    fromSpecification "Europe/Athens" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Greece), DateTime 1981 Jan 1 0 WallClock )
             ]
@@ -5174,9 +5166,9 @@ europe__athens _ =
 
 {-| `Europe/Belgrade`
 -}
-europe__belgrade : () -> Time.Zone
+europe__belgrade : () -> Time2.Zone
 europe__belgrade _ =
-    fromSpecification <|
+    fromSpecification "Europe/Belgrade" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1982 Nov 27 0 WallClock )
             ]
@@ -5185,9 +5177,9 @@ europe__belgrade _ =
 
 {-| `Europe/Berlin`
 -}
-europe__berlin : () -> Time.Zone
+europe__berlin : () -> Time2.Zone
 europe__berlin _ =
-    fromSpecification <|
+    fromSpecification "Europe/Berlin" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1980 Jan 1 0 WallClock )
             ]
@@ -5196,9 +5188,9 @@ europe__berlin _ =
 
 {-| `Europe/Brussels`
 -}
-europe__brussels : () -> Time.Zone
+europe__brussels : () -> Time2.Zone
 europe__brussels _ =
-    fromSpecification <|
+    fromSpecification "Europe/Brussels" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1977 Jan 1 0 WallClock )
             ]
@@ -5207,9 +5199,9 @@ europe__brussels _ =
 
 {-| `Europe/Bucharest`
 -}
-europe__bucharest : () -> Time.Zone
+europe__bucharest : () -> Time2.Zone
 europe__bucharest _ =
-    fromSpecification <|
+    fromSpecification "Europe/Bucharest" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Romania), DateTime 1981 Mar 29 120 Standard )
             , ( ZoneState 120 (Rules rules_C_Eur), DateTime 1991 Jan 1 0 WallClock )
@@ -5221,9 +5213,9 @@ europe__bucharest _ =
 
 {-| `Europe/Budapest`
 -}
-europe__budapest : () -> Time.Zone
+europe__budapest : () -> Time2.Zone
 europe__budapest _ =
-    fromSpecification <|
+    fromSpecification "Europe/Budapest" <|
         Zone
             [ ( ZoneState 60 (Rules rules_Hungary), DateTime 1984 Jan 1 0 WallClock )
             ]
@@ -5232,9 +5224,9 @@ europe__budapest _ =
 
 {-| `Europe/Chisinau`
 -}
-europe__chisinau : () -> Time.Zone
+europe__chisinau : () -> Time2.Zone
 europe__chisinau _ =
-    fromSpecification <|
+    fromSpecification "Europe/Chisinau" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1990 May 6 120 WallClock )
             , ( ZoneState 120 (Rules rules_Russia), DateTime 1992 Jan 1 0 WallClock )
@@ -5245,9 +5237,9 @@ europe__chisinau _ =
 
 {-| `Europe/Copenhagen`
 -}
-europe__copenhagen : () -> Time.Zone
+europe__copenhagen : () -> Time2.Zone
 europe__copenhagen _ =
-    fromSpecification <|
+    fromSpecification "Europe/Copenhagen" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1980 Jan 1 0 WallClock )
             ]
@@ -5256,9 +5248,9 @@ europe__copenhagen _ =
 
 {-| `Europe/Dublin`
 -}
-europe__dublin : () -> Time.Zone
+europe__dublin : () -> Time2.Zone
 europe__dublin _ =
-    fromSpecification <|
+    fromSpecification "Europe/Dublin" <|
         Zone
             []
             (ZoneState 60 (Rules rules_Eire))
@@ -5266,9 +5258,9 @@ europe__dublin _ =
 
 {-| `Europe/Gibraltar`
 -}
-europe__gibraltar : () -> Time.Zone
+europe__gibraltar : () -> Time2.Zone
 europe__gibraltar _ =
-    fromSpecification <|
+    fromSpecification "Europe/Gibraltar" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1982 Jan 1 0 WallClock )
             ]
@@ -5277,9 +5269,9 @@ europe__gibraltar _ =
 
 {-| `Europe/Helsinki`
 -}
-europe__helsinki : () -> Time.Zone
+europe__helsinki : () -> Time2.Zone
 europe__helsinki _ =
-    fromSpecification <|
+    fromSpecification "Europe/Helsinki" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Finland), DateTime 1983 Jan 1 0 WallClock )
             ]
@@ -5288,9 +5280,9 @@ europe__helsinki _ =
 
 {-| `Europe/Istanbul`
 -}
-europe__istanbul : () -> Time.Zone
+europe__istanbul : () -> Time2.Zone
 europe__istanbul _ =
-    fromSpecification <|
+    fromSpecification "Europe/Istanbul" <|
         Zone
             [ ( ZoneState 120 (Rules rules_Turkey), DateTime 1978 Jun 29 0 WallClock )
             , ( ZoneState 180 (Rules rules_Turkey), DateTime 1984 Nov 1 120 WallClock )
@@ -5308,9 +5300,9 @@ europe__istanbul _ =
 
 {-| `Europe/Kaliningrad`
 -}
-europe__kaliningrad : () -> Time.Zone
+europe__kaliningrad : () -> Time2.Zone
 europe__kaliningrad _ =
-    fromSpecification <|
+    fromSpecification "Europe/Kaliningrad" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 120 (Rules rules_Russia), DateTime 2011 Mar 27 120 Standard )
@@ -5321,9 +5313,9 @@ europe__kaliningrad _ =
 
 {-| `Europe/Kiev`
 -}
-europe__kiev : () -> Time.Zone
+europe__kiev : () -> Time2.Zone
 europe__kiev _ =
-    fromSpecification <|
+    fromSpecification "Europe/Kiev" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1990 Jul 1 120 WallClock )
             , ( ZoneState 120 (Save 60), DateTime 1991 Sep 29 180 WallClock )
@@ -5334,9 +5326,9 @@ europe__kiev _ =
 
 {-| `Europe/Kirov`
 -}
-europe__kirov : () -> Time.Zone
+europe__kirov : () -> Time2.Zone
 europe__kirov _ =
-    fromSpecification <|
+    fromSpecification "Europe/Kirov" <|
         Zone
             [ ( ZoneState 240 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -5349,9 +5341,9 @@ europe__kirov _ =
 
 {-| `Europe/Lisbon`
 -}
-europe__lisbon : () -> Time.Zone
+europe__lisbon : () -> Time2.Zone
 europe__lisbon _ =
-    fromSpecification <|
+    fromSpecification "Europe/Lisbon" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1976 Sep 26 60 WallClock )
             , ( ZoneState 0 (Rules rules_Port), DateTime 1983 Sep 25 60 Standard )
@@ -5363,9 +5355,9 @@ europe__lisbon _ =
 
 {-| `Europe/London`
 -}
-europe__london : () -> Time.Zone
+europe__london : () -> Time2.Zone
 europe__london _ =
-    fromSpecification <|
+    fromSpecification "Europe/London" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1971 Oct 31 120 Universal )
             , ( ZoneState 0 (Rules rules_GB_Eire), DateTime 1996 Jan 1 0 WallClock )
@@ -5375,9 +5367,9 @@ europe__london _ =
 
 {-| `Europe/Luxembourg`
 -}
-europe__luxembourg : () -> Time.Zone
+europe__luxembourg : () -> Time2.Zone
 europe__luxembourg _ =
-    fromSpecification <|
+    fromSpecification "Europe/Luxembourg" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1977 Jan 1 0 WallClock )
             ]
@@ -5386,9 +5378,9 @@ europe__luxembourg _ =
 
 {-| `Europe/Madrid`
 -}
-europe__madrid : () -> Time.Zone
+europe__madrid : () -> Time2.Zone
 europe__madrid _ =
-    fromSpecification <|
+    fromSpecification "Europe/Madrid" <|
         Zone
             [ ( ZoneState 60 (Rules rules_Spain), DateTime 1979 Jan 1 0 WallClock )
             ]
@@ -5397,9 +5389,9 @@ europe__madrid _ =
 
 {-| `Europe/Malta`
 -}
-europe__malta : () -> Time.Zone
+europe__malta : () -> Time2.Zone
 europe__malta _ =
-    fromSpecification <|
+    fromSpecification "Europe/Malta" <|
         Zone
             [ ( ZoneState 60 (Rules rules_Italy), DateTime 1973 Mar 31 0 WallClock )
             , ( ZoneState 60 (Rules rules_Malta), DateTime 1981 Jan 1 0 WallClock )
@@ -5409,9 +5401,9 @@ europe__malta _ =
 
 {-| `Europe/Minsk`
 -}
-europe__minsk : () -> Time.Zone
+europe__minsk : () -> Time2.Zone
 europe__minsk _ =
-    fromSpecification <|
+    fromSpecification "Europe/Minsk" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1990 Jan 1 0 WallClock )
             , ( ZoneState 180 (Save 0), DateTime 1991 Mar 31 120 Standard )
@@ -5422,9 +5414,9 @@ europe__minsk _ =
 
 {-| `Europe/Monaco`
 -}
-europe__monaco : () -> Time.Zone
+europe__monaco : () -> Time2.Zone
 europe__monaco _ =
-    fromSpecification <|
+    fromSpecification "Europe/Monaco" <|
         Zone
             [ ( ZoneState 60 (Rules rules_France), DateTime 1977 Jan 1 0 WallClock )
             ]
@@ -5433,9 +5425,9 @@ europe__monaco _ =
 
 {-| `Europe/Moscow`
 -}
-europe__moscow : () -> Time.Zone
+europe__moscow : () -> Time2.Zone
 europe__moscow _ =
-    fromSpecification <|
+    fromSpecification "Europe/Moscow" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
             , ( ZoneState 120 (Rules rules_Russia), DateTime 1992 Jan 19 120 Standard )
@@ -5447,9 +5439,9 @@ europe__moscow _ =
 
 {-| `Europe/Oslo`
 -}
-europe__oslo : () -> Time.Zone
+europe__oslo : () -> Time2.Zone
 europe__oslo _ =
-    fromSpecification <|
+    fromSpecification "Europe/Oslo" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1980 Jan 1 0 WallClock )
             ]
@@ -5458,9 +5450,9 @@ europe__oslo _ =
 
 {-| `Europe/Paris`
 -}
-europe__paris : () -> Time.Zone
+europe__paris : () -> Time2.Zone
 europe__paris _ =
-    fromSpecification <|
+    fromSpecification "Europe/Paris" <|
         Zone
             [ ( ZoneState 60 (Rules rules_France), DateTime 1977 Jan 1 0 WallClock )
             ]
@@ -5469,9 +5461,9 @@ europe__paris _ =
 
 {-| `Europe/Prague`
 -}
-europe__prague : () -> Time.Zone
+europe__prague : () -> Time2.Zone
 europe__prague _ =
-    fromSpecification <|
+    fromSpecification "Europe/Prague" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1979 Jan 1 0 WallClock )
             ]
@@ -5480,9 +5472,9 @@ europe__prague _ =
 
 {-| `Europe/Riga`
 -}
-europe__riga : () -> Time.Zone
+europe__riga : () -> Time2.Zone
 europe__riga _ =
-    fromSpecification <|
+    fromSpecification "Europe/Riga" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 120 (Save 60), DateTime 1989 Sep 24 120 Standard )
@@ -5495,9 +5487,9 @@ europe__riga _ =
 
 {-| `Europe/Rome`
 -}
-europe__rome : () -> Time.Zone
+europe__rome : () -> Time2.Zone
 europe__rome _ =
-    fromSpecification <|
+    fromSpecification "Europe/Rome" <|
         Zone
             [ ( ZoneState 60 (Rules rules_Italy), DateTime 1980 Jan 1 0 WallClock )
             ]
@@ -5506,9 +5498,9 @@ europe__rome _ =
 
 {-| `Europe/Samara`
 -}
-europe__samara : () -> Time.Zone
+europe__samara : () -> Time2.Zone
 europe__samara _ =
-    fromSpecification <|
+    fromSpecification "Europe/Samara" <|
         Zone
             [ ( ZoneState 240 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -5522,9 +5514,9 @@ europe__samara _ =
 
 {-| `Europe/Saratov`
 -}
-europe__saratov : () -> Time.Zone
+europe__saratov : () -> Time2.Zone
 europe__saratov _ =
-    fromSpecification <|
+    fromSpecification "Europe/Saratov" <|
         Zone
             [ ( ZoneState 240 (Rules rules_Russia), DateTime 1988 Mar 27 120 Standard )
             , ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -5538,9 +5530,9 @@ europe__saratov _ =
 
 {-| `Europe/Simferopol`
 -}
-europe__simferopol : () -> Time.Zone
+europe__simferopol : () -> Time2.Zone
 europe__simferopol _ =
-    fromSpecification <|
+    fromSpecification "Europe/Simferopol" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1990 Jan 1 0 WallClock )
             , ( ZoneState 180 (Save 0), DateTime 1990 Jul 1 120 WallClock )
@@ -5558,9 +5550,9 @@ europe__simferopol _ =
 
 {-| `Europe/Sofia`
 -}
-europe__sofia : () -> Time.Zone
+europe__sofia : () -> Time2.Zone
 europe__sofia _ =
-    fromSpecification <|
+    fromSpecification "Europe/Sofia" <|
         Zone
             [ ( ZoneState 120 (Save 0), DateTime 1979 Mar 31 1380 WallClock )
             , ( ZoneState 120 (Rules rules_Bulg), DateTime 1982 Sep 26 180 WallClock )
@@ -5572,9 +5564,9 @@ europe__sofia _ =
 
 {-| `Europe/Stockholm`
 -}
-europe__stockholm : () -> Time.Zone
+europe__stockholm : () -> Time2.Zone
 europe__stockholm _ =
-    fromSpecification <|
+    fromSpecification "Europe/Stockholm" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1980 Jan 1 0 WallClock )
             ]
@@ -5583,9 +5575,9 @@ europe__stockholm _ =
 
 {-| `Europe/Tallinn`
 -}
-europe__tallinn : () -> Time.Zone
+europe__tallinn : () -> Time2.Zone
 europe__tallinn _ =
-    fromSpecification <|
+    fromSpecification "Europe/Tallinn" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 120 (Save 60), DateTime 1989 Sep 24 120 Standard )
@@ -5598,9 +5590,9 @@ europe__tallinn _ =
 
 {-| `Europe/Tirane`
 -}
-europe__tirane : () -> Time.Zone
+europe__tirane : () -> Time2.Zone
 europe__tirane _ =
-    fromSpecification <|
+    fromSpecification "Europe/Tirane" <|
         Zone
             [ ( ZoneState 60 (Rules rules_Albania), DateTime 1984 Jul 1 0 WallClock )
             ]
@@ -5609,9 +5601,9 @@ europe__tirane _ =
 
 {-| `Europe/Ulyanovsk`
 -}
-europe__ulyanovsk : () -> Time.Zone
+europe__ulyanovsk : () -> Time2.Zone
 europe__ulyanovsk _ =
-    fromSpecification <|
+    fromSpecification "Europe/Ulyanovsk" <|
         Zone
             [ ( ZoneState 240 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -5625,9 +5617,9 @@ europe__ulyanovsk _ =
 
 {-| `Europe/Uzhgorod`
 -}
-europe__uzhgorod : () -> Time.Zone
+europe__uzhgorod : () -> Time2.Zone
 europe__uzhgorod _ =
-    fromSpecification <|
+    fromSpecification "Europe/Uzhgorod" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1990 Jan 1 0 WallClock )
             , ( ZoneState 180 (Save 0), DateTime 1990 Jul 1 120 WallClock )
@@ -5640,9 +5632,9 @@ europe__uzhgorod _ =
 
 {-| `Europe/Vienna`
 -}
-europe__vienna : () -> Time.Zone
+europe__vienna : () -> Time2.Zone
 europe__vienna _ =
-    fromSpecification <|
+    fromSpecification "Europe/Vienna" <|
         Zone
             [ ( ZoneState 60 (Rules rules_Austria), DateTime 1981 Jan 1 0 WallClock )
             ]
@@ -5651,9 +5643,9 @@ europe__vienna _ =
 
 {-| `Europe/Vilnius`
 -}
-europe__vilnius : () -> Time.Zone
+europe__vilnius : () -> Time2.Zone
 europe__vilnius _ =
-    fromSpecification <|
+    fromSpecification "Europe/Vilnius" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1989 Mar 26 120 Standard )
             , ( ZoneState 120 (Rules rules_Russia), DateTime 1991 Sep 29 120 Standard )
@@ -5667,9 +5659,9 @@ europe__vilnius _ =
 
 {-| `Europe/Volgograd`
 -}
-europe__volgograd : () -> Time.Zone
+europe__volgograd : () -> Time2.Zone
 europe__volgograd _ =
-    fromSpecification <|
+    fromSpecification "Europe/Volgograd" <|
         Zone
             [ ( ZoneState 240 (Rules rules_Russia), DateTime 1988 Mar 27 120 Standard )
             , ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 Standard )
@@ -5684,9 +5676,9 @@ europe__volgograd _ =
 
 {-| `Europe/Warsaw`
 -}
-europe__warsaw : () -> Time.Zone
+europe__warsaw : () -> Time2.Zone
 europe__warsaw _ =
-    fromSpecification <|
+    fromSpecification "Europe/Warsaw" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1977 Jan 1 0 WallClock )
             , ( ZoneState 60 (Rules rules_W_Eur), DateTime 1988 Jan 1 0 WallClock )
@@ -5696,9 +5688,9 @@ europe__warsaw _ =
 
 {-| `Europe/Zaporozhye`
 -}
-europe__zaporozhye : () -> Time.Zone
+europe__zaporozhye : () -> Time2.Zone
 europe__zaporozhye _ =
-    fromSpecification <|
+    fromSpecification "Europe/Zaporozhye" <|
         Zone
             [ ( ZoneState 180 (Rules rules_Russia), DateTime 1991 Mar 31 120 WallClock )
             , ( ZoneState 120 (Rules rules_E_Eur), DateTime 1992 Mar 20 0 WallClock )
@@ -5709,9 +5701,9 @@ europe__zaporozhye _ =
 
 {-| `Europe/Zurich`
 -}
-europe__zurich : () -> Time.Zone
+europe__zurich : () -> Time2.Zone
 europe__zurich _ =
-    fromSpecification <|
+    fromSpecification "Europe/Zurich" <|
         Zone
             [ ( ZoneState 60 (Save 0), DateTime 1981 Jan 1 0 WallClock )
             ]
@@ -5720,9 +5712,9 @@ europe__zurich _ =
 
 {-| `Indian/Chagos`
 -}
-indian__chagos : () -> Time.Zone
+indian__chagos : () -> Time2.Zone
 indian__chagos _ =
-    fromSpecification <|
+    fromSpecification "Indian/Chagos" <|
         Zone
             [ ( ZoneState 300 (Save 0), DateTime 1996 Jan 1 0 WallClock )
             ]
@@ -5731,9 +5723,9 @@ indian__chagos _ =
 
 {-| `Indian/Christmas`
 -}
-indian__christmas : () -> Time.Zone
+indian__christmas : () -> Time2.Zone
 indian__christmas _ =
-    fromSpecification <|
+    fromSpecification "Indian/Christmas" <|
         Zone
             []
             (ZoneState 420 (Save 0))
@@ -5741,9 +5733,9 @@ indian__christmas _ =
 
 {-| `Indian/Cocos`
 -}
-indian__cocos : () -> Time.Zone
+indian__cocos : () -> Time2.Zone
 indian__cocos _ =
-    fromSpecification <|
+    fromSpecification "Indian/Cocos" <|
         Zone
             []
             (ZoneState 390 (Save 0))
@@ -5751,9 +5743,9 @@ indian__cocos _ =
 
 {-| `Indian/Kerguelen`
 -}
-indian__kerguelen : () -> Time.Zone
+indian__kerguelen : () -> Time2.Zone
 indian__kerguelen _ =
-    fromSpecification <|
+    fromSpecification "Indian/Kerguelen" <|
         Zone
             []
             (ZoneState 300 (Save 0))
@@ -5761,9 +5753,9 @@ indian__kerguelen _ =
 
 {-| `Indian/Mahe`
 -}
-indian__mahe : () -> Time.Zone
+indian__mahe : () -> Time2.Zone
 indian__mahe _ =
-    fromSpecification <|
+    fromSpecification "Indian/Mahe" <|
         Zone
             []
             (ZoneState 240 (Save 0))
@@ -5771,9 +5763,9 @@ indian__mahe _ =
 
 {-| `Indian/Maldives`
 -}
-indian__maldives : () -> Time.Zone
+indian__maldives : () -> Time2.Zone
 indian__maldives _ =
-    fromSpecification <|
+    fromSpecification "Indian/Maldives" <|
         Zone
             []
             (ZoneState 300 (Save 0))
@@ -5781,9 +5773,9 @@ indian__maldives _ =
 
 {-| `Indian/Mauritius`
 -}
-indian__mauritius : () -> Time.Zone
+indian__mauritius : () -> Time2.Zone
 indian__mauritius _ =
-    fromSpecification <|
+    fromSpecification "Indian/Mauritius" <|
         Zone
             []
             (ZoneState 240 (Rules rules_Mauritius))
@@ -5791,9 +5783,9 @@ indian__mauritius _ =
 
 {-| `Indian/Reunion`
 -}
-indian__reunion : () -> Time.Zone
+indian__reunion : () -> Time2.Zone
 indian__reunion _ =
-    fromSpecification <|
+    fromSpecification "Indian/Reunion" <|
         Zone
             []
             (ZoneState 240 (Save 0))
@@ -5801,9 +5793,9 @@ indian__reunion _ =
 
 {-| `Pacific/Apia`
 -}
-pacific__apia : () -> Time.Zone
+pacific__apia : () -> Time2.Zone
 pacific__apia _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Apia" <|
         Zone
             [ ( ZoneState -660 (Rules rules_WS), DateTime 2011 Dec 29 1440 WallClock )
             ]
@@ -5812,9 +5804,9 @@ pacific__apia _ =
 
 {-| `Pacific/Auckland`
 -}
-pacific__auckland : () -> Time.Zone
+pacific__auckland : () -> Time2.Zone
 pacific__auckland _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Auckland" <|
         Zone
             []
             (ZoneState 720 (Rules rules_NZ))
@@ -5822,9 +5814,9 @@ pacific__auckland _ =
 
 {-| `Pacific/Bougainville`
 -}
-pacific__bougainville : () -> Time.Zone
+pacific__bougainville : () -> Time2.Zone
 pacific__bougainville _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Bougainville" <|
         Zone
             [ ( ZoneState 600 (Save 0), DateTime 2014 Dec 28 120 WallClock )
             ]
@@ -5833,9 +5825,9 @@ pacific__bougainville _ =
 
 {-| `Pacific/Chatham`
 -}
-pacific__chatham : () -> Time.Zone
+pacific__chatham : () -> Time2.Zone
 pacific__chatham _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Chatham" <|
         Zone
             []
             (ZoneState 765 (Rules rules_Chatham))
@@ -5843,9 +5835,9 @@ pacific__chatham _ =
 
 {-| `Pacific/Chuuk`
 -}
-pacific__chuuk : () -> Time.Zone
+pacific__chuuk : () -> Time2.Zone
 pacific__chuuk _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Chuuk" <|
         Zone
             []
             (ZoneState 600 (Save 0))
@@ -5853,9 +5845,9 @@ pacific__chuuk _ =
 
 {-| `Pacific/Easter`
 -}
-pacific__easter : () -> Time.Zone
+pacific__easter : () -> Time2.Zone
 pacific__easter _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Easter" <|
         Zone
             [ ( ZoneState -420 (Rules rules_Chile), DateTime 1982 Mar 14 180 Universal )
             ]
@@ -5864,9 +5856,9 @@ pacific__easter _ =
 
 {-| `Pacific/Efate`
 -}
-pacific__efate : () -> Time.Zone
+pacific__efate : () -> Time2.Zone
 pacific__efate _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Efate" <|
         Zone
             []
             (ZoneState 660 (Rules rules_Vanuatu))
@@ -5874,9 +5866,9 @@ pacific__efate _ =
 
 {-| `Pacific/Fakaofo`
 -}
-pacific__fakaofo : () -> Time.Zone
+pacific__fakaofo : () -> Time2.Zone
 pacific__fakaofo _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Fakaofo" <|
         Zone
             [ ( ZoneState -660 (Save 0), DateTime 2011 Dec 30 0 WallClock )
             ]
@@ -5885,9 +5877,9 @@ pacific__fakaofo _ =
 
 {-| `Pacific/Fiji`
 -}
-pacific__fiji : () -> Time.Zone
+pacific__fiji : () -> Time2.Zone
 pacific__fiji _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Fiji" <|
         Zone
             []
             (ZoneState 720 (Rules rules_Fiji))
@@ -5895,9 +5887,9 @@ pacific__fiji _ =
 
 {-| `Pacific/Funafuti`
 -}
-pacific__funafuti : () -> Time.Zone
+pacific__funafuti : () -> Time2.Zone
 pacific__funafuti _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Funafuti" <|
         Zone
             []
             (ZoneState 720 (Save 0))
@@ -5905,9 +5897,9 @@ pacific__funafuti _ =
 
 {-| `Pacific/Galapagos`
 -}
-pacific__galapagos : () -> Time.Zone
+pacific__galapagos : () -> Time2.Zone
 pacific__galapagos _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Galapagos" <|
         Zone
             [ ( ZoneState -300 (Save 0), DateTime 1986 Jan 1 0 WallClock )
             ]
@@ -5916,9 +5908,9 @@ pacific__galapagos _ =
 
 {-| `Pacific/Gambier`
 -}
-pacific__gambier : () -> Time.Zone
+pacific__gambier : () -> Time2.Zone
 pacific__gambier _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Gambier" <|
         Zone
             []
             (ZoneState -540 (Save 0))
@@ -5926,9 +5918,9 @@ pacific__gambier _ =
 
 {-| `Pacific/Guadalcanal`
 -}
-pacific__guadalcanal : () -> Time.Zone
+pacific__guadalcanal : () -> Time2.Zone
 pacific__guadalcanal _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Guadalcanal" <|
         Zone
             []
             (ZoneState 660 (Save 0))
@@ -5936,9 +5928,9 @@ pacific__guadalcanal _ =
 
 {-| `Pacific/Guam`
 -}
-pacific__guam : () -> Time.Zone
+pacific__guam : () -> Time2.Zone
 pacific__guam _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Guam" <|
         Zone
             [ ( ZoneState 600 (Rules rules_Guam), DateTime 2000 Dec 23 0 WallClock )
             ]
@@ -5947,9 +5939,9 @@ pacific__guam _ =
 
 {-| `Pacific/Honolulu`
 -}
-pacific__honolulu : () -> Time.Zone
+pacific__honolulu : () -> Time2.Zone
 pacific__honolulu _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Honolulu" <|
         Zone
             []
             (ZoneState -600 (Save 0))
@@ -5957,9 +5949,9 @@ pacific__honolulu _ =
 
 {-| `Pacific/Kanton`
 -}
-pacific__kanton : () -> Time.Zone
+pacific__kanton : () -> Time2.Zone
 pacific__kanton _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Kanton" <|
         Zone
             [ ( ZoneState -720 (Save 0), DateTime 1979 Oct 1 0 WallClock )
             , ( ZoneState -660 (Save 0), DateTime 1994 Dec 31 0 WallClock )
@@ -5969,9 +5961,9 @@ pacific__kanton _ =
 
 {-| `Pacific/Kiritimati`
 -}
-pacific__kiritimati : () -> Time.Zone
+pacific__kiritimati : () -> Time2.Zone
 pacific__kiritimati _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Kiritimati" <|
         Zone
             [ ( ZoneState -640 (Save 0), DateTime 1979 Oct 1 0 WallClock )
             , ( ZoneState -600 (Save 0), DateTime 1994 Dec 31 0 WallClock )
@@ -5981,9 +5973,9 @@ pacific__kiritimati _ =
 
 {-| `Pacific/Kosrae`
 -}
-pacific__kosrae : () -> Time.Zone
+pacific__kosrae : () -> Time2.Zone
 pacific__kosrae _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Kosrae" <|
         Zone
             [ ( ZoneState 720 (Save 0), DateTime 1999 Jan 1 0 WallClock )
             ]
@@ -5992,9 +5984,9 @@ pacific__kosrae _ =
 
 {-| `Pacific/Kwajalein`
 -}
-pacific__kwajalein : () -> Time.Zone
+pacific__kwajalein : () -> Time2.Zone
 pacific__kwajalein _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Kwajalein" <|
         Zone
             [ ( ZoneState -720 (Save 0), DateTime 1993 Aug 20 1440 WallClock )
             ]
@@ -6003,9 +5995,9 @@ pacific__kwajalein _ =
 
 {-| `Pacific/Majuro`
 -}
-pacific__majuro : () -> Time.Zone
+pacific__majuro : () -> Time2.Zone
 pacific__majuro _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Majuro" <|
         Zone
             []
             (ZoneState 720 (Save 0))
@@ -6013,9 +6005,9 @@ pacific__majuro _ =
 
 {-| `Pacific/Marquesas`
 -}
-pacific__marquesas : () -> Time.Zone
+pacific__marquesas : () -> Time2.Zone
 pacific__marquesas _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Marquesas" <|
         Zone
             []
             (ZoneState -570 (Save 0))
@@ -6023,9 +6015,9 @@ pacific__marquesas _ =
 
 {-| `Pacific/Nauru`
 -}
-pacific__nauru : () -> Time.Zone
+pacific__nauru : () -> Time2.Zone
 pacific__nauru _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Nauru" <|
         Zone
             [ ( ZoneState 690 (Save 0), DateTime 1979 Feb 10 120 WallClock )
             ]
@@ -6034,9 +6026,9 @@ pacific__nauru _ =
 
 {-| `Pacific/Niue`
 -}
-pacific__niue : () -> Time.Zone
+pacific__niue : () -> Time2.Zone
 pacific__niue _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Niue" <|
         Zone
             []
             (ZoneState -660 (Save 0))
@@ -6044,9 +6036,9 @@ pacific__niue _ =
 
 {-| `Pacific/Norfolk`
 -}
-pacific__norfolk : () -> Time.Zone
+pacific__norfolk : () -> Time2.Zone
 pacific__norfolk _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Norfolk" <|
         Zone
             [ ( ZoneState 690 (Save 0), DateTime 1974 Oct 27 120 Standard )
             , ( ZoneState 690 (Save 60), DateTime 1975 Mar 2 120 Standard )
@@ -6058,9 +6050,9 @@ pacific__norfolk _ =
 
 {-| `Pacific/Noumea`
 -}
-pacific__noumea : () -> Time.Zone
+pacific__noumea : () -> Time2.Zone
 pacific__noumea _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Noumea" <|
         Zone
             []
             (ZoneState 660 (Rules rules_NC))
@@ -6068,9 +6060,9 @@ pacific__noumea _ =
 
 {-| `Pacific/Pago_Pago`
 -}
-pacific__pago_pago : () -> Time.Zone
+pacific__pago_pago : () -> Time2.Zone
 pacific__pago_pago _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Pago_Pago" <|
         Zone
             []
             (ZoneState -660 (Save 0))
@@ -6078,9 +6070,9 @@ pacific__pago_pago _ =
 
 {-| `Pacific/Palau`
 -}
-pacific__palau : () -> Time.Zone
+pacific__palau : () -> Time2.Zone
 pacific__palau _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Palau" <|
         Zone
             []
             (ZoneState 540 (Save 0))
@@ -6088,9 +6080,9 @@ pacific__palau _ =
 
 {-| `Pacific/Pitcairn`
 -}
-pacific__pitcairn : () -> Time.Zone
+pacific__pitcairn : () -> Time2.Zone
 pacific__pitcairn _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Pitcairn" <|
         Zone
             [ ( ZoneState -510 (Save 0), DateTime 1998 Apr 27 0 WallClock )
             ]
@@ -6099,9 +6091,9 @@ pacific__pitcairn _ =
 
 {-| `Pacific/Pohnpei`
 -}
-pacific__pohnpei : () -> Time.Zone
+pacific__pohnpei : () -> Time2.Zone
 pacific__pohnpei _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Pohnpei" <|
         Zone
             []
             (ZoneState 660 (Save 0))
@@ -6109,9 +6101,9 @@ pacific__pohnpei _ =
 
 {-| `Pacific/Port_Moresby`
 -}
-pacific__port_moresby : () -> Time.Zone
+pacific__port_moresby : () -> Time2.Zone
 pacific__port_moresby _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Port_Moresby" <|
         Zone
             []
             (ZoneState 600 (Save 0))
@@ -6119,9 +6111,9 @@ pacific__port_moresby _ =
 
 {-| `Pacific/Rarotonga`
 -}
-pacific__rarotonga : () -> Time.Zone
+pacific__rarotonga : () -> Time2.Zone
 pacific__rarotonga _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Rarotonga" <|
         Zone
             [ ( ZoneState -630 (Save 0), DateTime 1978 Nov 12 0 WallClock )
             ]
@@ -6130,9 +6122,9 @@ pacific__rarotonga _ =
 
 {-| `Pacific/Tahiti`
 -}
-pacific__tahiti : () -> Time.Zone
+pacific__tahiti : () -> Time2.Zone
 pacific__tahiti _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Tahiti" <|
         Zone
             []
             (ZoneState -600 (Save 0))
@@ -6140,9 +6132,9 @@ pacific__tahiti _ =
 
 {-| `Pacific/Tarawa`
 -}
-pacific__tarawa : () -> Time.Zone
+pacific__tarawa : () -> Time2.Zone
 pacific__tarawa _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Tarawa" <|
         Zone
             []
             (ZoneState 720 (Save 0))
@@ -6150,9 +6142,9 @@ pacific__tarawa _ =
 
 {-| `Pacific/Tongatapu`
 -}
-pacific__tongatapu : () -> Time.Zone
+pacific__tongatapu : () -> Time2.Zone
 pacific__tongatapu _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Tongatapu" <|
         Zone
             [ ( ZoneState 780 (Save 0), DateTime 1999 Jan 1 0 WallClock )
             ]
@@ -6161,9 +6153,9 @@ pacific__tongatapu _ =
 
 {-| `Pacific/Wake`
 -}
-pacific__wake : () -> Time.Zone
+pacific__wake : () -> Time2.Zone
 pacific__wake _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Wake" <|
         Zone
             []
             (ZoneState 720 (Save 0))
@@ -6171,9 +6163,9 @@ pacific__wake _ =
 
 {-| `Pacific/Wallis`
 -}
-pacific__wallis : () -> Time.Zone
+pacific__wallis : () -> Time2.Zone
 pacific__wallis _ =
-    fromSpecification <|
+    fromSpecification "Pacific/Wallis" <|
         Zone
             []
             (ZoneState 720 (Save 0))
@@ -6185,615 +6177,615 @@ pacific__wallis _ =
 
 {-| `Africa/Accra` (alias of `Africa/Abidjan`)
 -}
-africa__accra : () -> Time.Zone
+africa__accra : () -> Time2.Zone
 africa__accra =
     africa__abidjan
 
 
 {-| `Africa/Addis_Ababa` (alias of `Africa/Nairobi`)
 -}
-africa__addis_ababa : () -> Time.Zone
+africa__addis_ababa : () -> Time2.Zone
 africa__addis_ababa =
     africa__nairobi
 
 
 {-| `Africa/Asmara` (alias of `Africa/Nairobi`)
 -}
-africa__asmara : () -> Time.Zone
+africa__asmara : () -> Time2.Zone
 africa__asmara =
     africa__nairobi
 
 
 {-| `Africa/Bamako` (alias of `Africa/Abidjan`)
 -}
-africa__bamako : () -> Time.Zone
+africa__bamako : () -> Time2.Zone
 africa__bamako =
     africa__abidjan
 
 
 {-| `Africa/Bangui` (alias of `Africa/Lagos`)
 -}
-africa__bangui : () -> Time.Zone
+africa__bangui : () -> Time2.Zone
 africa__bangui =
     africa__lagos
 
 
 {-| `Africa/Banjul` (alias of `Africa/Abidjan`)
 -}
-africa__banjul : () -> Time.Zone
+africa__banjul : () -> Time2.Zone
 africa__banjul =
     africa__abidjan
 
 
 {-| `Africa/Blantyre` (alias of `Africa/Maputo`)
 -}
-africa__blantyre : () -> Time.Zone
+africa__blantyre : () -> Time2.Zone
 africa__blantyre =
     africa__maputo
 
 
 {-| `Africa/Brazzaville` (alias of `Africa/Lagos`)
 -}
-africa__brazzaville : () -> Time.Zone
+africa__brazzaville : () -> Time2.Zone
 africa__brazzaville =
     africa__lagos
 
 
 {-| `Africa/Bujumbura` (alias of `Africa/Maputo`)
 -}
-africa__bujumbura : () -> Time.Zone
+africa__bujumbura : () -> Time2.Zone
 africa__bujumbura =
     africa__maputo
 
 
 {-| `Africa/Conakry` (alias of `Africa/Abidjan`)
 -}
-africa__conakry : () -> Time.Zone
+africa__conakry : () -> Time2.Zone
 africa__conakry =
     africa__abidjan
 
 
 {-| `Africa/Dakar` (alias of `Africa/Abidjan`)
 -}
-africa__dakar : () -> Time.Zone
+africa__dakar : () -> Time2.Zone
 africa__dakar =
     africa__abidjan
 
 
 {-| `Africa/Dar_es_Salaam` (alias of `Africa/Nairobi`)
 -}
-africa__dar_es_salaam : () -> Time.Zone
+africa__dar_es_salaam : () -> Time2.Zone
 africa__dar_es_salaam =
     africa__nairobi
 
 
 {-| `Africa/Djibouti` (alias of `Africa/Nairobi`)
 -}
-africa__djibouti : () -> Time.Zone
+africa__djibouti : () -> Time2.Zone
 africa__djibouti =
     africa__nairobi
 
 
 {-| `Africa/Douala` (alias of `Africa/Lagos`)
 -}
-africa__douala : () -> Time.Zone
+africa__douala : () -> Time2.Zone
 africa__douala =
     africa__lagos
 
 
 {-| `Africa/Freetown` (alias of `Africa/Abidjan`)
 -}
-africa__freetown : () -> Time.Zone
+africa__freetown : () -> Time2.Zone
 africa__freetown =
     africa__abidjan
 
 
 {-| `Africa/Gaborone` (alias of `Africa/Maputo`)
 -}
-africa__gaborone : () -> Time.Zone
+africa__gaborone : () -> Time2.Zone
 africa__gaborone =
     africa__maputo
 
 
 {-| `Africa/Harare` (alias of `Africa/Maputo`)
 -}
-africa__harare : () -> Time.Zone
+africa__harare : () -> Time2.Zone
 africa__harare =
     africa__maputo
 
 
 {-| `Africa/Kampala` (alias of `Africa/Nairobi`)
 -}
-africa__kampala : () -> Time.Zone
+africa__kampala : () -> Time2.Zone
 africa__kampala =
     africa__nairobi
 
 
 {-| `Africa/Kigali` (alias of `Africa/Maputo`)
 -}
-africa__kigali : () -> Time.Zone
+africa__kigali : () -> Time2.Zone
 africa__kigali =
     africa__maputo
 
 
 {-| `Africa/Kinshasa` (alias of `Africa/Lagos`)
 -}
-africa__kinshasa : () -> Time.Zone
+africa__kinshasa : () -> Time2.Zone
 africa__kinshasa =
     africa__lagos
 
 
 {-| `Africa/Libreville` (alias of `Africa/Lagos`)
 -}
-africa__libreville : () -> Time.Zone
+africa__libreville : () -> Time2.Zone
 africa__libreville =
     africa__lagos
 
 
 {-| `Africa/Lome` (alias of `Africa/Abidjan`)
 -}
-africa__lome : () -> Time.Zone
+africa__lome : () -> Time2.Zone
 africa__lome =
     africa__abidjan
 
 
 {-| `Africa/Luanda` (alias of `Africa/Lagos`)
 -}
-africa__luanda : () -> Time.Zone
+africa__luanda : () -> Time2.Zone
 africa__luanda =
     africa__lagos
 
 
 {-| `Africa/Lubumbashi` (alias of `Africa/Maputo`)
 -}
-africa__lubumbashi : () -> Time.Zone
+africa__lubumbashi : () -> Time2.Zone
 africa__lubumbashi =
     africa__maputo
 
 
 {-| `Africa/Lusaka` (alias of `Africa/Maputo`)
 -}
-africa__lusaka : () -> Time.Zone
+africa__lusaka : () -> Time2.Zone
 africa__lusaka =
     africa__maputo
 
 
 {-| `Africa/Malabo` (alias of `Africa/Lagos`)
 -}
-africa__malabo : () -> Time.Zone
+africa__malabo : () -> Time2.Zone
 africa__malabo =
     africa__lagos
 
 
 {-| `Africa/Maseru` (alias of `Africa/Johannesburg`)
 -}
-africa__maseru : () -> Time.Zone
+africa__maseru : () -> Time2.Zone
 africa__maseru =
     africa__johannesburg
 
 
 {-| `Africa/Mbabane` (alias of `Africa/Johannesburg`)
 -}
-africa__mbabane : () -> Time.Zone
+africa__mbabane : () -> Time2.Zone
 africa__mbabane =
     africa__johannesburg
 
 
 {-| `Africa/Mogadishu` (alias of `Africa/Nairobi`)
 -}
-africa__mogadishu : () -> Time.Zone
+africa__mogadishu : () -> Time2.Zone
 africa__mogadishu =
     africa__nairobi
 
 
 {-| `Africa/Niamey` (alias of `Africa/Lagos`)
 -}
-africa__niamey : () -> Time.Zone
+africa__niamey : () -> Time2.Zone
 africa__niamey =
     africa__lagos
 
 
 {-| `Africa/Nouakchott` (alias of `Africa/Abidjan`)
 -}
-africa__nouakchott : () -> Time.Zone
+africa__nouakchott : () -> Time2.Zone
 africa__nouakchott =
     africa__abidjan
 
 
 {-| `Africa/Ouagadougou` (alias of `Africa/Abidjan`)
 -}
-africa__ouagadougou : () -> Time.Zone
+africa__ouagadougou : () -> Time2.Zone
 africa__ouagadougou =
     africa__abidjan
 
 
 {-| `Africa/Porto-Novo` (alias of `Africa/Lagos`)
 -}
-africa__porto_novo : () -> Time.Zone
+africa__porto_novo : () -> Time2.Zone
 africa__porto_novo =
     africa__lagos
 
 
 {-| `America/Anguilla` (alias of `America/Puerto_Rico`)
 -}
-america__anguilla : () -> Time.Zone
+america__anguilla : () -> Time2.Zone
 america__anguilla =
     america__puerto_rico
 
 
 {-| `America/Antigua` (alias of `America/Puerto_Rico`)
 -}
-america__antigua : () -> Time.Zone
+america__antigua : () -> Time2.Zone
 america__antigua =
     america__puerto_rico
 
 
 {-| `America/Aruba` (alias of `America/Puerto_Rico`)
 -}
-america__aruba : () -> Time.Zone
+america__aruba : () -> Time2.Zone
 america__aruba =
     america__puerto_rico
 
 
 {-| `America/Atikokan` (alias of `America/Panama`)
 -}
-america__atikokan : () -> Time.Zone
+america__atikokan : () -> Time2.Zone
 america__atikokan =
     america__panama
 
 
 {-| `America/Blanc-Sablon` (alias of `America/Puerto_Rico`)
 -}
-america__blanc_sablon : () -> Time.Zone
+america__blanc_sablon : () -> Time2.Zone
 america__blanc_sablon =
     america__puerto_rico
 
 
 {-| `America/Cayman` (alias of `America/Panama`)
 -}
-america__cayman : () -> Time.Zone
+america__cayman : () -> Time2.Zone
 america__cayman =
     america__panama
 
 
 {-| `America/Creston` (alias of `America/Phoenix`)
 -}
-america__creston : () -> Time.Zone
+america__creston : () -> Time2.Zone
 america__creston =
     america__phoenix
 
 
 {-| `America/Curacao` (alias of `America/Puerto_Rico`)
 -}
-america__curacao : () -> Time.Zone
+america__curacao : () -> Time2.Zone
 america__curacao =
     america__puerto_rico
 
 
 {-| `America/Dominica` (alias of `America/Puerto_Rico`)
 -}
-america__dominica : () -> Time.Zone
+america__dominica : () -> Time2.Zone
 america__dominica =
     america__puerto_rico
 
 
 {-| `America/Grenada` (alias of `America/Puerto_Rico`)
 -}
-america__grenada : () -> Time.Zone
+america__grenada : () -> Time2.Zone
 america__grenada =
     america__puerto_rico
 
 
 {-| `America/Guadeloupe` (alias of `America/Puerto_Rico`)
 -}
-america__guadeloupe : () -> Time.Zone
+america__guadeloupe : () -> Time2.Zone
 america__guadeloupe =
     america__puerto_rico
 
 
 {-| `America/Kralendijk` (alias of `America/Puerto_Rico`)
 -}
-america__kralendijk : () -> Time.Zone
+america__kralendijk : () -> Time2.Zone
 america__kralendijk =
     america__puerto_rico
 
 
 {-| `America/Lower_Princes` (alias of `America/Puerto_Rico`)
 -}
-america__lower_princes : () -> Time.Zone
+america__lower_princes : () -> Time2.Zone
 america__lower_princes =
     america__puerto_rico
 
 
 {-| `America/Marigot` (alias of `America/Puerto_Rico`)
 -}
-america__marigot : () -> Time.Zone
+america__marigot : () -> Time2.Zone
 america__marigot =
     america__puerto_rico
 
 
 {-| `America/Montserrat` (alias of `America/Puerto_Rico`)
 -}
-america__montserrat : () -> Time.Zone
+america__montserrat : () -> Time2.Zone
 america__montserrat =
     america__puerto_rico
 
 
 {-| `America/Nassau` (alias of `America/Toronto`)
 -}
-america__nassau : () -> Time.Zone
+america__nassau : () -> Time2.Zone
 america__nassau =
     america__toronto
 
 
 {-| `America/Port_of_Spain` (alias of `America/Puerto_Rico`)
 -}
-america__port_of_spain : () -> Time.Zone
+america__port_of_spain : () -> Time2.Zone
 america__port_of_spain =
     america__puerto_rico
 
 
 {-| `America/St_Barthelemy` (alias of `America/Puerto_Rico`)
 -}
-america__st_barthelemy : () -> Time.Zone
+america__st_barthelemy : () -> Time2.Zone
 america__st_barthelemy =
     america__puerto_rico
 
 
 {-| `America/St_Kitts` (alias of `America/Puerto_Rico`)
 -}
-america__st_kitts : () -> Time.Zone
+america__st_kitts : () -> Time2.Zone
 america__st_kitts =
     america__puerto_rico
 
 
 {-| `America/St_Lucia` (alias of `America/Puerto_Rico`)
 -}
-america__st_lucia : () -> Time.Zone
+america__st_lucia : () -> Time2.Zone
 america__st_lucia =
     america__puerto_rico
 
 
 {-| `America/St_Thomas` (alias of `America/Puerto_Rico`)
 -}
-america__st_thomas : () -> Time.Zone
+america__st_thomas : () -> Time2.Zone
 america__st_thomas =
     america__puerto_rico
 
 
 {-| `America/St_Vincent` (alias of `America/Puerto_Rico`)
 -}
-america__st_vincent : () -> Time.Zone
+america__st_vincent : () -> Time2.Zone
 america__st_vincent =
     america__puerto_rico
 
 
 {-| `America/Tortola` (alias of `America/Puerto_Rico`)
 -}
-america__tortola : () -> Time.Zone
+america__tortola : () -> Time2.Zone
 america__tortola =
     america__puerto_rico
 
 
 {-| `Antarctica/DumontDUrville` (alias of `Pacific/Port_Moresby`)
 -}
-antarctica__dumontdurville : () -> Time.Zone
+antarctica__dumontdurville : () -> Time2.Zone
 antarctica__dumontdurville =
     pacific__port_moresby
 
 
 {-| `Antarctica/McMurdo` (alias of `Pacific/Auckland`)
 -}
-antarctica__mcmurdo : () -> Time.Zone
+antarctica__mcmurdo : () -> Time2.Zone
 antarctica__mcmurdo =
     pacific__auckland
 
 
 {-| `Antarctica/Syowa` (alias of `Asia/Riyadh`)
 -}
-antarctica__syowa : () -> Time.Zone
+antarctica__syowa : () -> Time2.Zone
 antarctica__syowa =
     asia__riyadh
 
 
 {-| `Arctic/Longyearbyen` (alias of `Europe/Oslo`)
 -}
-arctic__longyearbyen : () -> Time.Zone
+arctic__longyearbyen : () -> Time2.Zone
 arctic__longyearbyen =
     europe__oslo
 
 
 {-| `Asia/Aden` (alias of `Asia/Riyadh`)
 -}
-asia__aden : () -> Time.Zone
+asia__aden : () -> Time2.Zone
 asia__aden =
     asia__riyadh
 
 
 {-| `Asia/Bahrain` (alias of `Asia/Qatar`)
 -}
-asia__bahrain : () -> Time.Zone
+asia__bahrain : () -> Time2.Zone
 asia__bahrain =
     asia__qatar
 
 
 {-| `Asia/Istanbul` (alias of `Europe/Istanbul`)
 -}
-asia__istanbul : () -> Time.Zone
+asia__istanbul : () -> Time2.Zone
 asia__istanbul =
     europe__istanbul
 
 
 {-| `Asia/Kuwait` (alias of `Asia/Riyadh`)
 -}
-asia__kuwait : () -> Time.Zone
+asia__kuwait : () -> Time2.Zone
 asia__kuwait =
     asia__riyadh
 
 
 {-| `Asia/Muscat` (alias of `Asia/Dubai`)
 -}
-asia__muscat : () -> Time.Zone
+asia__muscat : () -> Time2.Zone
 asia__muscat =
     asia__dubai
 
 
 {-| `Asia/Phnom_Penh` (alias of `Asia/Bangkok`)
 -}
-asia__phnom_penh : () -> Time.Zone
+asia__phnom_penh : () -> Time2.Zone
 asia__phnom_penh =
     asia__bangkok
 
 
 {-| `Asia/Vientiane` (alias of `Asia/Bangkok`)
 -}
-asia__vientiane : () -> Time.Zone
+asia__vientiane : () -> Time2.Zone
 asia__vientiane =
     asia__bangkok
 
 
 {-| `Atlantic/St_Helena` (alias of `Africa/Abidjan`)
 -}
-atlantic__st_helena : () -> Time.Zone
+atlantic__st_helena : () -> Time2.Zone
 atlantic__st_helena =
     africa__abidjan
 
 
 {-| `Europe/Bratislava` (alias of `Europe/Prague`)
 -}
-europe__bratislava : () -> Time.Zone
+europe__bratislava : () -> Time2.Zone
 europe__bratislava =
     europe__prague
 
 
 {-| `Europe/Busingen` (alias of `Europe/Zurich`)
 -}
-europe__busingen : () -> Time.Zone
+europe__busingen : () -> Time2.Zone
 europe__busingen =
     europe__zurich
 
 
 {-| `Europe/Guernsey` (alias of `Europe/London`)
 -}
-europe__guernsey : () -> Time.Zone
+europe__guernsey : () -> Time2.Zone
 europe__guernsey =
     europe__london
 
 
 {-| `Europe/Isle_of_Man` (alias of `Europe/London`)
 -}
-europe__isle_of_man : () -> Time.Zone
+europe__isle_of_man : () -> Time2.Zone
 europe__isle_of_man =
     europe__london
 
 
 {-| `Europe/Jersey` (alias of `Europe/London`)
 -}
-europe__jersey : () -> Time.Zone
+europe__jersey : () -> Time2.Zone
 europe__jersey =
     europe__london
 
 
 {-| `Europe/Ljubljana` (alias of `Europe/Belgrade`)
 -}
-europe__ljubljana : () -> Time.Zone
+europe__ljubljana : () -> Time2.Zone
 europe__ljubljana =
     europe__belgrade
 
 
 {-| `Europe/Mariehamn` (alias of `Europe/Helsinki`)
 -}
-europe__mariehamn : () -> Time.Zone
+europe__mariehamn : () -> Time2.Zone
 europe__mariehamn =
     europe__helsinki
 
 
 {-| `Europe/Nicosia` (alias of `Asia/Nicosia`)
 -}
-europe__nicosia : () -> Time.Zone
+europe__nicosia : () -> Time2.Zone
 europe__nicosia =
     asia__nicosia
 
 
 {-| `Europe/Podgorica` (alias of `Europe/Belgrade`)
 -}
-europe__podgorica : () -> Time.Zone
+europe__podgorica : () -> Time2.Zone
 europe__podgorica =
     europe__belgrade
 
 
 {-| `Europe/San_Marino` (alias of `Europe/Rome`)
 -}
-europe__san_marino : () -> Time.Zone
+europe__san_marino : () -> Time2.Zone
 europe__san_marino =
     europe__rome
 
 
 {-| `Europe/Sarajevo` (alias of `Europe/Belgrade`)
 -}
-europe__sarajevo : () -> Time.Zone
+europe__sarajevo : () -> Time2.Zone
 europe__sarajevo =
     europe__belgrade
 
 
 {-| `Europe/Skopje` (alias of `Europe/Belgrade`)
 -}
-europe__skopje : () -> Time.Zone
+europe__skopje : () -> Time2.Zone
 europe__skopje =
     europe__belgrade
 
 
 {-| `Europe/Vaduz` (alias of `Europe/Zurich`)
 -}
-europe__vaduz : () -> Time.Zone
+europe__vaduz : () -> Time2.Zone
 europe__vaduz =
     europe__zurich
 
 
 {-| `Europe/Vatican` (alias of `Europe/Rome`)
 -}
-europe__vatican : () -> Time.Zone
+europe__vatican : () -> Time2.Zone
 europe__vatican =
     europe__rome
 
 
 {-| `Europe/Zagreb` (alias of `Europe/Belgrade`)
 -}
-europe__zagreb : () -> Time.Zone
+europe__zagreb : () -> Time2.Zone
 europe__zagreb =
     europe__belgrade
 
 
 {-| `Indian/Antananarivo` (alias of `Africa/Nairobi`)
 -}
-indian__antananarivo : () -> Time.Zone
+indian__antananarivo : () -> Time2.Zone
 indian__antananarivo =
     africa__nairobi
 
 
 {-| `Indian/Comoro` (alias of `Africa/Nairobi`)
 -}
-indian__comoro : () -> Time.Zone
+indian__comoro : () -> Time2.Zone
 indian__comoro =
     africa__nairobi
 
 
 {-| `Indian/Mayotte` (alias of `Africa/Nairobi`)
 -}
-indian__mayotte : () -> Time.Zone
+indian__mayotte : () -> Time2.Zone
 indian__mayotte =
     africa__nairobi
 
 
 {-| `Pacific/Midway` (alias of `Pacific/Pago_Pago`)
 -}
-pacific__midway : () -> Time.Zone
+pacific__midway : () -> Time2.Zone
 pacific__midway =
     pacific__pago_pago
 
 
 {-| `Pacific/Saipan` (alias of `Pacific/Guam`)
 -}
-pacific__saipan : () -> Time.Zone
+pacific__saipan : () -> Time2.Zone
 pacific__saipan =
     pacific__guam

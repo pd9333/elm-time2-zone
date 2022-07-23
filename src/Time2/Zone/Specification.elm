@@ -1,4 +1,4 @@
-module TimeZone.Specification exposing (Clock(..), DateTime, DayOfMonth(..), Rule, Zone, ZoneRules(..), ZoneState, toOffsets)
+module Time2.Zone.Specification exposing (Clock(..), DateTime, DayOfMonth(..), Rule, Zone, ZoneRules(..), ZoneState, toOffsets)
 
 import RataDie exposing (RataDie)
 import Time exposing (Month(..), Weekday)

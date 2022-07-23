@@ -1,6 +1,6 @@
-module TimeZone exposing
+module Time2.Zone exposing
     ( version
-    , getZone, Error(..)
+    , get, getOrUtc
     , zones
     , ZONE_IDS
     )
@@ -11,30 +11,22 @@ Time Zone Database.
 @docs version
 
 
-## Local zone
+## Find a zone
 
-@docs getZone, Error
+@docs get, getOrUtc
 
 
 ## Zones
 
 @docs zones
 
----
-
-Each unevaluated zone is named after its zone name (e.g.
-`America/New_York`), where slashes are replaced by `__`, dashes are replaced
-by `_`, and the name is lowercased. For example, `America/Port-au-Prince`
-becomes `america__port_au_prince`.
-
-@docs ZONE_IDS
-
 -}
 
 import Dict exposing (Dict)
-import Task exposing (Task)
+import Maybe exposing (Maybe)
 import Time exposing (Month(..), Weekday(..))
-import TimeZone.Specification exposing (Clock(..), DateTime, DayOfMonth(..), Rule, Zone, ZoneRules(..), ZoneState)
+import Time2
+import Time2.Zone.Specification exposing (Clock(..), DateTime, DayOfMonth(..), Rule, Zone, ZoneRules(..), ZoneState)
 
 
 {-| What release of the IANA Time Zone Database is this data from?
@@ -54,56 +46,56 @@ maxYear =
     MAX_YEAR
 
 
-fromSpecification : Zone -> Time.Zone
-fromSpecification zone =
+fromSpecification : String -> Zone -> Time2.Zone
+fromSpecification name zone =
     let
         ( descending, bottom ) =
-            zone |> TimeZone.Specification.toOffsets minYear maxYear
+            zone |> Time2.Zone.Specification.toOffsets minYear maxYear
     in
-    Time.customZone bottom descending
+    Time2.customZone name descending bottom
 
 
-{-| Represents an error that may occur when trying to get the local zone.
+{-|
+
+    get "America/New_York"
+    --> Just (america__new_york ())
+
 -}
-type Error
-    = NoZoneName
-    | NoDataForZoneName String
+get : String -> Maybe Time2.Zone
+get name =
+    Dict.get name zones
+        |> Maybe.map (\f -> f ())
 
 
-{-| Try to get the local time zone. If the task succeeds, then you get the zone
-name along with the `Time.Zone`.
+{-|
+
+    import Time2
+
+    getOrUtc (Just "America/New_York")
+    --> america__new_york ()
+
+    getOrUtc Nothing
+    --> Time2.utc
+
+    getOrUtc (Just "XXX")
+    --> Time2.utc
+
 -}
-getZone : Task Error ( String, Time.Zone )
-getZone =
-    Time.getZoneName
-        |> Task.andThen
-            (\nameOrOffset ->
-                case nameOrOffset of
-                    Time.Name zoneName ->
-                        case Dict.get zoneName zones of
-                            Just zone ->
-                                Task.succeed ( zoneName, zone () )
-
-                            Nothing ->
-                                Task.fail (NoDataForZoneName zoneName)
-
-                    Time.Offset _ ->
-                        Task.fail NoZoneName
-            )
+getOrUtc : Maybe String -> Time2.Zone
+getOrUtc name =
+    Maybe.andThen get name
+        |> Maybe.withDefault Time2.utc
 
 
 {-| You can look up an unevaluated zone by its zone name in the `zones` dictionary.
 
     import Dict
-    import TimeZone exposing (zones, america__new_york)
-
 
     Dict.get "America/New_York" zones
-
-    -- Just america__new_york
+    --> Just america__new_york
 
 -}
-zones : Dict String (() -> Time.Zone)
+zones : Dict String (() -> Time2.Zone)
 zones =
     [ ZONE_NAME_ID_PAIRS
     ]

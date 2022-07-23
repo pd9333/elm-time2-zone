@@ -390,9 +390,9 @@ template_rule = "Rule {from} {to} {month} ({dayofmonth}) {time} {clock} {save}"
 template_zone = """
 {{-| `{zonename}`
 -}}
-{zoneid} : () -> Time.Zone
+{zoneid} : () -> Time2.Zone
 {zoneid} _ =
-    fromSpecification <|
+    fromSpecification "{zonename}" <|
         Zone
             [ {history}
             ]
@@ -408,7 +408,7 @@ template_datetime = "DateTime {year} {month} {day} {time} {clock}"
 template_link = """
 {{-| `{sourcename}` (alias of `{targetname}`)
 -}}
-{sourceid} : () -> Time.Zone
+{sourceid} : () -> Time2.Zone
 {sourceid} =
     {targetid}
 """
