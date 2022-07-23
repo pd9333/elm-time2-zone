@@ -1,2 +1,5 @@
-elm-stuff
-tz
+/.direnv/
+/elm-stuff/
+/node_modules/
+/tests/VerifyExamples/
+/tz/
