@@ -95,8 +95,8 @@ get name =
     Dict.get name_ zones
         |> (\a ->
                 case a of
-                    Just v ->
-                        Just v
+                    Just _ ->
+                        a
 
                     Nothing ->
                         Dict.get name_ Etcetera.zones
