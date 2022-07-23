@@ -32,6 +32,7 @@ Time Zone Database.
 
 import Backward
 import Dict exposing (Dict)
+import Etcetera
 import Maybe exposing (Maybe)
 import Time exposing (Month(..), Weekday(..))
 import Time2
@@ -68,11 +69,20 @@ fromSpecification name zone =
 
 [zone]: /packages/pd9333/elm-time2/latest/Time2#Zone
 
+    import Dict
+    import Etcetera
+    import Time2
+
+
     get "Africa/Asmera"
     --> Just (africa__nairobi ())
 
     get "America/New_York"
     --> Just (america__new_york ())
+
+    get "UTC"
+    --> Dict.get "Etc/UTC" Etcetera.zones
+    -->     |> Maybe.map (\f -> f())
 
 -}
 get : String -> Maybe Time2.Zone
@@ -83,6 +93,14 @@ get name =
                 |> Maybe.withDefault name
     in
     Dict.get name_ zones
+        |> (\a ->
+                case a of
+                    Just v ->
+                        Just v
+
+                    Nothing ->
+                        Dict.get name_ Etcetera.zones
+           )
         |> Maybe.map (\f -> f ())
 
 

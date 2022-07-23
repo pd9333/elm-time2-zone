@@ -27,6 +27,10 @@ backward_module="src/Backward.elm"
 python3 ./build_backward_module.py tz $backward_module
 elm-format --yes $backward_module
 
+etcetera_module="src/Etcetera.elm"
+python3 ./build_etcetera_module.py tz $etcetera_module
+elm-format --yes $etcetera_module
+
 # tz: checkout main
 
 git -C tz checkout main

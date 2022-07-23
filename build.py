@@ -6,11 +6,12 @@ import os
 import re
 import sys
 from datetime import date
+import settings
 
 
-MIN_YEAR = 1970
+MIN_YEAR = settings.min_year
 
-MAX_YEAR = 2037
+MAX_YEAR = settings.max_year
 
 PRIMARY_DATA = [
     "africa",
