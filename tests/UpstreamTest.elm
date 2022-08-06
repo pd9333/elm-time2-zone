@@ -58,4 +58,4 @@ findDifferWithUpstream names =
 
 sameAsUpstream : Test
 sameAsUpstream =
-    Test.test "sameAsUpstream" (\() -> findDifferWithUpstream Time2.Zone.zoneNames)
+    Test.test "sameAsUpstream" (\() -> findDifferWithUpstream Time2.Zone.names)
