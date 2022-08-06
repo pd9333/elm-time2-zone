@@ -3,7 +3,7 @@
     "name": "pd9333/elm-time2-zone",
     "summary": "Time zone data from the IANA Time Zone Database for using with pd9333/elm-time2",
     "license": "BSD-3-Clause",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "exposed-modules": [
         "Time2.Zone"
     ],
