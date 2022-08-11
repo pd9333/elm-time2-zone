@@ -1,7 +1,7 @@
 module Time2.Zone exposing
     ( version
     , get
-    , zoneNames
+    , names
     , ZONE_IDS
     )
 
@@ -21,7 +21,7 @@ Time Zone Database.
 
 ## Zone names
 
-@docs zoneNames
+@docs names
 
 
 ## Zones
@@ -106,8 +106,8 @@ get name =
 
 {-| All zone names.
 -}
-zoneNames : List String
-zoneNames =
+names : List String
+names =
     Dict.keys zones
 
 
