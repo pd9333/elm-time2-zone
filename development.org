@@ -1,4 +1,4 @@
-#+title: DEVELOPMENT
+#+TITLE: DEVELOPMENT
 * getting started
 #+begin_src sh
   pdm install
@@ -7,3 +7,15 @@
   pnpm install
   just test
 #+end_src
+* publish
+1. Bump version:
+  #+begin_src sh
+    elm bump
+  #+end_src
+2. Commit all changes with a meaningful message.
+3. Tag the commit
+   #+begin_src sh :eval no
+     git tag $(jq -r .version elm.json)
+   #+end_src
+4. ~git push --tags~
+5. ~elm publish~

@@ -32,8 +32,8 @@ fromSpecification name zone =
 zones : Dict String (() -> Time2.Zone)
 zones =
     Dict.fromList
-        [ ( "Etc/GMT", etc__gmt )
-        , ( "Etc/UTC", etc__utc )
+        [ ( "Etc/UTC", etc__utc )
+        , ( "Etc/GMT", etc__gmt )
         , ( "Etc/GMT-14", etc__gmt_14 )
         , ( "Etc/GMT-13", etc__gmt_13 )
         , ( "Etc/GMT-12", etc__gmt_12 )
@@ -61,12 +61,6 @@ zones =
         , ( "Etc/GMT+11", etc__gmt___11 )
         , ( "Etc/GMT+12", etc__gmt___12 )
         , ( "GMT", gmt )
-        , ( "Etc/Universal", etc__universal )
-        , ( "Etc/Zulu", etc__zulu )
-        , ( "Etc/Greenwich", etc__greenwich )
-        , ( "Etc/GMT-0", etc__gmt_0 )
-        , ( "Etc/GMT+0", etc__gmt___0 )
-        , ( "Etc/GMT0", etc__gmt0 )
         ]
 
 
@@ -74,18 +68,18 @@ zones =
 -- Zones
 
 
-{-| `Etc/GMT`
--}
-etc__gmt : () -> Time2.Zone
-etc__gmt _ =
-    fromSpecification "Etc/GMT" (Zone [] (ZoneState 0 (Save 0)))
-
-
 {-| `Etc/UTC`
 -}
 etc__utc : () -> Time2.Zone
 etc__utc _ =
     fromSpecification "Etc/UTC" (Zone [] (ZoneState 0 (Save 0)))
+
+
+{-| `Etc/GMT`
+-}
+etc__gmt : () -> Time2.Zone
+etc__gmt _ =
+    fromSpecification "Etc/GMT" (Zone [] (ZoneState 0 (Save 0)))
 
 
 {-| `Etc/GMT-14`
@@ -279,45 +273,3 @@ etc__gmt___12 _ =
 gmt : () -> Time2.Zone
 gmt _ =
     fromSpecification "GMT" (Zone [] (ZoneState 0 (Save 0)))
-
-
-{-| `Etc/Universal` (alias of `Etc/UTC`)
--}
-etc__universal : () -> Time2.Zone
-etc__universal _ =
-    fromSpecification "Etc/Universal" (Zone [] (ZoneState 0 (Save 0)))
-
-
-{-| `Etc/Zulu` (alias of `Etc/UTC`)
--}
-etc__zulu : () -> Time2.Zone
-etc__zulu _ =
-    fromSpecification "Etc/Zulu" (Zone [] (ZoneState 0 (Save 0)))
-
-
-{-| `Etc/Greenwich` (alias of `Etc/GMT`)
--}
-etc__greenwich : () -> Time2.Zone
-etc__greenwich _ =
-    fromSpecification "Etc/Greenwich" (Zone [] (ZoneState 0 (Save 0)))
-
-
-{-| `Etc/GMT-0` (alias of `Etc/GMT`)
--}
-etc__gmt_0 : () -> Time2.Zone
-etc__gmt_0 _ =
-    fromSpecification "Etc/GMT-0" (Zone [] (ZoneState 0 (Save 0)))
-
-
-{-| `Etc/GMT+0` (alias of `Etc/GMT`)
--}
-etc__gmt___0 : () -> Time2.Zone
-etc__gmt___0 _ =
-    fromSpecification "Etc/GMT+0" (Zone [] (ZoneState 0 (Save 0)))
-
-
-{-| `Etc/GMT0` (alias of `Etc/GMT`)
--}
-etc__gmt0 : () -> Time2.Zone
-etc__gmt0 _ =
-    fromSpecification "Etc/GMT0" (Zone [] (ZoneState 0 (Save 0)))
