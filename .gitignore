@@ -1,5 +1,6 @@
 *.pyc
 /.direnv/
+/.pdm.toml
 /elm-stuff/
 /node_modules/
 /tests/VerifyExamples/

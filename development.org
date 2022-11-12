@@ -1,0 +1,9 @@
+#+title: DEVELOPMENT
+* getting started
+#+begin_src sh
+  pdm install
+  just build
+
+  pnpm install
+  just test
+#+end_src

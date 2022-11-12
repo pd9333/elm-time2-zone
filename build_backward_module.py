@@ -37,7 +37,7 @@ def main(tz_dir: Path, backward_module: Path):
             if line == "" or line.startswith("#"):
                 continue
 
-            [_, new, old] = line.split()
+            _, new, old, *_ = line.split()
             links[old] = new
 
     deprecated_names = "\n        , ".join(
